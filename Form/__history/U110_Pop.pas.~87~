@@ -1,0 +1,249 @@
+unit U110_Pop;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, jpeg, ExtCtrls, StdCtrls, Buttons, d_MainDm, h_MainLib, h_ReferLib,
+  DB, ADODB, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  Vcl.Mask, Vcl.DBCtrls, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh;
+
+type
+  TfrmU110_Pop = class(TForm)
+    Pnl_Main: TPanel;
+    Pnl_Sub: TPanel;
+    Pnl_Top: TPanel;
+    Pnl_BTN: TPanel;
+    Pnl_Btn5: TPanel;
+    btnClose: TSpeedButton;
+    Pnl_Btn0: TPanel;
+    btnSave: TSpeedButton;
+    Panel24: TPanel;
+    Panel13: TPanel;
+    Panel14: TPanel;
+    PnlFormName: TPanel;
+    Panel16: TPanel;
+    GroupBox3: TGroupBox;
+    Panel39: TPanel;
+    Panel44: TPanel;
+    qryCommand: TADOQuery;
+    qrySearch: TADOQuery;
+    cbSET_YN: TComboBox;
+    edtITEM_CODE: TEdit;
+    Panel1: TPanel;
+    edtSPEC: TEdit;
+    qryTemp: TADOQuery;
+    Panel3: TPanel;
+    edtITEM_NM: TEdit;
+    edtPLT_BOX: TEdit;
+    Panel4: TPanel;
+    edtBOX_QTY: TEdit;
+    Panel6: TPanel;
+    Panel9: TPanel;
+    cbCLASS_1: TComboBox;
+    Panel2: TPanel;
+    edtEXPIRY_DAY: TEdit;
+    Panel5: TPanel;
+    cbSTOCK_YN: TComboBox;
+    procedure FormActivate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnSaveClick(Sender: TObject);
+    procedure btnCloseClick(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
+    procedure USERKeyPress(Sender: TObject; var Key: Char);
+  private
+    procedure SetItemList;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+var
+  frmU110_Pop: TfrmU110_Pop;
+
+implementation
+
+uses U110;
+
+{$R *.dfm}
+
+//==============================================================================
+// btnSaveClick
+//==============================================================================
+procedure TfrmU110_Pop.btnSaveClick(Sender: TObject);
+var
+  ExecNo : integer ;
+  StrSQL, tmpStr, StrSQL2 : String ;
+begin
+  //+++++++++++++++++++++++++++++++
+  // 코드데이터 체크
+  //+++++++++++++++++++++++++++++++
+  if Trim(edtITEM_CODE.Text) = ''  then
+  begin
+    edtITEM_CODE.SetFocus;
+    MessageDlg('품목 코드를 확인해주십시오', mtConfirmation, [mbYes], 0) ;
+    Exit;
+  end;
+
+  if Trim(edtPLT_BOX.Text) = '' then
+  begin
+    edtPLT_BOX.SetFocus;
+    MessageDlg('파레트당 박스 수량을 입력해주십시오', mtConfirmation, [mbYes], 0) ;
+    Exit;
+  end;
+
+  //+++++++++++++++++++++++++++++++
+  // 코드데이터 처리
+  //+++++++++++++++++++++++++++++++
+  if btnSave.Caption = '등 록' then
+  begin
+    tmpStr := '등록';
+    StrSQL := ' INSERT INTO TT_ITEM ( ' +
+              '     WMS_NO, ITEM_CODE, ITEM_NM, SPEC, ' +
+              '     EXPIRY_DAY, PLT_BOX, BOX_QTY, STOCK_YN, ' +
+              '     SET_YN, CLASS_1, CR_DT )  ' +
+              '   VALUES( ' +
+              QuotedStr(MainDM.M_Info.WMS_NO)         + ',' +
+              QuotedStr(UpperCase(edtITEM_CODE.Text)) + ',' +
+              QuotedStr(edtITEM_NM.Text)              + ',' +
+              QuotedStr(edtSPEC.Text)                 + ',' +
+              QuotedStr(edtEXPIRY_DAY.Text)           + ',' +
+              QuotedStr(edtPLT_BOX.Text)              + ',' +
+              QuotedStr(edtBOX_QTY.Text)              + ',' +
+              QuotedStr(UpperCase(cbSTOCK_YN.Text))   + ',' +
+              QuotedStr(UpperCase(cbSET_YN.Text))     + ',' +
+              QuotedStr(UpperCase(cbCLASS_1.Text))    + ',' +
+              ' CONVERT(VARCHAR(MAX), GETDATE(), 21) ' + ')';
+  end else
+  if btnSave.Caption = '수 정' then
+  begin
+    tmpStr := '수정';
+    StrSQL := ' UPDATE TT_ITEM ' +
+            	'    SET ITEM_NM    = ' + QuotedStr(edtITEM_NM.Text)+
+              '      , SPEC       = ' + QuotedStr(edtSPEC.Text)   +
+              '      , EXPIRY_DAY = ' + QuotedStr(edtEXPIRY_DAY.Text)        +
+              '      , PLT_BOX    = ' + QuotedStr(edtPLT_BOX.Text)           +
+              '      , BOX_QTY    = ' + QuotedStr(edtBOX_QTY.Text)           +
+              '      , STOCK_YN   = ' + QuotedStr(UpperCase(cbSTOCK_YN.Text))  +
+              '      , SET_YN     = ' + QuotedStr(UpperCase(cbSET_YN.Text))  +
+              '      , CLASS_1    = ' + QuotedStr(UpperCase(cbCLASS_1.Text)) +
+              ' WHERE WMS_NO    = ' + QuotedStr(MainDM.M_Info.WMS_NO) +
+              '   AND ITEM_CODE = ' + QuotedStr(UpperCase(edtITEM_CODE.Text)) ;
+  end;
+
+  try
+    with qryCommand do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSQL ;
+      ExecNo := ExecSQL;
+      Close;
+      TraceLogWrite( '[110] 품목코드(팝업) 변경 | ' +
+                     'btnSaveClick -> 상태 : ['+tmpStr+
+                     '], StrSQL : ['+StrSQL+']');
+    end;
+    frmU110.SetComboBox ;
+    frmU110.fnCommandQuery;
+    Close;
+  except
+    on E : Exception do
+    begin
+      if qryCommand.Active then qryCommand.Close;
+      if tmpStr = '등록' then
+        ShowMessage('코드' + tmpStr + '에 실패하였습니다.' + #13#10 + '중복코드 여부 및 입력 정보를 확인해 주십시오.' )
+      else
+        ShowMessage('코드' + tmpStr + '에 실패하였습니다.' + #13#10 + '현재암호 및 입력 정보를 확인해 주십시오.' );
+      TraceLogWrite( '[110] 품목코드(팝업) 에러 | ' +
+                     'btnSaveClick -> 상태 : ['+tmpStr+
+                     '], StrSQL : ['+StrSQL+
+                     '], Exception : ['+E.Message+']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// FormActivate
+//==============================================================================
+procedure TfrmU110_Pop.FormActivate(Sender: TObject);
+begin
+  SetItemList;
+  if btnSave.Caption = '등 록' then edtITEM_CODE.SetFocus
+  else                              edtITEM_NM.SetFocus;
+end;
+
+//==============================================================================
+// FormDeactivate
+//==============================================================================
+procedure TfrmU110_Pop.FormDeactivate(Sender: TObject);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+end;
+
+//==============================================================================
+// FormClose
+//==============================================================================
+procedure TfrmU110_Pop.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+
+  Action := Cafree;
+  try frmU110_Pop := Nil ;
+  except end;
+end;
+
+//==============================================================================
+// btnCloseClick
+//==============================================================================
+procedure TfrmU110_Pop.btnCloseClick(Sender: TObject);
+begin
+  Close;
+end;
+
+//==============================================================================
+// SetItemList
+//==============================================================================
+procedure TfrmU110_Pop.SetItemList;
+begin
+//
+end;
+
+//==============================================================================
+// USERKeyPress
+//==============================================================================
+procedure TfrmU110_Pop.USERKeyPress(Sender: TObject; var Key: Char);
+begin
+  if key = #13 then
+  begin
+    btnSaveClick(nil);
+  end else
+  if key = #27 then
+  begin
+    Close;
+  end;
+end;
+
+end.

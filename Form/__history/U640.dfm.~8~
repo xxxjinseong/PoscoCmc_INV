@@ -1,0 +1,5192 @@
+object frmU640: TfrmU640
+  Left = 2026
+  Top = 265
+  Caption = '640. ALC '#53076#46300#44288#47532'(NEW)'
+  ClientHeight = 592
+  ClientWidth = 1264
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poDefault
+  Visible = True
+  WindowState = wsMaximized
+  OnActivate = FormActivate
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDeactivate = FormDeactivate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object shpB: TShape
+    Left = 0
+    Top = 591
+    Width = 1264
+    Height = 1
+    Align = alBottom
+    Brush.Color = clNavy
+    Pen.Color = 9408913
+    ExplicitTop = 12
+    ExplicitWidth = 1184
+  end
+  object shpL: TShape
+    Left = 0
+    Top = 5
+    Width = 1
+    Height = 586
+    Align = alLeft
+    Brush.Color = clNavy
+    Pen.Color = 9408913
+    ExplicitLeft = 213
+    ExplicitTop = 20
+    ExplicitHeight = 22
+  end
+  object shpR: TShape
+    Left = 1263
+    Top = 5
+    Width = 1
+    Height = 586
+    Align = alRight
+    Brush.Color = clNavy
+    Pen.Color = 9408913
+    ExplicitLeft = 213
+    ExplicitTop = 20
+    ExplicitHeight = 22
+  end
+  object shpT: TShape
+    Left = 0
+    Top = 4
+    Width = 1264
+    Height = 1
+    Align = alTop
+    Brush.Color = clNavy
+    Pen.Color = 9408913
+    ExplicitWidth = 1184
+  end
+  object Pnl_Main: TPanel
+    Left = 1
+    Top = 5
+    Width = 1262
+    Height = 586
+    Align = alClient
+    BevelInner = bvRaised
+    BevelOuter = bvNone
+    TabOrder = 0
+    object Pnl_Top: TPanel
+      Left = 1
+      Top = 1
+      Width = 1260
+      Height = 50
+      Align = alTop
+      BevelInner = bvRaised
+      BevelOuter = bvNone
+      ParentBackground = False
+      TabOrder = 0
+      object cbSTOC_CODE: TComboBox
+        Left = 85
+        Top = 14
+        Width = 120
+        Height = 23
+        Cursor = crHandPoint
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = #54620#44397#50612' '#51077#47141' '#49884#49828#53596' (IME 2000)'
+        ParentFont = False
+        TabOrder = 0
+        OnChange = ComboChange
+        OnKeyPress = KeyPress
+      end
+      object cbSTOC_ITEM_1: TComboBox
+        Left = 287
+        Top = 14
+        Width = 120
+        Height = 23
+        Cursor = crHandPoint
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = #54620#44397#50612' '#51077#47141' '#49884#49828#53596' (IME 2000)'
+        ParentFont = False
+        TabOrder = 2
+        OnChange = ComboChange
+        OnKeyPress = KeyPress
+      end
+      object Panel1: TPanel
+        Left = 12
+        Top = 14
+        Width = 70
+        Height = 23
+        BevelOuter = bvNone
+        Caption = 'ALC'#53076#46300
+        Color = 14935011
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 1
+      end
+      object Panel4: TPanel
+        Left = 214
+        Top = 14
+        Width = 70
+        Height = 23
+        BevelOuter = bvNone
+        Caption = #49324#50577#51648
+        Color = 14935011
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 7
+      end
+      object cbSTOC_ITEM_2: TComboBox
+        Left = 489
+        Top = 14
+        Width = 120
+        Height = 23
+        Cursor = crHandPoint
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = #54620#44397#50612' '#51077#47141' '#49884#49828#53596' (IME 2000)'
+        ParentFont = False
+        TabOrder = 3
+        OnChange = ComboChange
+        OnKeyPress = KeyPress
+      end
+      object Panel7: TPanel
+        Left = 416
+        Top = 14
+        Width = 70
+        Height = 23
+        BevelOuter = bvNone
+        Caption = 'FL'#53076#46300
+        Color = 14935011
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 8
+      end
+      object cbSTOC_ITEM_3: TComboBox
+        Left = 691
+        Top = 14
+        Width = 120
+        Height = 23
+        Cursor = crHandPoint
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = #54620#44397#50612' '#51077#47141' '#49884#49828#53596' (IME 2000)'
+        ParentFont = False
+        TabOrder = 4
+        OnChange = ComboChange
+        OnKeyPress = KeyPress
+      end
+      object Panel8: TPanel
+        Left = 618
+        Top = 14
+        Width = 70
+        Height = 23
+        BevelOuter = bvNone
+        Caption = 'FR'#53076#46300
+        Color = 14935011
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 9
+      end
+      object ComboBox1: TComboBox
+        Left = 893
+        Top = 14
+        Width = 120
+        Height = 23
+        Cursor = crHandPoint
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = #54620#44397#50612' '#51077#47141' '#49884#49828#53596' (IME 2000)'
+        ParentFont = False
+        TabOrder = 5
+        OnChange = ComboChange
+        OnKeyPress = KeyPress
+      end
+      object Panel9: TPanel
+        Left = 820
+        Top = 14
+        Width = 70
+        Height = 23
+        BevelOuter = bvNone
+        Caption = 'RL'#53076#46300
+        Color = 14935011
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 10
+      end
+      object ComboBox2: TComboBox
+        Left = 1095
+        Top = 14
+        Width = 120
+        Height = 23
+        Cursor = crHandPoint
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = #54620#44397#50612' '#51077#47141' '#49884#49828#53596' (IME 2000)'
+        ParentFont = False
+        TabOrder = 6
+        OnChange = ComboChange
+        OnKeyPress = KeyPress
+      end
+      object Panel10: TPanel
+        Left = 1022
+        Top = 14
+        Width = 70
+        Height = 23
+        BevelOuter = bvNone
+        Caption = 'RR'#53076#46300
+        Color = 14935011
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 11
+      end
+    end
+    object Panel2: TPanel
+      Left = 1
+      Top = 51
+      Width = 1260
+      Height = 3
+      ParentCustomHint = False
+      Align = alTop
+      BevelOuter = bvNone
+      BiDiMode = bdLeftToRight
+      Color = 16442514
+      Ctl3D = True
+      DoubleBuffered = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentBackground = False
+      ParentCtl3D = False
+      ParentDoubleBuffered = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = False
+      TabOrder = 1
+      object Panel3: TPanel
+        Left = 0
+        Top = 0
+        Width = 18
+        Height = 3
+        Align = alLeft
+        BevelOuter = bvNone
+        Color = 14258944
+        TabOrder = 0
+      end
+    end
+    object dgInfo: TDBGridEh
+      Left = 1
+      Top = 54
+      Width = 1260
+      Height = 531
+      Align = alClient
+      Color = clWhite
+      DataSource = dsInfo
+      DrawGraphicData = True
+      DynProps = <>
+      EditActions = [geaCopyEh]
+      EvenRowColor = clWindow
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = #46027#50880
+      Font.Style = []
+      FooterRowCount = 1
+      FooterParams.FillStyle = cfstThemedEh
+      FooterParams.Font.Charset = DEFAULT_CHARSET
+      FooterParams.Font.Color = clNavy
+      FooterParams.Font.Height = -13
+      FooterParams.Font.Name = #46027#50880
+      FooterParams.Font.Style = [fsBold]
+      FooterParams.ParentFont = False
+      FooterParams.RowHeight = 17
+      ImeName = 'Microsoft Office IME 2007'
+      IndicatorParams.FillStyle = cfstThemedEh
+      IndicatorTitle.TitleButton = True
+      IndicatorTitle.UseGlobalMenu = False
+      OddRowColor = clWindow
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+      ParentFont = False
+      RowHeight = 6
+      RowLines = 1
+      SumList.Active = True
+      TabOrder = 2
+      TitleParams.FillStyle = cfstThemedEh
+      TitleParams.MultiTitle = True
+      TitleParams.RowHeight = 24
+      TitleParams.RowLines = 2
+      VertScrollBar.VisibleMode = sbAlwaysShowEh
+      OnDrawColumnCell = dgInfoDrawColumnCell
+      OnTitleClick = dgInfoTitleClick
+      Columns = <
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'IDX'
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'NO'
+          Width = 45
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'KIND'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footer.Alignment = taCenter
+          Footer.Value = #52509' '#44148#49688
+          Footer.ValueType = fvtStaticText
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = #52264#51333
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Color = 16710378
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'CODE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footer.Alignment = taRightJustify
+          Footer.DisplayFormat = '###,###,##0 '#44148
+          Footer.FieldName = 'CODE'
+          Footer.ValueType = fvtCount
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'ALC-2 CODE'
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'KMC_CODE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footer.Alignment = taRightJustify
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'KMC ALC-2 CODE'
+          Width = 300
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'GRADE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRV_TYPE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRV TYPE'
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'SEAT_CLASS'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = #51064#49849#44396#48516
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'REGION'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = #49324#50577#51648
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'COVER_COLOR'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = #44277#53685#49324#54637'|COVER'#39'G & '#49324#52636
+          Title.Color = 16121560
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'COVER_SET'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = #44277#53685#49324#54637'|COVER'#39'G '#49324#50577
+          Title.Color = 16121560
+          Width = 210
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'FR_DRIVER'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |FRT SEAT(1'#50676')|DRIVER'
+          Title.Color = 16121560
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'FR_FABRIC1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |FRT SEAT(1'#50676')|'#50896#45800' CODE'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Color = 16710378
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'FR_KMC_CD1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |FRT SEAT(1'#50676')|KMC CODE'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'FR_PASSENGER'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |FRT SEAT(1'#50676')|PASSENGER'
+          Title.Color = 16121560
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'FR_FABRIC2'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |FRT SEAT(1'#50676')|'#50896#45800' CODE'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Color = 16710378
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'FR_KMC_CD2'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |FRT SEAT(1'#50676')|KMC CODE'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R1_LH'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |Rr SEAT(2'#50676')|R1 LH'
+          Title.Color = 16121560
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R1_FABRIC1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |Rr SEAT(2'#50676')|'#50896#45800' CODE'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Color = 16710378
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R1_KMC_CD1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |Rr SEAT(2'#50676')|KMC CODE'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R1_CTR'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |Rr SEAT(2'#50676')|R1 CTR(CUSH)'
+          Title.Color = 16121560
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R1_FABRIC2'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |Rr SEAT(2'#50676')|'#50896#45800' CODE'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Color = 16710378
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R1_KMC_CD2'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |Rr SEAT(2'#50676')|KMC CODE'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R1_RH'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |Rr SEAT(2'#50676')|R1 RH'
+          Title.Color = 16121560
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R1_FABRIC3'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |Rr SEAT(2'#50676')|'#50896#45800' CODE'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Color = 16710378
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R1_KMC_CD3'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |Rr SEAT(2'#50676')|KMC CODE'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2_LH'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |Rr SEAT(3'#50676')|R2 LH'
+          Title.Color = 16121560
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2_FABRIC1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |Rr SEAT(3'#50676')|'#50896#45800' CODE'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Color = 16710378
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2_KMC_CD1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |Rr SEAT(3'#50676')|KMC CODE'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2_RH'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |Rr SEAT(3'#50676')|R2 RH'
+          Title.Color = 16121560
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2_FABRIC2'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |Rr SEAT(3'#50676')|'#50896#45800' CODE'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Color = 16710378
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2_KMC_CD2'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = ' |Rr SEAT(3'#50676')|KMC CODE'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_POWER'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#49884#53944#51333#47448'|POWER'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_MANUAL'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#49884#53944#51333#47448'|MANUAL'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#49884#53944#51333#47448'|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_ES_CUSHION'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|POWER '#50741#49496'|EXTENDABLE SEAT CUSHION'
+          Title.Color = 16121560
+          Width = 169
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_PL_SUPPORT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|POWER '#50741#49496'|LUMBAR SUPPORT'
+          Title.Color = 16121560
+          Width = 134
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve2'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|POWER '#50741#49496'|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve3'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|POWER '#50741#49496'|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_H_ADJUST'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|MANUAL '#50741#49496'|HEIGHT ADJUSTER'
+          Title.Color = 16121560
+          Width = 138
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_ML_SUPPORT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|MANUAL '#50741#49496'|LUMBAR SUPPORT'
+          Title.Color = 16121560
+          Width = 127
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve4'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|MANUAL '#50741#49496'|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve5'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|MANUAL '#50741#49496'|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_SAB'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|SAB|SIDE AIR BAG'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_THORAX'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|SAB|THORAX '
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_PELVIS'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|SAB|PELVIS'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve6'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|SAB|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_AIR_VENTIL'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#53685#54413#49884#53944'-AIR VENTILATION'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_1STEP'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#50676#49440#50976#47924'|1-STEPS'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_2STEP'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#50676#49440#50976#47924'|2-STEPS'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_3STEP'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#50676#49440#50976#47924'|3-STEPS'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_4STEP'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#50676#49440#50976#47924'|4-STEPS'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_5STEP'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#50676#49440#50976#47924'|5-STEPS'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve7'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#50676#49440#50976#47924'|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_V_COMM'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#53685#54413'ECU|'#44277#50857
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_V_FABRIC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#53685#54413'ECU|'#52380
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_V_SKIN'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#53685#54413'ECU|'#44032#51453
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve8'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#53685#54413'ECU|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_H_COMM'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#50676#49440'ECU|'#44277#50857
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_H_FABRIC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#50676#49440'ECU|'#52380
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_H_SKIN'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#50676#49440'ECU|'#44032#51453
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve9'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#50676#49440'ECU|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve10'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#50676#49440'ECU|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_SBELT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|SEAT BUCKLE|S/BELT '#49324#50577
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_WARN'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|SEAT BUCKLE|'#50892#45789#50976#47924
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_SENSOR'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|SEAT BUCKLE|'#49468#49436#50976#47924
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve11'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|SEAT BUCKLE|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve12'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|SEAT BUCKLE|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_STD_BACK'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|SEAT BACK|STD BACK COVER'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_BACK_PK'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|SEAT BACK|BACK POKET'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_BACK_BD'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|SEAT BACK|BACK BOARD'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_BACK_TB'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|SEAT BACK|BACK TABLE'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve13'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|SEAT BACK|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve14'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|SEAT BACK|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_UD'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|FRT H/REST|UP/DOWN'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_ACT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|FRT H/REST|ACTIVE'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_SLD'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|FRT H/REST|SLIDING'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve15'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|FRT H/REST|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve16'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|FRT H/REST|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve17'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#53944#47548' '#51333#47448
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve18'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve19'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve20'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRI_Reserve21'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'DRIVER|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Checkboxes = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_POWER'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#49884#53944#51333#47448'|POWER'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_MANUAL'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#49884#53944#51333#47448'|MANUAL'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#49884#53944#51333#47448'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_ES_CUSHION'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|POWER '#50741#49496'|EXTENDABLE SEAT'
+          Title.Color = 16121560
+          Width = 121
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_PL_SUPPORT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|POWER '#50741#49496'|LUMBAR SUPPORT'
+          Title.Color = 16121560
+          Width = 122
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve2'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|POWER '#50741#49496'|W/IN'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve3'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|POWER '#50741#49496'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_SBF'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|MANUAL '#50741#49496'|SEAT BACK FOLD'#39'G'
+          Title.Color = 16121560
+          Width = 116
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_ML_SUPPORT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|MANUAL '#50741#49496'|LUMBAR SUPPORT'
+          Title.Color = 16121560
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve4'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|MANUAL '#50741#49496'|HEIGHT ADJUSTER'
+          Title.Color = 16121560
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_SAB'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|SAB|SIDE AIR BAG'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_THORAX'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|SAB|THORAX'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_PELVIS'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|SAB|PELVIS'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve5'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|SAB|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_AIR_VENTIL'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#53685#54413#49884#53944'-AIR VENTILATION'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_1STEP'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#50676#49440#50976#47924'|1-STEPS'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_2STEP'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#50676#49440#50976#47924'|2-STEPS'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_3STEP'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#50676#49440#50976#47924'|3-STEPS'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_4STEP'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#50676#49440#50976#47924'|4-STEPS'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_5STEP'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#50676#49440#50976#47924'|5-STEPS'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve6'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#50676#49440#50976#47924'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_V_COMM'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#53685#54413'ECU|'#44277#50857
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_V_FABRIC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#53685#54413'ECU|'#52380
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_V_SKIN'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#53685#54413'ECU|'#44032#51453
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve7'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#53685#54413'ECU|'#53685#54413#48512#54408' '#49324#50857#50976#47924
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_H_COMM'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#50676#49440'ECU|'#44277#50857
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_H_FABRIC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#50676#49440'ECU|'#52380
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_H_SKIN'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#50676#49440'ECU|'#44032#51453
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve8'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#50676#49440'ECU|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_C_POCKET'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#49780#46300#52964#48260#54252#53011
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_BACK_BD'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|SEAT BACK|BACK BOARD'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_STD_BACK'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|SEAT BACK|STD BACK COVER'
+          Title.Color = 16121560
+          Width = 112
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_BACK_FD_C'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|SEAT BACK|BACK FOLD'#39'G COVER'
+          Title.Color = 16121560
+          Width = 129
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_BACK_TB'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|SEAT BACK|BACK TABLE'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_BACK_FD_T'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|SEAT BACK|BACK FOLD'#39'G TABLE'
+          Title.Color = 16121560
+          Width = 119
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_BACK_PK'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|SEAT BACK|BACKPOKET'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve9'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|SEAT BACK|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve10'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|SEAT BACK|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_PODS'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#49849#44061#44048#51648' '#49468#49436'|PODS'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_WCS'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#49849#44061#44048#51648' '#49468#49436'|WCS'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_OCS'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#49849#44061#44048#51648' '#49468#49436'|OCS'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_SBR'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#49849#44061#44048#51648' '#49468#49436'|SBR'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve11'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#49849#44061#44048#51648' '#49468#49436'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_SBELT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|SEAT BUCKLE|S/BELT'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_WARN'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|SEAT BUCKLE|'#50892#45789#50976#47924
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_SENSOR'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|SEAT BUCKLE|'#49468#49436#50976#47924
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve12'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|SEAT BUCKLE|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve13'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|SEAT BUCKLE|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_UD'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|FRT H/REST|UP/DOWN'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_ACT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|FRT H/REST|ACTIVE'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_SLD'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|FRT H/REST|SLIDING'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve14'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|FRT H/REST|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve15'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|FRT H/REST|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve16'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve17'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve18'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve19'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PAS_Reserve20'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'PASSENGER|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_64_DIV'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|SEAT TYPE|6:4 '#48516#47532#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_64_ALL'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|SEAT TYPE|6:4 '#51068#52404#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_LPI'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|SEAT TYPE|LPI'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_333'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|SEAT TYPE|3:3:3 '#46021#47549
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_Reserve1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|SEAT TYPE|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_Reserve2'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|SEAT TYPE|-'
+          Title.Color = 16121560
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_GENERAL'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|CHSH TYPE|'#51068#48152#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_EUROPE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|CHSH TYPE|'#50976#47101#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_WARM'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|Rr WARMER'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_H_SKIN'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|'#50676#49440'ECU|'#44032#51453
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_H_FABRIC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|'#50676#49440'ECU|'#52380
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_H_COMM'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|'#50676#49440'ECU|'#51068#48152
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_Reserve3'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|'#50676#49440'ECU|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_Reserve4'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|'#50676#49440'ECU|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_SBELT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|SEAT BUCKLE|S/BELT'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_2P'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|SEAT BUCKLE|2'#51216#49885
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_3P'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|SEAT BUCKLE|3'#51216#49885
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_WARN'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|SEAT BUCKLE|'#50892#45789#50976#47924
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_Reserve5'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|SEAT BUCKLE|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_WCUP'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|CTR A/REST|W/CUP HOLDER'
+          Title.Color = 16121560
+          Width = 102
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_RC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|CTR A/REST|REMOTE CONTROL'
+          Title.Color = 16121560
+          Width = 128
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_Reserve6'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|CTR A/REST|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_CTR_HEST'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|CTR HEST'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_HR_GEN'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|HEAD REST '#53440#51077'|'#51068#48152#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_HR_HEL'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|HEAD REST '#53440#51077'|'#53804#44396#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_HR_ACT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|HEAD REST '#53440#51077'|ACTIVE'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_HR_SLD'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|HEAD REST '#53440#51077'|SLIDEING'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_HR_FLD'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|HEAD REST '#53440#51077'|FOLDING'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_Reserve7'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|HEAD REST '#53440#51077'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_Reserve8'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|HEAD REST '#53440#51077'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_UP_ANC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|CILD ANCHOR|UPPER ANCHOR'
+          Title.Color = 16121560
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_LOW_ANC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|CILD ANCHOR|LOWER ANCHOR'
+          Title.Color = 16121560
+          Width = 114
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_Reserve9'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|CILD ANCHOR|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_SB_C_HOLD'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|'#49884#53944#50741#49496'|SEAT BACK - CUP HOLDER'
+          Title.Color = 16121560
+          Width = 154
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_WI_DEVICE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|'#49884#53944#50741#49496'|WALK IN DEVICE'
+          Title.Color = 16121560
+          Width = 134
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_Reserve10'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|'#49884#53944#50741#49496'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_Reserve11'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|'#49884#53944#50741#49496'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_Reserve12'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|'#53580#45908#50549#52964
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_Reserve13'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_Reserve14'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_Reserve15'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2L_Reserve16'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND LH|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_64_DIV'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|SEAT TYPE|6:4 '#48516#47532#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_64_ALL'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|SEAT TYPE|6:4 '#51068#52404#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_LPI'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|SEAT TYPE|LPI'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_333'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|SEAT TYPE|3:3:3 '#46021#47549
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_Reserve1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|SEAT TYPE|'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_Reserve2'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|SEAT TYPE|'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_GENERAL'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|CUSH TYPE|'#51068#48152#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_EUROPE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|CUSH TYPE|'#50976#47101#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_WARM'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|Rr WARMER'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_H_SKIN'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|'#50676#49440'ECU|'#44032#51453
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_H_FABRIC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|'#50676#49440'ECU|'#52380
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_H_COMM'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|'#50676#49440'ECU|'#51068#48152
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_Reserve3'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|'#50676#49440'ECU|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_Reserve4'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|'#50676#49440'ECU|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_SBELT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|SEAT BUCKLE|S/BELT'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_2P'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|SEAT BUCKLE|2'#51216#49885
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_3P'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|SEAT BUCKLE|3'#51216#49885
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_WARN'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|SEAT BUCKLE|'#50892#45789#50976#47924
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_Reserve5'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|SEAT BUCKLE|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_WCUP'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|CTR A/REST|W/CUP HOLDER'
+          Title.Color = 16121560
+          Width = 96
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_RC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|CTR A/REST|REMOTE CONTROL'
+          Title.Color = 16121560
+          Width = 124
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_Reserve6'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|CTR A/REST|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_CTR_HEST'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|CTR HEST'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_HR_GEN'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|HEAD REST|'#51068#48152#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_HR_HEL'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|HEAD REST|'#53804#44396#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_HR_ACT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|HEAD REST|ACTIVE'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_HR_SLD'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|HEAD REST|SLIDEING'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_HR_FLD'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|HEAD REST|FOLDING'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_Reserve7'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|HEAD REST|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_Reserve8'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|HEAD REST|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_UP_ANC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|CILD ANCHOR|UPPER ANCHOR'
+          Title.Color = 16121560
+          Width = 95
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_LOW_ANC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|CILD ANCHOR|LOWER ANCHOR'
+          Title.Color = 16121560
+          Width = 119
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_Reserve9'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|CILD ANCHOR|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_SB_C_HOLD'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|'#49884#53944#50741#49496'|SEAT BACK- CUP HOLDER'
+          Title.Color = 16121560
+          Width = 152
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_WI_DEVICE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|'#49884#53944#50741#49496'|WALK IN DEVICE'
+          Title.Color = 16121560
+          Width = 121
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_Reserve10'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|'#49884#53944#50741#49496'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_Reserve11'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|'#49884#53944#50741#49496'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_Reserve12'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_Reserve13'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_Reserve14'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_Reserve15'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2C_Reserve16'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND CTR|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_64_DIV'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|SEAT TYPE|6:4 '#48516#47532#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_64_ALL'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|SEAT TYPE|6:4 '#51068#52404#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_LPI'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|SEAT TYPE|LPI'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_333'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|SEAT TYPE|3:3:3 '#46021#47549
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_Reserve1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|SEAT TYPE|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_Reserve2'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|SEAT TYPE|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_GENERAL'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|CHSH TYPE|'#51068#48152#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_EUROPE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|CHSH TYPE|'#50976#47101#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_WARM'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|Rr WARMER'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_H_SKIN'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|'#50676#49440'ECU|'#44032#51453
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_H_FABRIC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|'#50676#49440'ECU|'#52380
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_H_COMM'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|'#50676#49440'ECU|'#51068#48152
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_Reserve3'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|'#50676#49440'ECU|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_Reserve4'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|'#50676#49440'ECU|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_SBELT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|SEAT BUCKLE|S/BELT'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_2P'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|SEAT BUCKLE|2'#51216#49885
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_3P'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|SEAT BUCKLE|3'#51216#49885
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_WARN'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|SEAT BUCKLE|'#50892#45789#50976#47924
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_Reserve5'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|SEAT BUCKLE|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_WCUP'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|CTR A/REST|W/CUP HOLDER'
+          Title.Color = 16121560
+          Width = 96
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_RC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|CTR A/REST|REMOTE CONTROL'
+          Title.Color = 16121560
+          Width = 115
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_Reserve6'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|CTR A/REST|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_CTR_HEST'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|CTR HEST'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_HR_GEN'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|HEAD REST|'#51068#48152#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_HR_HEL'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|HEAD REST|'#53804#44396#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_HR_ACT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|HEAD REST|ACTIVE'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_HR_SLD'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|HEAD REST|SLIDEING'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_HR_FLD'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|HEAD REST|FOLDING'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_Reserve7'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|HEAD REST|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_Reserve8'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|HEAD REST|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_UP_ANC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|CILD ANCHOR|UPPER ANCHOR'
+          Title.Color = 16121560
+          Width = 101
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_LOW_ANC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|CILD ANCHOR|LOWER ANCHOR'
+          Title.Color = 16121560
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_Reserve9'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|CILD ANCHOR|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_SB_C_HOLD'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|'#49884#53944#50741#49496'|SEAT BACK - CUP HOLDER'
+          Title.Color = 16121560
+          Width = 152
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_WI_DEVICE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|'#49884#53944#50741#49496'|WALK IN DEVICE'
+          Title.Color = 16121560
+          Width = 111
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_Reserve10'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|'#49884#53944#50741#49496'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_Reserve11'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|'#49884#53944#50741#49496'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_Reserve12'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_Reserve13'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_Reserve14'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_Reserve15'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R2R_Reserve16'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 2ND RH|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R3_ALL'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 3RD|SEAT TYPE|'#51068#52404#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R3_DIV'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 3RD|SEAT TYPE|'#48516#47532#54805
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R3_Reserve1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 3RD|SEAT TYPE|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R3_S_HREST'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 3RD|3'#50676' H/REST|SIDE H/REST'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R3_A_FD'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 3RD|3'#50676' H/REST|'#50724#53664#54540#46377
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R3_Reserve2'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 3RD|3'#50676' H/REST|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R3_Reserve3'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 3RD|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R3_Reserve4'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 3RD|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R3_Reserve5'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 3RD|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R3_Reserve6'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 3RD|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'R3_Reserve7'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = 'Rr 3RD|'#50668#50976#52972#47100'|-'
+          Title.Color = 16121560
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'BIGO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Footers = <>
+          Layout = tlCenter
+          Title.Caption = #48708' '#44256
+          Title.Color = 16759671
+          Width = 90
+        end>
+      object RowDetailData: TRowDetailPanelControlEh
+      end
+    end
+  end
+  object Panel5: TPanel
+    Left = 0
+    Top = 0
+    Width = 1264
+    Height = 4
+    ParentCustomHint = False
+    Align = alTop
+    BevelOuter = bvNone
+    BiDiMode = bdLeftToRight
+    Ctl3D = True
+    DoubleBuffered = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentBiDiMode = False
+    ParentBackground = False
+    ParentCtl3D = False
+    ParentDoubleBuffered = False
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = False
+    TabOrder = 1
+    object Panel6: TPanel
+      Left = 0
+      Top = 0
+      Width = 18
+      Height = 4
+      Align = alLeft
+      BevelOuter = bvNone
+      Color = 14258944
+      TabOrder = 0
+    end
+  end
+  object dsInfo: TDataSource
+    DataSet = qryInfo
+    Left = 56
+    Top = 174
+  end
+  object qryInfo: TADOQuery
+    Connection = MainDm.MainDatabase
+    Parameters = <>
+    Left = 24
+    Top = 174
+  end
+  object qryTemp: TADOQuery
+    Connection = MainDm.MainDatabase
+    Parameters = <>
+    Left = 88
+    Top = 174
+  end
+  object EhPrint: TPrintDBGridEh
+    Options = []
+    PageFooter.Font.Charset = DEFAULT_CHARSET
+    PageFooter.Font.Color = clWindowText
+    PageFooter.Font.Height = -11
+    PageFooter.Font.Name = 'Tahoma'
+    PageFooter.Font.Style = []
+    PageHeader.Font.Charset = DEFAULT_CHARSET
+    PageHeader.Font.Color = clWindowText
+    PageHeader.Font.Height = -11
+    PageHeader.Font.Name = 'Tahoma'
+    PageHeader.Font.Style = []
+    Units = MM
+    Left = 120
+    Top = 174
+  end
+end

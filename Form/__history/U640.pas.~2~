@@ -1,0 +1,422 @@
+unit U640;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, d_MainDm, h_MainLib, h_ReferLib, StdCtrls, DB, ADODB,
+  Grids, StrUtils, DBGrids, comobj, frxClass, frxDBSet, DBGridEhGrouping, EhLibADO,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh,DBGridEhImpExp,
+  DBGridEh, Vcl.Mask, Vcl.DBCtrls, DBCtrlsEh, PrnDbgeh, Vcl.Buttons, Vcl.Menus ;
+
+type
+  TfrmU640 = class(TForm)
+    Pnl_Main: TPanel;
+    Pnl_Top: TPanel;
+    dsInfo: TDataSource;
+    qryInfo: TADOQuery;
+    qryTemp: TADOQuery;
+    cbSTOC_CODE: TComboBox;
+    cbSTOC_ITEM_1: TComboBox;
+    Panel1: TPanel;
+    Panel4: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    shpB: TShape;
+    shpL: TShape;
+    shpR: TShape;
+    shpT: TShape;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    cbSTOC_ITEM_2: TComboBox;
+    Panel7: TPanel;
+    cbSTOC_ITEM_3: TComboBox;
+    Panel8: TPanel;
+    EhPrint: TPrintDBGridEh;
+    dgInfo: TDBGridEh;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormActivate(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
+    procedure dgInfoTitleClick(Column: TColumnEh);
+    procedure ComboChange(Sender: TObject);
+    procedure dgInfoDblClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure KeyPress(Sender: TObject; var Key: Char);
+    procedure dgInfoDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure mnCodeDelClick(Sender: TObject);
+    procedure dgInfoCellClick(Column: TColumnEh);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure fnCommandStart;
+    procedure fnCommandAdd  ;
+    procedure fnCommandExcel;
+    procedure fnCommandDelete;
+    procedure fnCommandPrint;
+    procedure fnCommandQuery;
+    procedure fnCommandClose;
+    procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
+    procedure SetComboBox ;
+    procedure ProcDeleteCode(STOC_CODE: String);
+  end;
+  procedure U640Create();
+
+const
+  FormNo ='640';
+
+var
+  frmU640: TfrmU640;
+  SrtFlag : integer = 0 ;
+
+implementation
+
+uses Main;
+
+{$R *.dfm}
+
+//==============================================================================
+// U640Create
+//==============================================================================
+procedure U640Create();
+begin
+  if not Assigned( frmU640 ) then
+  begin
+    frmU640 := TfrmU640.Create(Application);
+    with frmU640 do
+    begin
+      fnCommandStart;
+    end;
+  end;
+  frmU640.Show;
+end;
+
+//==============================================================================
+// fnWmMsgRecv
+//==============================================================================
+procedure TfrmU640.fnWmMsgRecv(var MSG: TMessage);
+begin
+  case MSG.WParam of
+    MSG_MDI_WIN_ADD     : begin fnCommandAdd     ; end;
+    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;
+    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;
+    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;
+    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;
+    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;
+  end;
+end;
+
+//==============================================================================
+// FormCreate
+//==============================================================================
+procedure TfrmU640.FormCreate(Sender: TObject);
+begin
+//
+end;
+
+//==============================================================================
+// FormShow
+//==============================================================================
+procedure TfrmU640.FormShow(Sender: TObject);
+begin
+//
+end;
+
+//==============================================================================
+// FormActivate
+//==============================================================================
+procedure TfrmU640.FormActivate(Sender: TObject);
+begin
+  frmMain.LblMenu000.Caption := (Sender as TForm).Caption ;
+  fnWmMsgSend( 22221,111 );
+  SetComboBox;
+  fnCommandQuery ;
+end;
+
+//==============================================================================
+// FormDeactivate
+//==============================================================================
+procedure TfrmU640.FormDeactivate(Sender: TObject);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+end;
+
+//==============================================================================
+// FormClose
+//==============================================================================
+procedure TfrmU640.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+
+  Action := Cafree;
+  try frmU640 := Nil ;
+  except end;
+end;
+
+//==============================================================================
+// fnCommandStart [시작]
+//==============================================================================
+procedure TfrmU640.fnCommandStart;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandAdd [신규]
+//==============================================================================
+procedure TfrmU640.fnCommandAdd  ;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandExcel [엑셀]
+//==============================================================================
+procedure TfrmU640.fnCommandExcel;
+begin
+  if hlbEhgridListExcel ( dgInfo , '...' + '_' + FormatDatetime('YYYYMMDD', Now) ) then
+  begin
+    MessageDlg('엑셀 저장을 완료하였습니다.', mtConfirmation, [mbYes], 0);
+  end;
+end;
+
+//==============================================================================
+// fnCommandDelete [삭제]
+//==============================================================================
+procedure TfrmU640.fnCommandDelete;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandPrint [인쇄]
+//==============================================================================
+procedure TfrmU640.fnCommandPrint;
+begin
+  if not qryInfo.Active then Exit;
+  fnCommandQuery;
+  EhPrint.PageFooter.RightText.Clear;
+  EhPrint.PageFooter.RightText.Add(FormatDateTime('YYYY-MM-DD HH:NN:SS',Now()) + '   ' + MainDM.M_Info.UserCode);
+  EhPrint.PageFooter.Font.Name := '돋움';
+  EhPrint.PageFooter.Font.Size := 11;
+  EhPrint.Preview;
+end;
+
+//==============================================================================
+// fnCommandQuery [조회]
+//==============================================================================
+procedure TfrmU640.fnCommandQuery;
+var
+  WhereStr, StrSQL : String;
+begin
+  WhereStr := '' ;
+  // 차량코드
+  if (cbSTOC_CODE.Text <> '전체') then
+    WhereStr := WhereStr + ' AND STOC_CODE LIKE ' + QuotedStr('%'+cbSTOC_CODE.Text+'%') ;
+  // 1번 품목
+  if (cbSTOC_ITEM_1.Text <> '전체') then
+    WhereStr := WhereStr + ' AND STOC_ITEM_1 LIKE ' + QuotedStr('%'+cbSTOC_ITEM_1.Text+'%') ;
+  // 2번 품목
+  if (cbSTOC_ITEM_2.Text <> '전체') then
+    WhereStr := WhereStr + ' AND STOC_ITEM_2 LIKE ' + QuotedStr('%'+cbSTOC_ITEM_2.Text+'%') ;
+  // 3번 품목
+  if (cbSTOC_ITEM_3.Text <> '전체') then
+    WhereStr := WhereStr + ' AND STOC_ITEM_3 LIKE ' + QuotedStr('%'+cbSTOC_ITEM_3.Text+'%') ;
+
+  try
+    with qryInfo do
+    begin
+      Close;
+      SQL.Clear;
+      StrSQL := ' SELECT ROW_NUMBER() OVER(ORDER BY STOCK_CODE) AS IDX, ' +
+                '        (STOCK_DATA.STOCK_BANK+''-''+STOCK_DATA.STOCK_BAY+''-''+STOCK_DATA.STOCK_LEVEL) AS CELL_POS, ' +
+                '        (CONVERT(DATE, STOCK_DATE)) AS dSTOCK_DATE,  ' +
+                '        (CONVERT(INT,  STOCK_TIME)) AS iSTOCK_TIME,  ' +
+	              '        (CASE WHEN (STOCK_DATA.CELL_IN_USE =  ''가능'') AND (STOCK_DATA.CELL_OT_USE =  ''가능'') then ''입/출고가능''  ' +
+	              '              WHEN (STOCK_DATA.CELL_IN_USE <> ''가능'') AND (STOCK_DATA.CELL_OT_USE =  ''가능'') then ''입고금지''     ' +
+	              '       	     WHEN (STOCK_DATA.CELL_IN_USE =  ''가능'') AND (STOCK_DATA.CELL_OT_USE <> ''가능'') then ''출고금지''     ' +
+	              '       	     WHEN (STOCK_DATA.CELL_IN_USE <> ''가능'') AND (STOCK_DATA.CELL_OT_USE <> ''가능'') then ''입/출고금지'' END) AS CELL_USE, ' +
+                '        STOCK_DATA.*                               ' +
+                '   FROM ( SELECT CELL_STOCK_STOC.*, ALC.*          ' +
+                '            FROM ( SELECT CELL_STOCK.*, STOC.*     ' +
+                '                     FROM ( SELECT STOCK.*, CELL.* ' +
+                '  			                  	  FROM TM_CELL CELL    ' +
+                '  			          	          JOIN TT_STOCK STOCK  ' +
+                '  				                      ON CELL.CELL_CODE = STOCK.STOCK_CODE ' +
+                '  				                     AND CELL.CELL_STATUS = ''실셀''       ' +
+
+                '  			        	       ) CELL_STOCK LEFT OUTER JOIN TB_STOC_CODE STOC ' +
+                '  	    	   	        ON CELL_STOCK.STOCK_STOC_CODE = STOC.STOC_CODE ' +
+                '                 ) CELL_STOCK_STOC LEFT OUTER JOIN TB_ALC_CODE ALC' +
+                '              ON CELL_STOCK_STOC.STOCK_STOC_CODE = ALC.ALC_CODE + ''-'' + ALC.ALC_KIND ' +
+                '  	     ) STOCK_DATA ' +
+                '   WHERE 1=1 ' + WhereStr ;
+
+      StrSQL := StrSQL + ' ORDER BY STOCK_DATA.STOCK_CODE ' ;
+      SQL.Text := StrSQL;
+      Open;
+
+    end;
+  except
+    if qryInfo.Active then qryInfo.Close;
+  end ;
+end;
+
+//==============================================================================
+// fnCommandClose [닫기]
+//==============================================================================
+procedure TfrmU640.fnCommandClose;
+begin
+  Close;
+end;
+
+//==============================================================================
+// SetComboBox
+//==============================================================================
+procedure TfrmU640.SetComboBox;
+begin
+  MainDm.SearchCodeList(cbSTOC_CODE  , 'TT_STOCK', 'STOCK_STOC_CODE'   );
+  MainDm.SearchCodeList(cbSTOC_ITEM_1, 'TB_STOC_CODE', 'STOC_ITEM_1' );
+  MainDm.SearchCodeList(cbSTOC_ITEM_2, 'TB_STOC_CODE', 'STOC_ITEM_2' );
+  MainDm.SearchCodeList(cbSTOC_ITEM_3, 'TB_STOC_CODE', 'STOC_ITEM_3' );
+end;
+
+//==============================================================================
+// dgInfoCellClick
+//==============================================================================
+procedure TfrmU640.dgInfoCellClick(Column: TColumnEh);
+begin
+//
+end;
+
+//==============================================================================
+// dgInfoDblClick
+//==============================================================================
+procedure TfrmU640.dgInfoDblClick(Sender: TObject);
+begin
+//
+end;
+
+//==============================================================================
+// ComboChange
+//==============================================================================
+procedure TfrmU640.ComboChange(Sender: TObject);
+begin
+  if (Trim((Sender as TComboBox).Text) <> '') then
+  begin
+    fnCommandQuery;
+  end;
+end;
+
+//==============================================================================
+// dgInfoTitleClick
+//==============================================================================
+procedure TfrmU640.dgInfoTitleClick(Column: TColumnEh);
+begin
+  if Column.Field.DataSet is TADOQuery then
+  begin
+    with TADOQuery(Column.Field.DataSet) do
+    begin
+      if RecordCount=0 then Exit ;
+      if SrtFlag = 0 then
+      begin
+        SrtFlag := 1; Sort := Column.FieldName + ' DESC' ;
+      end else
+      begin
+        SrtFlag := 0; Sort := Column.FieldName + ' ASC' ;
+      end;
+    end;
+  end;
+end;
+
+//==============================================================================
+// ProcDeleteCode [코드삭제]
+//==============================================================================
+procedure TfrmU640.ProcDeleteCode(STOC_CODE: String);
+var
+  StrSQL : String;
+begin
+  try
+    StrSQL := ' DELETE FROM TB_STOC_CODE ' +
+              '  WHERE STOC_CODE = ' + QuotedStr(STOC_CODE) ;
+
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSQL;
+      ExecSQL;
+    end;
+  except
+    if qryTemp.Active then qryTemp.Close;
+  end;
+end;
+
+//==============================================================================
+// dgInfoDrawColumnCell
+//==============================================================================
+procedure TfrmU640.dgInfoDrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+begin
+  with dgInfo do
+  begin
+    if DataCol = 11 then
+    begin
+      if Column.Field.DataSet.FieldByName('CELL_USE').AsString <> '입/출고가능' then
+      begin
+        Canvas.Font.Color := clRed;
+        Canvas.Font.Style := [];
+      end else
+      begin
+        Canvas.Font.Color := clBlack;
+        Canvas.Font.Style := [];
+      end;
+    end;
+    dgInfo.defaultdrawcolumncell(rect, datacol, column, state);
+  end;
+end;
+
+//==============================================================================
+// mnCodeDelClick
+//==============================================================================
+procedure TfrmU640.mnCodeDelClick(Sender: TObject);
+begin
+  fnCommandDelete;
+end;
+
+//==============================================================================
+// KeyPress
+//==============================================================================
+procedure TfrmU640.KeyPress(Sender: TObject; var Key: Char);
+begin
+  if key = #13 then
+  begin
+    fnCommandQuery;
+  end;
+end;
+
+end.
+
+
+
+

@@ -1,0 +1,861 @@
+unit U260;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, d_MainDm, h_MainLib, h_ReferLib, StdCtrls, DB, ADODB,
+  Grids, StrUtils, DBGrids, comobj, frxClass, frxDBSet, DBGridEhGrouping, EhLibADO,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh,DBGridEhImpExp,
+  DBGridEh, Vcl.Mask, Vcl.DBCtrls, DBCtrlsEh, PrnDbgeh, Vcl.Buttons, Vcl.Menus ;
+
+type
+  TfrmU260 = class(TForm)
+    Pnl_Main: TPanel;
+    Pnl_Top: TPanel;
+    dsInfo: TDataSource;
+    EhPrint: TPrintDBGridEh;
+    dgInfo: TDBGridEh;
+    qryInfo: TADOQuery;
+    qryTemp: TADOQuery;
+    cbSTOC_CODE: TComboBox;
+    cbSTOC_ITEM_1: TComboBox;
+    Panel1: TPanel;
+    Panel4: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    shpB: TShape;
+    shpL: TShape;
+    shpR: TShape;
+    shpT: TShape;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    cbSTOC_ITEM_2: TComboBox;
+    Panel7: TPanel;
+    cbSTOC_ITEM_3: TComboBox;
+    Panel8: TPanel;
+    dgInfo_Sub: TDBGridEh;
+    Panel9: TPanel;
+    btnOut: TSpeedButton;
+    Panel10: TPanel;
+    sbtClear: TSpeedButton;
+    qryInfoSub: TADOQuery;
+    dsInfoSub: TDataSource;
+    pmControlSub: TPopupMenu;
+    mnTmpJobDel: TMenuItem;
+    pmControl: TPopupMenu;
+    mnTmpJobIns: TMenuItem;
+    cbSTOC_ITEM_4: TComboBox;
+    Panel11: TPanel;
+    Panel12: TPanel;
+    PnlBtn: TPanel;
+    Panel13: TPanel;
+    imgInsert: TImage;
+    Panel14: TPanel;
+    imgDelete: TImage;
+    qryInsertToOrder: TADOQuery;
+    SP_AUTO_INDEX: TADOStoredProc;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormActivate(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
+    procedure dgInfoTitleClick(Column: TColumnEh);
+    procedure ComboChange(Sender: TObject);
+    procedure dgInfoDblClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure KeyPress(Sender: TObject; var Key: Char);
+    procedure dgInfoDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure dgInfo_SubDblClick(Sender: TObject);
+    procedure sbtClearClick(Sender: TObject);
+    procedure Pnl_MainResize(Sender: TObject);
+    procedure dgInfo_SubDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure mnTmpJobDelClick(Sender: TObject);
+    procedure mnTmpJobInsClick(Sender: TObject);
+    procedure imgInsertClick(Sender: TObject);
+    procedure imgDeleteClick(Sender: TObject);
+    procedure btnOutClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure fnCommandStart;
+    procedure fnCommandAdd  ;
+    procedure fnCommandExcel;
+    procedure fnCommandDelete;
+    procedure fnCommandPrint;
+    procedure fnCommandQuery;
+    procedure fnCommandClose;
+    procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
+    procedure SetComboBox ;
+    procedure ProcInsertCode;
+    procedure ProcDeleteCode;
+    function  OrderInsert(OrdDate, OrdTime, Idx : String; SubIdx : Integer; UnloadLevel : String) : Boolean;
+    function  Get_BrNo: String;
+  end;
+  procedure U260Create();
+
+const
+  FormNo ='260';
+
+var
+  frmU260: TfrmU260;
+  SrtFlag : integer = 0 ;
+  byPopUnloadLevel : String;
+  isSelectedFloor : Boolean = False;     // 층이 선택된 것은 출고제품이 7개임을 의미
+implementation
+
+uses Main, U260_Pop;
+
+
+{$R *.dfm}
+
+
+//==============================================================================
+// U260Create
+//==============================================================================
+procedure U260Create();
+begin
+  if not Assigned( frmU260 ) then
+  begin
+    frmU260 := TfrmU260.Create(Application);
+    with frmU260 do
+    begin
+      fnCommandStart;
+    end;
+  end;
+  frmU260.Show;
+end;
+
+//==============================================================================
+// fnWmMsgRecv
+//==============================================================================
+procedure TfrmU260.fnWmMsgRecv(var MSG: TMessage);
+begin
+  case MSG.WParam of
+    MSG_MDI_WIN_ADD     : begin fnCommandAdd     ; end;
+    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;
+    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;
+    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;
+    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;
+    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;
+  end;
+end;
+
+//==============================================================================
+// FormCreate
+//==============================================================================
+procedure TfrmU260.FormCreate(Sender: TObject);
+begin
+//
+end;
+
+//==============================================================================
+// FormShow
+//==============================================================================
+procedure TfrmU260.FormShow(Sender: TObject);
+begin
+//
+end;
+
+//==============================================================================
+// FormActivate
+//==============================================================================
+procedure TfrmU260.FormActivate(Sender: TObject);
+begin
+  frmMain.LblMenu000.Caption := (Sender as TForm).Caption ;
+  fnWmMsgSend( 22221,111 );
+  SetComboBox;
+  fnCommandQuery ;
+end;
+
+//==============================================================================
+// FormDeactivate
+//==============================================================================
+procedure TfrmU260.FormDeactivate(Sender: TObject);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+end;
+
+//==============================================================================
+// FormClose
+//==============================================================================
+procedure TfrmU260.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+
+  Action := Cafree;
+  try frmU260 := Nil ;
+  except end;
+end;
+
+//==============================================================================
+// fnCommandStart [시작]
+//==============================================================================
+procedure TfrmU260.fnCommandStart;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandAdd [신규]
+//==============================================================================
+procedure TfrmU260.fnCommandAdd  ;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandExcel [엑셀]
+//==============================================================================
+procedure TfrmU260.fnCommandExcel;
+begin
+  if hlbEhgridListExcel ( dgInfo , '수동 서열출고' + '_' + FormatDatetime('YYYYMMDD', Now) ) then
+  begin
+    MessageDlg('엑셀 저장을 완료하였습니다.', mtConfirmation, [mbYes], 0);
+  end;
+end;
+
+//==============================================================================
+// fnCommandDelete [삭제]
+//==============================================================================
+procedure TfrmU260.fnCommandDelete;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandPrint [인쇄]
+//==============================================================================
+procedure TfrmU260.fnCommandPrint;
+begin
+  if not qryInfo.Active then Exit;
+  fnCommandQuery;
+  EhPrint.PageFooter.RightText.Clear;
+  EhPrint.PageFooter.RightText.Add(FormatDateTime('YYYY-MM-DD HH:NN:SS',Now()) + '   ' + MainDM.M_Info.UserCode);
+  EhPrint.PageFooter.Font.Name := '돋움';
+  EhPrint.PageFooter.Font.Size := 11;
+  EhPrint.Preview;
+end;
+
+//==============================================================================
+// fnCommandQuery [조회]
+//==============================================================================
+procedure TfrmU260.fnCommandQuery;
+var
+  WhereStr, StrSQL1, StrSQL2 : String;
+begin
+  WhereStr := '' ;
+  // 차량코드
+  if (cbSTOC_CODE.Text <> '전체') then
+    WhereStr := WhereStr + ' AND STOCK_ALC_CODE LIKE ' + QuotedStr('%'+cbSTOC_CODE.Text+'%') ;
+  // 1번 품목
+  if (cbSTOC_ITEM_1.Text <> '전체') then
+    WhereStr := WhereStr + ' AND STOCK_LOT_NO1 LIKE ' + QuotedStr('%'+cbSTOC_ITEM_1.Text+'%') ;
+  // 2번 품목
+  if (cbSTOC_ITEM_2.Text <> '전체') then
+    WhereStr := WhereStr + ' AND STOCK_LOT_NO2 LIKE ' + QuotedStr('%'+cbSTOC_ITEM_2.Text+'%') ;
+  // 3번 품목
+  if (cbSTOC_ITEM_3.Text <> '전체') then
+    WhereStr := WhereStr + ' AND STOCK_LOT_NO3 LIKE ' + QuotedStr('%'+cbSTOC_ITEM_3.Text+'%') ;
+  // 4번 품목
+  if (cbSTOC_ITEM_4.Text <> '전체') then
+    WhereStr := WhereStr + ' AND STOCK_LOT_NO4 LIKE ' + QuotedStr('%'+cbSTOC_ITEM_4.Text+'%') ;
+
+  try
+    with qryInfo do
+    begin
+      Close;
+      SQL.Clear;
+      StrSQL1 := ' SELECT ROW_NUMBER() OVER(ORDER BY STOCK_CODE) AS IDX, ' +
+                 '        (STOCK_DATA.STOCK_BANK+''-''+STOCK_DATA.STOCK_BAY+''-''+STOCK_DATA.STOCK_LEVEL) AS CELL_POS, ' +
+                 '         CONVERT(DATE, STOCK_DATE) AS dSTOCK_DATE, ' +
+                 '         CONVERT(INT,  STOCK_TIME) AS iSTOCK_TIME, ' +
+                 '         STOCK_DATA.* ' +
+                 '   FROM ( SELECT CELL_STOCK.*, ' +
+                 '                 ALC.DRV_TYPE ' +
+                 '            FROM ( SELECT STOCK.*, CELL.* ' +
+ 			           '                          FROM TM_CELL CELL ' +
+                 '              			      JOIN TT_STOCK STOCK ' +
+ 				         '                            ON CELL.CELL_CODE = STOCK.STOCK_CODE ' +
+                 '                				   AND CELL.CELL_STATUS = ''실셀'' ' +
+                 '                  ) CELL_STOCK LEFT OUTER JOIN TM_ALCC_MASTER ALC ' +
+                 '                                            ON CELL_STOCK.STOCK_ALC_CODE = ALC.CODE ' +
+ 	               '        ) STOCK_DATA ' +
+                 '  WHERE STOCK_DATA.STOCK_CODE Not in ( SELECT DISTINCT ORD_CELL FROM TT_ORDER_TEMP ) ' + WhereStr;
+      SQL.Text := StrSQL1;
+      Open;
+    end;
+  except
+  on e : Exception do ShowMessage(e.Message);
+  //  if qryInfo.Active then qryInfo.Close;
+  end ;
+
+  try
+    with qryInfoSub do
+    begin
+      Close;
+      SQL.Clear;
+      StrSQL2 := ' SELECT ROW_NUMBER() OVER(ORDER BY ORD_DATE, ORD_TIME) AS IDX, *, ' +
+                 '        (ORD_LOAD_BANK+''-''+ORD_LOAD_BAY+''-''+ORD_LOAD_LEVEL) AS CELL_POS, ' +
+                 '        ''임시등록'' as ORD_TEMP_STATUS ' +
+                 '   FROM TT_ORDER_TEMP ' ;
+      SQL.Text := StrSQL2;
+      Open;
+    end;
+  except
+    if qryInfoSub.Active then qryInfoSub.Close;
+  end;
+end;
+
+//==============================================================================
+// fnCommandClose [닫기]
+//==============================================================================
+procedure TfrmU260.fnCommandClose;
+begin
+  Close;
+end;
+
+//==============================================================================
+// SetComboBox
+//==============================================================================
+procedure TfrmU260.SetComboBox;
+begin
+  MainDm.SearchCodeList(cbSTOC_CODE,   'TT_STOCK', 'STOCK_ALC_CODE'   );
+  MainDm.SearchCodeList(cbSTOC_ITEM_1, 'TT_STOCK', 'STOCK_LOT_NO1' );
+  MainDm.SearchCodeList(cbSTOC_ITEM_2, 'TT_STOCK', 'STOCK_LOT_NO2' );
+  MainDm.SearchCodeList(cbSTOC_ITEM_3, 'TT_STOCK', 'STOCK_LOT_NO3' );
+  MainDm.SearchCodeList(cbSTOC_ITEM_4, 'TT_STOCK', 'STOCK_LOT_NO4' );
+end;
+
+//==============================================================================
+// dgInfoDblClick
+//==============================================================================
+procedure TfrmU260.dgInfoDblClick(Sender: TObject);
+begin
+  if not qryInfo.Active then Exit;
+  if qryInfo.RecordCount = 0 then Exit;
+  ProcInsertCode;
+  SetComboBox;
+  fnCommandQuery;
+end;
+
+//==============================================================================
+// dgInfo_SubDblClick
+//==============================================================================
+procedure TfrmU260.dgInfo_SubDblClick(Sender: TObject);
+begin
+  if not qryInfoSub.Active then Exit;
+  if qryInfoSub.RecordCount = 0 then Exit;
+  ProcDeleteCode;
+  SetComboBox;
+  fnCommandQuery;
+end;
+
+
+//==============================================================================
+// btnOutClick
+//==============================================================================
+procedure TfrmU260.btnOutClick(Sender: TObject);
+var
+  RowCnt, strSubIdx : Integer;
+  StrBR_NO, StrDate, StrTime, StrIndex, MsgKind : String;
+  Idx : String;
+begin
+  if (qryInfoSub.RecordCount = 7) then
+  begin
+    U260_Pop_Create;
+    if not isSelectedFloor then Exit;
+  end else if (qryInfoSub.RecordCount = 14) then
+  begin
+    if MessageDlg(IntToStr(qryInfoSub.RecordCount) + '건 ' +
+                    MsgKind + ' 출고하시겠습니까?',
+                    mtInformation, [mbYes, mbNo], 0) <> mrYes then Exit;
+  end else
+  begin
+    ShowMessage('7건 또는 14건 씩 출하해주십시오');
+    Exit;
+  end;
+
+{
+
+  StrBR_NO  := Get_BrNo;
+  StrDate   := Copy(StrBR_NO, 1, 8) ; // YYYYMMDD
+  StrTime   := Copy(StrBR_NO, 9, 6) ; // HHNNSS
+  StrIndex  := Copy(StrBR_NO, 15, Length(strBR_NO) - 14 ) ; }
+
+  StrSubIdx := 1;
+  Idx := Get_BrNo;
+  try
+    with qryInfoSub do
+    begin
+      First;
+      while not Eof do
+      begin
+        if isSelectedFloor then // 층이 선택되었다는 것은 현재 출고할 제품이 7개임을 의미
+        begin
+          if OrderInsert(StrDate, StrTime, Idx, StrSubIdx, byPopUnloadLevel) = True then Inc(StrSubIdx);
+          Next;
+        end else    // 층이 선택되지 않았으면 출고할 제품이 14개 unLoadLevel 자동 생성
+        begin
+          if OrderInsert(StrDate, StrTime, Idx, StrSubIdx, '') = True then Inc(StrSubIdx);
+          Next;
+        end;
+      end;
+
+    end;
+
+    try
+      with qryTemp do
+      begin
+        Close ;
+        SQL.Clear;
+        SQL.Text := ' Delete From TT_ORDER_TEMP ' ;
+        ExecSQL;
+      end;
+    except
+      if qryTemp.Active then qryTemp.Close;
+    end;
+  except
+    if qryInfoSub.Active then qryInfoSub.Close;
+  end;
+  fnCommandQuery;
+end;
+
+
+
+
+
+//==============================================================================
+// ComboChange
+//==============================================================================
+procedure TfrmU260.ComboChange(Sender: TObject);
+begin
+  if (Trim((Sender as TComboBox).Text) <> '') then
+  begin
+    fnCommandQuery;
+  end;
+end;
+
+//==============================================================================
+// sbtClearClick [초기화]
+//==============================================================================
+procedure TfrmU260.sbtClearClick(Sender: TObject);
+begin
+  try
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := 'DELETE FROM TT_ORDER_TEMP ' ;
+      ExecSQL;
+    end;
+  except
+    if qryTemp.Active then qryTemp.Close;
+  end;
+  SetComboBox;
+  fnCommandQuery;
+end;
+
+//==============================================================================
+// dgInfoDrawColumnCell
+//==============================================================================
+procedure TfrmU260.dgInfoDrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+begin
+  with dgInfo do
+  begin
+    if DataCol in [0..9] then
+    begin
+      if Column.Field.DataSet.FieldByName('CELL_OT_USE').AsString = '금지' then
+      begin
+        Canvas.Font.Color := clRed;
+        Canvas.Font.Style := [];
+      end else
+      begin
+        Canvas.Font.Color := clBlack;
+        Canvas.Font.Style := [];
+      end;
+    end;
+    dgInfo.defaultdrawcolumncell(rect, datacol, column, state);
+  end;
+end;
+
+//==============================================================================
+// dgInfo_SubDrawColumnCell
+//==============================================================================
+procedure TfrmU260.dgInfo_SubDrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+begin
+  with dgInfo_Sub do
+  begin
+    if DataCol = 9 then
+    begin
+      if Column.Field.DataSet.FieldByName('ORD_TEMP_STATUS').AsString = '임시등록' then
+      begin
+        Canvas.Font.Color := clNavy;
+        Canvas.Font.Style := [fsBold];
+      end else
+      begin
+        Canvas.Font.Color := clBlack;
+        Canvas.Font.Style := [];
+      end;
+    end;
+    dgInfo_Sub.defaultdrawcolumncell(rect, datacol, column, state);
+  end;
+end;
+
+//==============================================================================
+// KeyPress
+//==============================================================================
+procedure TfrmU260.KeyPress(Sender: TObject; var Key: Char);
+begin
+  if key = #13 then
+  begin
+    fnCommandQuery;
+  end;
+end;
+
+//==============================================================================
+// Pnl_MainResize
+//==============================================================================
+procedure TfrmU260.Pnl_MainResize(Sender: TObject);
+begin
+//  dgInfo.Width := ((Sender as TPanel).Width - 5) div 2;
+end;
+
+//==============================================================================
+// ProcInsertCode [작업등록]  임시등록
+//==============================================================================
+procedure TfrmU260.ProcInsertCode;
+var
+  i : integer;
+  StrSQL : String;
+  CellPos, Bank, Bay, Level : String;
+  Idx : Integer;
+  SubIdx : Integer;
+begin
+  try
+    Idx := Random(100); //임시등록이므로 임의 값 지정
+    for i := 0 to (dgInfo.SelectedRows.Count-1) do
+    begin
+      SubIdx := i + 1;
+      with dgInfo.DataSource.DataSet do
+      begin
+        GotoBookmark(Pointer(dgInfo.SelectedRows.Items[i]));
+        CellPos := qryInfo.FieldByName('CELL_POS').AsString; // 00-00-00
+        Bank := Copy(CellPos, 1, 2);
+        Bay := Copy(CellPos, 4, 2);
+        Level := Copy(CellPos, 7, 2);
+        if qryInfo.FieldByName('CELL_OT_USE').AsString = '금지' then
+        begin
+          MessageDlg('해당 셀['+ qryInfo.FieldByName('CELL_POS').AsString +'] 은 출고금지 상태입니다.', mtWarning, [mbYes], 0);
+          Continue;
+        end;
+
+        with qryTemp do
+        begin
+          Close;
+          SQL.Clear;
+          StrSQL :=  ' INSERT INTO TT_ORDER_TEMP (                                        ' +
+                     '            ORD_TYPE, ORD_DATE, ORD_TIME,                           ' +
+                     '            ORD_INDEX, ORD_SUBIDX, ORD_COMMITNO,                    ' +
+                     '            ORD_ALC_CODE, ORD_ALC_KIND,                             ' +
+                     '            ORD_PROD_CODE1, ORD_PROD_TYPE1,                         ' +
+                     '            ORD_PROD_CODE2, ORD_PROD_TYPE2,                         ' +
+                     '            ORD_PROD_CODE3, ORD_PROD_TYPE3,                         ' +
+                     '            ORD_PROD_CODE4, ORD_PROD_TYPE4,                         ' +
+                     '            ORD_PLT_CODE, ORD_SCNO, ORD_CELL,                       ' +
+                     '            ORD_LOAD_BANK, ORD_LOAD_BAY, ORD_LOAD_LEVEL,            ' +
+                     '            ORD_UNLOAD_BANK, ORD_UNLOAD_BAY, ORD_UNLOAD_LEVEL,      ' +
+                     '            ORD_BODY_NO, ORD_VEH_NO, ORD_INPOS, ORD_QTY, ORD_DANGA, ' +
+                     '            ORD_WORK_USER, ORD_STATUS, ORD_BCR_STATUS,              ' +
+                     '            ORD_PROCESS, ORD_SEQ, ORD_IN_DATE, ORD_OT_DATE,         ' +
+                     '            ORD_GUBUN                                             ) ' +
+                     '     VALUES ( ' +
+                     QuotedStr('서열출고') + ',' +                                            //ORD_TYPE
+                     ' CONVERT(CHAR(8),GETDATE(),112) ' + ',' +                               //ORD_DATE
+                     ' REPLACE(CONVERT(CHAR(8), GETDATE(),8), '':'', '''') ' + ',' +
+                     QuotedStr(IntToStr(Idx)) + ',' +                                         //ORD_INDEX  //임시등록이므로 임의값이 들어감
+                     QuotedStr(IntToStr(SubIdx)) + ',' +                                      //ORD_SUBIDX
+                     QuotedStr('') + ',' +                                                    //ORD_COMMITNO
+                     QuotedStr(qryInfo.FieldByName('STOCK_ALC_CODE').AsString) + ',' +        //ORD_ALC_CODE
+                     QuotedStr(qryInfo.FieldByName('STOCK_ALC_KIND').AsString) + ',' +        //ORD_ALC_KIND
+                     QuotedStr(qryInfo.FieldByName('STOCK_LOT_NO1').AsString) + ',' +         //ORD_PROD_CODE1
+                     QuotedStr('FL') + ',' +                                                  //ORD_PROD_TYPE1
+                     QuotedStr(qryInfo.FieldByName('STOCK_LOT_NO2').AsString) + ',' +         //ORD_PROD_CODE2
+                     QuotedStr('FR') + ',' +                                                  //ORD_PROD_TYPE2
+                     QuotedStr(qryInfo.FieldByName('STOCK_LOT_NO3').AsString) + ',' +         //ORD_PROD_CODE3
+                     QuotedStr('RB') + ',' +                                                  //ORD_PROD_TYPE3
+                     QuotedStr(qryInfo.FieldByName('STOCK_LOT_NO4').AsString) + ',' +         //ORD_PROD_CODE4
+                     QuotedStr('RC') + ',' +                                                  //ORD_PROD_TYPE4
+                     QuotedStr(qryInfo.FieldByName('STOCK_PLT_CODE').AsString) + ',' +        //ORD_PLT_CODE
+                     QuotedStr('02')    + ',' +                                               //ORD_SCNO
+                     QuotedStr(Bank+Bay+Level) + ',' +                                        //ORD_CELL
+                     QuotedStr(qryInfo.FieldByName('STOCK_BANK' ).AsString) + ',' +           //ORD_LOAD_BANK
+                     QuotedStr(qryInfo.FieldByName('STOCK_BAY'  ).AsString) + ',' +           //ORD_LOAD_BAY
+                     QuotedStr(qryInfo.FieldByName('STOCK_LEVEL').AsString) + ',' +           //ORD_LOAD_LEVEL
+                     QuotedStr('00') + ',' +                                                  //ORD_UNLOAD_BANK
+                     QuotedStr('00') + ',' +                                                  //ORD_UNLOAD_BAY
+                     QuotedStr('00') + ',' +                                                  //ORD_UNLOAD_LEVEL   // 출하지시 할 때 설정  1~7 1층, 8~14 2층
+                     QuotedStr('') + ',' +                                                    //ORD_BODY_NO
+                     QuotedStr('') + ',' +                                                    //ORD_VEH_NO
+                     QuotedStr(qryInfo.FieldByName('STOCK_LINE').AsString) + ',' +            //ORD_INPOS
+                     QuotedStr('1') + ',' +                                                   //ORD_QTY
+                     QuotedStr('') + ',' +                                                    //ORD_DANGA
+                     QuotedStr(MainDM.M_Info.UserCode) + ',' +                                //ORD_WORK_USER
+                     QuotedStr('작업대기') + ',' +                                            //ORD_STATUS
+                     QuotedStr('0') + ',' +                                                   //ORD_BCR_STATUS
+                     QuotedStr('') + ',' +                                                    //ORD_PROCESS
+                     QuotedStr('0') + ',' +                                                   //ORD_SEQ ( 0:서열출고,지정출고, 1:긴급출고)
+                     QuotedStr('') + ',' +                                                    //ORD_IN_DATE
+                     QuotedStr('') + ',' +                                                    //ORD_OT_DATE
+                     QuotedStr(qryinfo.FieldByName('STOCK_GUBUN').AsString) + ')';            //ORD_GUBUN
+          SQL.Text := StrSQL;
+          ExecSQL;
+        end;
+      end;
+    end;
+  except
+  if qryTemp.Active then qryTemp.Close;
+  end;
+end;
+
+//==============================================================================
+// ProcDeleteCode [작업삭제]
+//==============================================================================
+procedure TfrmU260.ProcDeleteCode;
+var
+  i : integer;
+  StrSQL : String;
+begin
+  try
+    for i := 0 to (dgInfo_Sub.SelectedRows.Count-1) do
+    begin
+      with dgInfo_Sub.DataSource.DataSet do
+      begin
+        GotoBookmark(pointer(dgInfo_Sub.SelectedRows.Items[i]));
+
+        with qryTemp do
+        begin
+          Close;
+          SQL.Clear;
+          StrSQL := ' DELETE FROM TT_ORDER_TEMP ' +
+                    '  WHERE ORD_CELL      = ' + QuotedStr(qryInfoSub.FieldByName('ORD_CELL').AsString);
+          SQL.Text := StrSQL;
+          ExecSQL;
+        end;
+      end;
+    end;
+  except
+  on e : exception do ShowMessage(e.message);
+//    if qryTemp.Active then qryTemp.Close;
+  end;
+end;
+
+//==============================================================================
+// imgInsertClick [작업등록]
+//==============================================================================
+procedure TfrmU260.imgInsertClick(Sender: TObject);
+begin
+  if not qryInfo.Active then Exit;
+  if qryInfo.RecordCount = 0 then Exit;
+  ProcInsertCode;
+  SetComboBox;
+  fnCommandQuery;
+end;
+
+//==============================================================================
+// imgDeleteClick [작업삭제]
+//==============================================================================
+procedure TfrmU260.imgDeleteClick(Sender: TObject);
+begin
+  if not qryInfoSub.Active then Exit;
+  if qryInfoSub.RecordCount = 0 then Exit;
+  ProcDeleteCode;
+  SetComboBox;
+  fnCommandQuery;
+end;
+
+//==============================================================================
+// mnTmpJobInsClick [작업등록]
+//==============================================================================
+procedure TfrmU260.mnTmpJobInsClick(Sender: TObject);
+begin
+  if not qryInfo.Active then Exit;
+  if qryInfo.RecordCount = 0 then Exit;
+  ProcInsertCode;
+  SetComboBox;
+  fnCommandQuery;
+end;
+
+//==============================================================================
+// mnTmpJobDelClick [작업삭제]
+//==============================================================================
+procedure TfrmU260.mnTmpJobDelClick(Sender: TObject);
+begin
+  if not qryInfoSub.Active then Exit;
+  if qryInfoSub.RecordCount = 0 then Exit;
+  ProcDeleteCode;
+  SetComboBox;
+  fnCommandQuery;
+end;
+
+//==============================================================================
+// dgInfoTitleClick
+//==============================================================================
+procedure TfrmU260.dgInfoTitleClick(Column: TColumnEh);
+begin
+  if Column.Field.DataSet is TADOQuery then
+  begin
+    with TADOQuery(Column.Field.DataSet) do
+    begin
+      if RecordCount=0 then Exit ;
+      if SrtFlag = 0 then
+      begin
+        SrtFlag := 1; Sort := Column.FieldName + ' DESC' ;
+      end else
+      begin
+        SrtFlag := 0; Sort := Column.FieldName + ' ASC' ;
+      end;
+    end;
+  end;
+end;
+
+
+//==============================================================================
+// OrderInsert
+//==============================================================================
+function TfrmU260.OrderInsert(OrdDate, OrdTime, Idx: String; SubIdx: Integer; UnloadLevel: String): Boolean;
+var
+  i : integer;
+  StrSQL : String;
+  CellPos, Bank, Bay, Level : String;
+begin
+  if UnloadLevel = '' then // 16개 인경우엔 UnloadLevel(출고대)이 정해져서 내려오지 않으므로 1~8은 01, 9~16은 02
+  begin
+    if SubIdx > 7 then UnLoadLevel := '02' //SubIdx 가 8 이상이면  ORD_UNLOAD_LEVEL 은 02 이하면 01
+    else               UnLoadLevel := '01';
+  end;
+
+  try
+    CellPos := qryInfoSub.FieldByName('CELL_POS').AsString; // 00-00-00
+    Bank := Copy(CellPos, 1, 2);
+    Bay := Copy(CellPos, 4, 2);
+    Level := Copy(CellPos, 7, 2);
+
+    with qryInsertToOrder do
+    begin
+      Close;
+      SQL.Clear;
+      StrSQL :=  'INSERT INTO TT_ORDER (' +
+                 '            ORD_TYPE, ORD_DATE, ORD_TIME,                           ' +
+                 '            ORD_INDEX, ORD_SUBIDX, ORD_COMMITNO,                    ' +
+                 '            ORD_ALC_CODE, ORD_ALC_KIND,                             ' +
+                 '            ORD_PROD_CODE1, ORD_PROD_TYPE1,                         ' +
+                 '            ORD_PROD_CODE2, ORD_PROD_TYPE2,                         ' +
+                 '            ORD_PROD_CODE3, ORD_PROD_TYPE3,                         ' +
+                 '            ORD_PROD_CODE4, ORD_PROD_TYPE4,                         ' +
+                 '            ORD_PLT_CODE, ORD_SCNO, ORD_CELL,                       ' +
+                 '            ORD_LOAD_BANK, ORD_LOAD_BAY, ORD_LOAD_LEVEL,            ' +
+                 '            ORD_UNLOAD_BANK, ORD_UNLOAD_BAY, ORD_UNLOAD_LEVEL,      ' +
+                 '            ORD_BODY_NO, ORD_VEH_NO, ORD_INPOS, ORD_QTY, ORD_DANGA, ' +
+                 '            ORD_WORK_USER, ORD_STATUS, ORD_BCR_STATUS,              ' +
+                 '            ORD_PROCESS, ORD_SEQ, ORD_GUBUN   ) ' +
+                 '     VALUES ( ' +
+                 QuotedStr('서열출고') + ',' +                                            //ORD_TYPE
+                 ' CONVERT(CHAR(8),GETDATE(),112) ' + ',' +                               //ORD_DATE
+                 ' REPLACE(CONVERT(CHAR(8), GETDATE(),8), '':'', '''') ' + ',' +
+                 QuotedStr(Idx) + ',' +                                                   //ORD_INDEX
+                 QuotedStr(IntToStr(SubIdx)) + ',' +                                      //ORD_SUBIDX
+                 QuotedStr('') + ',' +                                                    //ORD_COMMITNO
+                 QuotedStr(qryInfoSub.FieldByName('ORD_ALC_CODE').AsString) + ',' +       //ORD_ALC_CODE
+                 QuotedStr(qryInfoSub.FieldByName('ORD_ALC_KIND').AsString) + ',' +       //ORD_ALC_KIND
+                 QuotedStr(qryInfoSub.FieldByName('ORD_PROD_CODE1').AsString) + ',' +     //ORD_PROD_CODE1
+                 QuotedStr(qryInfoSub.FieldByName('ORD_PROD_TYPE1').AsString) + ',' +     //ORD_PROD_TYPE1
+                 QuotedStr(qryInfoSub.FieldByName('ORD_PROD_CODE2').AsString) + ',' +     //ORD_PROD_CODE2
+                 QuotedStr(qryInfoSub.FieldByName('ORD_PROD_TYPE2').AsString) + ',' +     //ORD_PROD_TYPE2
+                 QuotedStr(qryInfoSub.FieldByName('ORD_PROD_CODE3').AsString) + ',' +     //ORD_PROD_CODE3
+                 QuotedStr(qryInfoSub.FieldByName('ORD_PROD_TYPE3').AsString) + ',' +     //ORD_PROD_TYPE3
+                 QuotedStr(qryInfoSub.FieldByName('ORD_PROD_CODE4').AsString) + ',' +     //ORD_PROD_CODE4
+                 QuotedStr(qryInfoSub.FieldByName('ORD_PROD_TYPE4').AsString) + ',' +     //ORD_PROD_TYPE4
+                 QuotedStr(qryInfoSub.FieldByName('ORD_PLT_CODE').AsString)   + ',' +     //ORD_PLT_CODE
+                 QuotedStr('02')    + ',' +                                               //ORD_SCNO      2호기가 출고용 스태커
+                 QuotedStr(Bank+Bay+Level) + ',' +                                        //ORD_CELL
+                 QuotedStr(qryInfoSub.FieldByName('ORD_LOAD_BANK' ).AsString)   + ',' +   //ORD_LOAD_BANK
+                 QuotedStr(qryInfoSub.FieldByName('ORD_LOAD_BAY'  ).AsString)   + ',' +   //ORD_LOAD_BAY
+                 QuotedStr(qryInfoSub.FieldByName('ORD_LOAD_LEVEL').AsString)   + ',' +   //ORD_LOAD_LEVEL
+                 QuotedStr(qryInfoSub.FieldByName('ORD_UNLOAD_BANK').AsString)  + ',' +   //ORD_UNLOAD_BANK
+                 QuotedStr(qryInfoSub.FieldByName('ORD_UNLOAD_BAY').AsString)   + ',' +   //ORD_UNLOAD_BAY
+                 QuotedStr(UnloadLevel) + ',' +                                           //ORD_UNLOAD_LEVEL
+                 QuotedStr(qryInfoSub.FieldByName('ORD_BODY_NO').AsString)      + ',' +   //ORD_BODY_NO
+                 QuotedStr(qryInfoSub.FieldByName('ORD_VEH_NO').AsString)       + ',' +   //ORD_VEH_NO
+                 QuotedStr(qryInfoSub.FieldByName('ORD_INPOS').AsString)        + ',' +   //ORD_INPOS
+                 QuotedStr(qryInfoSub.FieldByName('ORD_QTY').AsString)          + ',' +   //ORD_QTY
+                 QuotedStr(qryInfoSub.FieldByName('ORD_DANGA').AsString)        + ',' +   //ORD_DANGA
+                 QuotedStr(MainDM.M_Info.UserCode) + ',' +                                //ORD_WORK_USER
+                 QuotedStr('작업대기') + ',' +                                            //ORD_STATUS
+                 QuotedStr(qryInfoSub.FieldByName('ORD_BCR_STATUS').AsString) + ',' +     //ORD_BCR_STATUS
+                 QuotedStr(qryInfoSub.FieldByName('ORD_PROCESS').AsString) + ',' +        //ORD_PROCESS
+                 QuotedStr(qryInfoSub.FieldByName('ORD_SEQ').AsString) + ',' +            //ORD_SEQ
+                 QuotedStr(qryInfoSub.FieldByName('ORD_GUBUN').AsString) + ')';           //ORD_GUBUN
+      SQL.Text := StrSQL;
+      ExecSQL;
+    end;
+    Result := True;
+  except
+    if qryInsertToOrder.Active then qryInsertToOrder.Close;
+  end;
+end;
+
+//==============================================================================
+// Get_BrNo
+//==============================================================================
+function TfrmU260.Get_BrNo: String;
+var
+  StrDateTime, StrIndex : String ;
+  Index : integer ;
+begin
+  strDateTime := FormatDateTime('YYYYMMDDHHNNSS', now) ;
+
+  with SP_AUTO_INDEX do
+  begin
+    Parameters.ParamByName('@Index').Value := '';
+    ExecProc;
+    Index := Integer(Parameters.ParamValues['@RETURN_VALUE']);
+  end;
+  StrIndex := FormatFloat('0000', Index) ; // IntToStr(Index);
+  Result   := StrIndex ;
+end;
+
+
+
+
+
+
+
+
+end.
+
+
+
+

@@ -1,0 +1,235 @@
+unit U140_Pop;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, jpeg, ExtCtrls, StdCtrls, Buttons, d_MainDm, h_MainLib, h_ReferLib,
+  DB, ADODB, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  Vcl.Mask, Vcl.DBCtrls, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh;
+
+type
+  TfrmU140_Pop = class(TForm)
+    Pnl_Main: TPanel;
+    Pnl_Sub: TPanel;
+    Pnl_Top: TPanel;
+    Pnl_BTN: TPanel;
+    Pnl_Btn5: TPanel;
+    btnClose: TSpeedButton;
+    Pnl_Btn0: TPanel;
+    btnSave: TSpeedButton;
+    Panel24: TPanel;
+    Panel13: TPanel;
+    Panel14: TPanel;
+    PnlFormName: TPanel;
+    Panel16: TPanel;
+    GroupBox3: TGroupBox;
+    Panel39: TPanel;
+    Panel44: TPanel;
+    qryCommand: TADOQuery;
+    qrySearch: TADOQuery;
+    cbAUTHORITY: TComboBox;
+    edtETC: TEdit;
+    Panel5: TPanel;
+    edtUSERID: TEdit;
+    Panel1: TPanel;
+    edtPW: TEdit;
+    Panel2: TPanel;
+    edtPWCheck: TEdit;
+    PnlCurrPW: TPanel;
+    edtCurrPW: TEdit;
+    qryTemp: TADOQuery;
+    procedure FormActivate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnSaveClick(Sender: TObject);
+    procedure btnCloseClick(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
+  private
+    procedure SetItemList;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+var
+  frmU140_Pop: TfrmU140_Pop;
+
+implementation
+
+uses U140;
+
+{$R *.dfm}
+
+//==============================================================================
+// btnSaveClick
+//==============================================================================
+procedure TfrmU140_Pop.btnSaveClick(Sender: TObject);
+var
+  ExecNo : integer ;
+  StrSQL, tmpStr, tmpAUTHORITY : String ;
+begin
+  //+++++++++++++++++++++++++++++++
+  // 코드데이터 체크
+  //+++++++++++++++++++++++++++++++
+  if Trim(edtUSERID.Text) = ''  then
+  begin
+    edtUSERID.SetFocus;
+    MessageDlg('사용자 코드를 확인해주십시오', mtConfirmation, [mbYes], 0) ;
+    Exit;
+  end;
+
+  if Trim(edtPW.Text) = '' then
+  begin
+    edtPW.SetFocus;
+    MessageDlg('사용자 암호를 확인해주십시오', mtConfirmation, [mbYes], 0) ;
+    Exit;
+  end;
+
+  if Trim(edtPWCheck.Text) = '' then
+  begin
+    edtPWCheck.SetFocus;
+    MessageDlg('사용자 암호를 확인해주십시오', mtConfirmation, [mbYes], 0) ;
+    Exit;
+  end;
+
+  if Trim(edtPW.Text) <> Trim(edtPWCheck.Text) then
+  begin
+    edtPW.SetFocus;
+    MessageDlg('사용자 암호가 동일하지 않습니다.' , mtConfirmation, [mbYes], 0) ;
+    Exit;
+  end;
+
+  if (btnSave.Caption = '수 정') and (Trim(edtCurrPW.Text) = '') then
+  begin
+    edtCurrPW.SetFocus;
+    MessageDlg('현재 암호를 입력해주십시오.' , mtConfirmation, [mbYes], 0) ;
+    Exit;
+  end;
+
+  if      cbAUTHORITY.ItemIndex = 0 then tmpAUTHORITY := '0'  // 조회
+  else if cbAUTHORITY.ItemIndex = 1 then tmpAUTHORITY := '1'  // 조회/지시
+  else                                   tmpAUTHORITY := '0'; // 조회
+
+  //+++++++++++++++++++++++++++++++
+  // 코드데이터 처리
+  //+++++++++++++++++++++++++++++++
+  if btnSave.Caption = '등 록' then
+  begin
+    tmpStr := '등록';
+    StrSQL := ' Insert Into TB_LOGIN ( ' +
+              '     USERID, PW, ETC, AUTHORITY,  ' +
+              '     USERDATE, USERTIME )         ' +
+              '   Values( ' +
+              QuotedStr(UpperCase(edtUSERID.Text )) + ',' +
+              QuotedStr(UpperCase(edtPW.Text     )) + ',' +
+              QuotedStr(UpperCase(edtETC.Text    )) + ',' +
+              QuotedStr(tmpAUTHORITY)               + ',' +
+              QuotedStr(FormatDateTime('YYYYMMDD',  Now)) + ',' +
+              QuotedStr(FormatDateTime('HHNNSS'  ,  Now)) + ')' ;
+  end else
+  if btnSave.Caption = '수 정' then
+  begin
+    tmpStr := '수정';
+    StrSQL := ' Update TB_LOGIN ' +
+            	'    Set PW        = ' + QuotedStr(UpperCase(edtPW.Text     )) +
+              '      , ETC       = ' + QuotedStr(UpperCase(edtETC.Text    )) +
+              '      , AUTHORITY = ' + QuotedStr(tmpAUTHORITY)               +
+              '      , USERDATE  = ' + QuotedStr(FormatDateTime('YYYYMMDD',  Now)) +
+              '      , USERTIME  = ' + QuotedStr(FormatDateTime('HHNNSS'  ,  Now)) +
+              ' Where USERID     = ' + QuotedStr(UpperCase(edtUSERID.Text )) +
+              '   And PW         = ' + QuotedStr(UpperCase(edtCurrPW.Text )) ;
+  end;
+
+  try
+    with qryCommand do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := strSQL ;
+      ExecNo := ExecSQL;
+
+      if btnSave.Caption = '등 록' then frmU140.ProcMenuDataInsert(UpperCase(edtUSERID.Text));
+
+      if (ExecNo <= 0) and (tmpStr = '수정') then
+        ShowMessage('코드' + tmpStr + '에 실패하였습니다.' + #13#10 + '현재암호 및 입력 정보를 확인해 주십시오.' );
+    end;
+    frmU140.SetComboBox ;
+    frmU140.fnCommandQuery;
+    Close;
+  except
+    if qryCommand.Active then qryCommand.Close;
+    if tmpStr = '등록' then
+      ShowMessage('코드' + tmpStr + '에 실패하였습니다.' + #13#10 + '중복코드 여부 및 입력 정보를 확인해 주십시오.' )
+    else
+      ShowMessage('코드' + tmpStr + '에 실패하였습니다.' + #13#10 + '현재암호 및 입력 정보를 확인해 주십시오.' )
+  end;
+end;
+
+//==============================================================================
+// FormActivate
+//==============================================================================
+procedure TfrmU140_Pop.FormActivate(Sender: TObject);
+begin
+  SetItemList;
+end;
+
+//==============================================================================
+// FormDeactivate
+//==============================================================================
+procedure TfrmU140_Pop.FormDeactivate(Sender: TObject);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+end;
+
+//==============================================================================
+// FormClose
+//==============================================================================
+procedure TfrmU140_Pop.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+
+  Action := Cafree;
+  try frmU140_Pop := Nil ;
+  except end;
+end;
+
+//==============================================================================
+// btnCloseClick
+//==============================================================================
+procedure TfrmU140_Pop.btnCloseClick(Sender: TObject);
+begin
+  Close;
+end;
+
+//==============================================================================
+// SetItemList
+//==============================================================================
+procedure TfrmU140_Pop.SetItemList;
+begin
+//
+end;
+
+end.

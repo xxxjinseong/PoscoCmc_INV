@@ -1,0 +1,401 @@
+unit U450;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, d_MainDm, h_MainLib, h_ReferLib, Grids, StdCtrls, Buttons,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
+  GridsEh, DBAxisGridsEh, DBGridEh, Data.Win.ADODB, Data.DB, Vcl.ComCtrls,
+  Vcl.Menus, DBGridEhImpExp, PrnDbgeh ;
+
+type
+  TfrmU450 = class(TForm)
+    shpB: TShape;
+    shpL: TShape;
+    shpR: TShape;
+    EhPrint: TPrintDBGridEh;
+    qryInfo: TADOQuery;
+    dsInfo: TDataSource;
+    shpT: TShape;
+    Pnl_Main: TPanel;
+    Pnl_List: TPanel;
+    dgInfo: TDBGridEh;
+    Pnl_Line: TPanel;
+    Panel12: TPanel;
+    Panel9: TPanel;
+    Panel11: TPanel;
+    Pnl_Top1: TPanel;
+    DatePicker1: TDateTimePicker;
+    Panel1: TPanel;
+    cbDate: TCheckBox;
+    procedure FormCreate(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure dgTitleClick(Column: TColumnEh);
+    procedure dgInfoDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure DatePicker1Change(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure fnCommandStart;
+    procedure fnCommandAdd  ;
+    procedure fnCommandExcel;
+    procedure fnCommandDelete;
+    procedure fnCommandPrint;
+    procedure fnCommandQuery;
+    procedure fnCommandClose;
+    procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
+    procedure SetComboBox;
+  end;
+  procedure U450Create();
+
+const
+  FormNo = '450' ;
+
+var
+  frmU450: TfrmU450;
+  SrtFlag : integer = 0 ;
+
+implementation
+
+uses Main ;
+
+{$R *.dfm}
+
+//==============================================================================
+// U240Create
+//==============================================================================
+procedure U450Create();
+begin
+  if not Assigned( frmU450 ) then
+  begin
+    frmU450 := TfrmU450.Create(Application);
+    with frmU450 do
+    begin
+      fnCommandStart;
+    end;
+  end;
+  frmU450.Show;
+end;
+
+//==============================================================================
+// fnWmMsgRecv
+//==============================================================================
+procedure TfrmU450.fnWmMsgRecv(var MSG: TMessage);
+begin
+  case MSG.WParam of
+    MSG_MDI_WIN_ADD     : begin fnCommandAdd     ; end;
+    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;
+    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;
+    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;
+    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;
+    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;
+  end;
+end;
+
+//==============================================================================
+// FormCreate
+//==============================================================================
+procedure TfrmU450.FormCreate(Sender: TObject);
+begin
+  DatePicker1.Date := Now;
+end;
+
+//==============================================================================
+// FormShow
+//==============================================================================
+procedure TfrmU450.FormShow(Sender: TObject);
+begin
+//
+end;
+
+//==============================================================================
+// FormActivate
+//==============================================================================
+procedure TfrmU450.FormActivate(Sender: TObject);
+begin
+  frmMain.LblMenu000.Caption := (Sender as TForm).Caption ;
+  fnWmMsgSend( 21211,111 );
+  fnCommandQuery ;
+end;
+
+//==============================================================================
+// FormDeactivate
+//==============================================================================
+procedure TfrmU450.FormDeactivate(Sender: TObject);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+end;
+
+//==============================================================================
+// FormClose
+//==============================================================================
+procedure TfrmU450.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+
+  Action := Cafree;
+  try frmU450 := Nil ;
+  except end;
+end;
+
+//==============================================================================
+// fnCommandStart [시작]
+//==============================================================================
+procedure TfrmU450.fnCommandStart;
+begin
+  SetComboBox;
+end;
+
+//==============================================================================
+// fnCommandAdd [신규]
+//==============================================================================
+procedure TfrmU450.fnCommandAdd  ;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandExcel [엑셀]
+//==============================================================================
+procedure TfrmU450.fnCommandExcel;
+begin
+  if hlbEhgridListExcel ( dgInfo , '작업시간별 실적조회' + '_' + FormatDatetime('YYYYMMDD', Now) ) then
+  begin
+    MessageDlg('엑셀 저장을 완료하였습니다.', mtConfirmation, [mbYes], 0);
+  end;
+end;
+
+//==============================================================================
+// fnCommandExcel [삭제]
+//==============================================================================
+procedure TfrmU450.fnCommandDelete;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandPrint [인쇄]
+//==============================================================================
+procedure TfrmU450.fnCommandPrint;
+begin
+  if not qryInfo.Active then Exit;
+  fnCommandQuery;
+  EhPrint.DBGridEh := dgInfo;
+  EhPrint.PageFooter.RightText.Clear;
+  EhPrint.PageFooter.RightText.Add(FormatDateTime('YYYY-MM-DD HH:NN:SS',Now()) + '   ' + MainDM.M_Info.UserCode);
+  EhPrint.PageFooter.Font.Name := '돋움';
+  EhPrint.PageFooter.Font.Size := 11;
+  EhPrint.Preview;
+end;
+
+//==============================================================================
+// fnCommandQuery [조회]
+//==============================================================================
+procedure TfrmU450.fnCommandQuery;
+var
+  StrSQL, TabName : String;
+  i : Integer;
+  Date : WideString;
+begin
+  try
+    Date := FormatDatetime('YYYYMMDD', DatePicker1.Date);
+
+    // 이력테이블 선택
+    if StrToInt(Copy(Date,1,4)) < 2017 then
+    begin
+      MessageDlg('2017년 이후 부터 조회가능 합니다.', mtConfirmation, [mbYes], 0);
+      DatePicker1.Date := Now;
+      Exit;
+    end else
+    if StrToInt(Copy(Date,1,4)) > StrToInt(FormatDateTime('YYYY', Now)) then
+    begin
+      Exit;
+    end else
+    begin
+      if Copy(Date,1,4) = FormatDateTime('YYYY', Now) then
+           TabName := 'TT_TRANS'
+      else TabName := 'TT_TRANS_' + Copy(Date,1,4) ;
+    end;
+
+    with qryInfo do
+    begin
+      Close;
+      SQL.Clear;
+      StrSQL := ' SELECT (FORMAT(CONVERT(INT,T.TmpTime),''00'') + ''H'') as TmpTime, Sum(INCOUNT) AS INCOUNT, Sum(OUTCOUNT) AS OUTCOUNT , ' +
+                '        CASE WHEN T.TmpTime < 16 THEN ''주간'' ELSE ''야간'' END as Round_Type ' +
+                '   FROM ( ' +
+                '          SELECT ''07'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''08'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''09'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''10'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''11'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''12'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''13'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''14'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''15'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''16'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''17'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''18'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''19'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''20'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''21'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''22'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''23'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''24'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''25'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''26'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''27'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''28'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''29'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT ''30'' AS TMPTIME, 0 AS INCOUNT, 0 AS OUTCOUNT UNION ALL	' +
+                '          SELECT SUBSTRING(TRN_TIME,1,2) as TmpTime, COUNT(*) AS INCOUNT , 0 as OUTCOUNT	' +
+                '            FROM ' + TabName +
+                '           WHERE TRN_DATE =' + QuotedStr(Date)+
+                '             AND ORD_TYPE =''생산입고''	' +
+                '             AND TRN_TIME > ''065959''   ' +
+                '             AND ORD_ALC_CODE <> ''00000'' ' +
+                '           GROUP BY SUBSTRING(TRN_TIME,1,2)	' +
+                '           UNION ALL ' +
+                '          SELECT SUBSTRING(TRN_TIME,1,2) as TmpTime,0  AS INCOUNT , COUNT(*) as OUTCOUNT	' +
+                '            FROM ' + TabName +
+                '           WHERE TRN_DATE = ' + QuotedStr(Date)+
+                '             AND (ORD_TYPE = ''서열출고'' or ORD_TYPE = ''긴급출고'' or ORD_TYPE = ''지정출고'' ) ' +
+                '             AND TRN_TIME > ''065959'' ' +
+                '             AND ORD_ALC_CODE <> ''00000'' ' +
+                '           GROUP BY SUBSTRING(TRN_TIME,1,2) ' +
+                '           UNION ALL' +
+                '          SELECT SUBSTRING(TRN_TIME,1,2)+24 as TmpTime, COUNT(*) AS INCOUNT , 0 as OUTCOUNT	' +
+                '            FROM ' + TabName +
+                '           WHERE TRN_DATE = CONVERT(VARCHAR(8), CONVERT(INT, ' + QuotedStr(Date)+ ') + 1)  	' +
+                '             AND TRN_TIME < ''070000'' ' +
+                '             AND ORD_TYPE =''생산입고''	' +
+                '             AND ORD_ALC_CODE <> ''00000'' ' +
+                '           GROUP BY SUBSTRING(TRN_TIME,1,2)	' +
+                '           UNION ALL' +
+                '          SELECT SUBSTRING(TRN_TIME,1,2)+24 as TmpTime,0  AS INCOUNT , COUNT(*) as OUTCOUNT	' +
+                '            FROM ' + TabName +
+                '           WHERE TRN_DATE = CONVERT(VARCHAR(8), CONVERT(INT, '+ QuotedStr(Date)+ ') + 1)		' +
+                '             AND (ORD_TYPE = ''서열출고'' or ORD_TYPE = ''긴급출고'' or ORD_TYPE = ''지정출고'' ) ' +
+                '             AND ORD_ALC_CODE <> ''00000'' ' +
+                '             AND TRN_TIME < ''070000'' ' +
+                '           GROUP BY SUBSTRING(TRN_TIME,1,2)	' +
+                ' 	   ) T ' +
+                '     GROUP BY T.TmpTime ' +
+                '     ORDER BY T.TmpTime ' ;
+
+      SQL.Text := StrSQL;
+      Open;
+    end;
+  except
+    if qryInfo.Active then qryInfo.Close;
+  end;
+end;
+
+//==============================================================================
+// fnCommandClose [닫기]
+//==============================================================================
+procedure TfrmU450.fnCommandClose;
+begin
+  Close;
+end;
+
+//==============================================================================
+// SetComboBox
+//==============================================================================
+procedure TfrmU450.SetComboBox;
+begin
+//
+end;
+
+//==============================================================================
+// dgTitleClick
+//==============================================================================
+procedure TfrmU450.dgTitleClick(Column: TColumnEh);
+begin
+  if Column.Field.DataSet is TADOQuery then
+  begin
+    with TADOQuery(Column.Field.DataSet) do
+    begin
+      if RecordCount=0 then Exit ;
+      if SrtFlag = 0 then
+      begin
+        SrtFlag := 1; Sort := Column.FieldName + ' DESC' ;
+      end else
+      begin
+        SrtFlag := 0; Sort := Column.FieldName + ' ASC' ;
+      end;
+    end;
+  end;
+end;
+
+//==============================================================================
+// dgInfoDrawColumnCell
+//==============================================================================
+procedure TfrmU450.dgInfoDrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+begin
+  with dgInfo do
+  begin
+    if DataCol in [2] then
+    begin
+      if StrToInt(Column.Field.DataSet.FieldByName('INCount').AsString) <> 0 then
+      begin
+        Canvas.Font.Color := clBlue;
+        Canvas.Font.Style := [fsBold];
+      end else
+      begin
+        Canvas.Font.Color := clBlack;
+        Canvas.Font.Style := [];
+      end;
+    end;
+
+    if DataCol in [3] then
+    begin
+      if StrToInt(Column.Field.DataSet.FieldByName('OUTCount').AsString) <> 0 then
+      begin
+        Canvas.Font.Color := clBlue;
+        Canvas.Font.Style := [fsBold];
+      end else
+      begin
+        Canvas.Font.Color := clBlack;
+        Canvas.Font.Style := [];
+      end;
+    end;
+
+    dgInfo.defaultdrawcolumncell(rect, datacol, column, state);
+  end;
+end;
+
+//==============================================================================
+// DatePicker1Change
+//==============================================================================
+procedure TfrmU450.DatePicker1Change(Sender: TObject);
+begin
+  fnCommandQuery;
+end;
+
+end.

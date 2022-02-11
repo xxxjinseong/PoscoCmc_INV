@@ -1,0 +1,63 @@
+object frmU270_Pop: TfrmU270_Pop
+  Left = 0
+  Top = 0
+  BorderIcons = []
+  BorderStyle = bsSingle
+  ClientHeight = 126
+  ClientWidth = 355
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  KeyPreview = True
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnClose = FormClose
+  OnKeyPress = FormKeyPress
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 355
+    Height = 126
+    Align = alClient
+    TabOrder = 0
+    ExplicitLeft = 280
+    ExplicitTop = 64
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object btn1F: TButton
+      Tag = 1
+      Left = 6
+      Top = 67
+      Width = 170
+      Height = 49
+      Caption = '1'#52789' '#52636#44256#45824
+      TabOrder = 0
+      OnClick = btnClick
+    end
+    object btn2F: TButton
+      Tag = 2
+      Left = 180
+      Top = 67
+      Width = 170
+      Height = 49
+      Caption = '2'#52789' '#52636#44256#45824
+      TabOrder = 1
+      OnClick = btnClick
+    end
+    object pnlInfo: TPanel
+      Left = 5
+      Top = 4
+      Width = 345
+      Height = 58
+      BevelInner = bvLowered
+      BevelOuter = bvLowered
+      Caption = #50612#46356#47196' '#52636#44256#54616#49884#44192#49845#45768#44620'? (ESC:'#52712#49548')'
+      TabOrder = 2
+    end
+  end
+end

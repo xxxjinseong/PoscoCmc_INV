@@ -1,0 +1,565 @@
+unit U460;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, d_MainDm, h_MainLib, h_ReferLib, Grids, StdCtrls, Buttons,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
+  GridsEh, DBAxisGridsEh, DBGridEh, Data.Win.ADODB, Data.DB, Vcl.ComCtrls,
+  Vcl.Menus, DBGridEhImpExp, PrnDbgeh ;
+
+type
+  TfrmU460 = class(TForm)
+    shpB: TShape;
+    shpL: TShape;
+    shpR: TShape;
+    shpT: TShape;
+    Panel9: TPanel;
+    Panel11: TPanel;
+    tmrQuery: TTimer;
+    pmIn: TPopupMenu;
+    mnInOk: TMenuItem;
+    mnInCancel: TMenuItem;
+    mnInDelete: TMenuItem;
+    qryOrderUpdate: TADOQuery;
+    EhPrint: TPrintDBGridEh;
+    Pnl_Main: TPanel;
+    Pnl_Top: TPanel;
+    DatePicker1: TDateTimePicker;
+    TimePicker1: TDateTimePicker;
+    DatePicker2: TDateTimePicker;
+    TimePicker2: TDateTimePicker;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel7: TPanel;
+    cbSTOC_CODE: TComboBox;
+    Pnl_Line: TPanel;
+    Panel3: TPanel;
+    dgInfo: TDBGridEh;
+    qryInfo: TADOQuery;
+    dsInfo: TDataSource;
+    qryTemp: TADOQuery;
+    procedure FormActivate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDeactivate(Sender: TObject);
+    procedure Pnl_MainResize(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure tmrQueryTimer(Sender: TObject);
+    procedure dgTitleClick(Column: TColumnEh);
+    procedure pmInfoPopup(Sender: TObject);
+    procedure mnInOkClick(Sender: TObject);
+    procedure mnInCancelClick(Sender: TObject);
+    procedure mnInDeleteClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure fnCommandStart;
+    procedure fnCommandAdd  ;
+    procedure fnCommandExcel;
+    procedure fnCommandDelete;
+    procedure fnCommandPrint;
+    procedure fnCommandQuery;
+    procedure fnCommandClose;
+    procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
+    procedure OrderProcess(MODE, ID_DATE, ID_TIME, ID_INDEX,  ID_SUBIDX, ID_TYPE, STATUS: String);
+    function  DeleteTrack(MODE, ID_DATE, ID_TIME, ID_INDEX, ID_SUBIDX, NOWBUFF: String): String;
+    procedure SetComboBox;
+  end;
+  procedure U460Create();
+
+const
+  FormNo = '460' ;
+
+var
+  frmU460: TfrmU460;
+  SrtFlag : integer = 0 ;
+
+implementation
+
+uses Main ;
+
+{$R *.dfm}
+
+//==============================================================================
+// U250Create
+//==============================================================================
+procedure U460Create();
+begin
+  if not Assigned( frmU460 ) then
+  begin
+    frmU460 := TfrmU460.Create(Application);
+    with frmU460 do
+    begin
+      fnCommandStart;
+    end;
+  end;
+  frmU460.Show;
+end;
+
+//==============================================================================
+// fnWmMsgRecv
+//==============================================================================
+procedure TfrmU460.fnWmMsgRecv(var MSG: TMessage);
+begin
+  case MSG.WParam of
+    MSG_MDI_WIN_ADD     : begin fnCommandAdd     ; end;
+    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;
+    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;
+    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;
+    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;
+    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;
+  end;
+end;
+
+//==============================================================================
+// FormCreate
+//==============================================================================
+procedure TfrmU460.FormCreate(Sender: TObject);
+begin
+  DatePicker1.Date := Now;
+  DatePicker2.Date := Now;
+end;
+
+//==============================================================================
+// FormShow
+//==============================================================================
+procedure TfrmU460.FormShow(Sender: TObject);
+begin
+//
+end;
+
+//==============================================================================
+// FormActivate
+//==============================================================================
+procedure TfrmU460.FormActivate(Sender: TObject);
+begin
+  frmMain.LblMenu000.Caption := (Sender as TForm).Caption ;
+  fnWmMsgSend( 21211,111 );
+  fnCommandQuery ;
+  if not tmrQuery.Enabled then tmrQuery.Enabled := True;
+end;
+
+//==============================================================================
+// FormDeactivate
+//==============================================================================
+procedure TfrmU460.FormDeactivate(Sender: TObject);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+end;
+
+//==============================================================================
+// FormClose
+//==============================================================================
+procedure TfrmU460.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+
+  Action := Cafree;
+  try frmU460 := Nil ;
+  except end;
+end;
+
+//==============================================================================
+// fnCommandStart [시작]
+//==============================================================================
+procedure TfrmU460.fnCommandStart;
+begin
+  SetComboBox;
+  fnCommandQuery ;
+end;
+
+//==============================================================================
+// fnCommandAdd [신규]
+//==============================================================================
+procedure TfrmU460.fnCommandAdd  ;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandExcel [엑셀]
+//==============================================================================
+procedure TfrmU460.fnCommandExcel;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandExcel [삭제]
+//==============================================================================
+procedure TfrmU460.fnCommandDelete;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandPrint [인쇄]
+//==============================================================================
+procedure TfrmU460.fnCommandPrint;
+begin
+  EhPrint.DBGridEh := dgInfo;
+  EhPrint.PageFooter.RightText.Clear;
+  EhPrint.PageFooter.RightText.Add(FormatDateTime('YYYY-MM-DD HH:NN:SS',Now()) + '   ' + MainDM.M_Info.UserCode);
+  EhPrint.PageFooter.Font.Name := '돋움';
+  EhPrint.PageFooter.Font.Size := 11;
+  EhPrint.Preview;
+end;
+
+//==============================================================================
+// fnCommandQuery [조회]
+//==============================================================================
+procedure TfrmU460.fnCommandQuery;
+var
+  StrSQL, WhereStr : String;
+  Date1, Date2, Time1, Time2 : String;
+begin
+  Date1 := FormatDateTime('YYYYMMDD', DatePicker1.Date);
+  Date2 := FormatDateTime('YYYYMMDD', DatePicker2.Date);
+  Time1 := FormatDateTime('HHMMSS', TimePicker1.Time);
+  Time2 := FormatDateTime('HHMMSS', TimePicker2.Time);
+
+  WhereStr := ' AND TRN_DATE BETWEEN ' + QuotedStr(Date1) + ' AND ' + QuotedStr(Date2) +
+              ' AND TRN_TIME BETWEEN ' + QuotedStr(Time1) + ' AND ' + QuotedStr(Time2);
+  try
+    with qryInfo do
+    begin
+      Close;
+      SQL.Clear;                  // ORD_ALC_CODE, IN_CNT, OUT_CNT
+      StrSQL := ' SELECT ORD_ALC_CODE, ORD_PROD_CODE1, ORD_PROD_CODE2, ' +
+                '        ORD_PROD_CODE3, ORD_PROD_CODE4, SUM(IN_CNT) AS IN_CNT, SUM(OUT_CNT) AS OUT_CNT ' +
+                '   FROM (SELECT ORD_ALC_CODE, ORD_PROD_CODE1, ORD_PROD_CODE2, ORD_PROD_CODE3, ORD_PROD_CODE4, COUNT(ORD_ALC_CODE) AS IN_CNT, 0 AS OUT_CNT ' +
+                '       		FROM TT_TRANS ' +
+                '          WHERE ORD_TYPE = ''생산입고'' ' + WhereStr +
+                '          GROUP BY ORD_ALC_CODE, ORD_PROD_CODE1, ORD_PROD_CODE2, ORD_PROD_CODE3, ORD_PROD_CODE4 ' +
+                '          UNION ALL ' +
+                '     	  SELECT ORD_ALC_CODE, ORD_PROD_CODE1, ORD_PROD_CODE2, ORD_PROD_CODE3, ORD_PROD_CODE4, 0 AS IN_CNT, ' +
+                '                COUNT(ORD_ALC_CODE) AS OUT_CNT ' +
+                '           FROM TT_TRANS ' +
+                '      		 WHERE ORD_TYPE IN (''서열출고'', ''지정출고'', ''긴급출고'') ' + WhereStr +
+                '          GROUP BY ORD_ALC_CODE, ORD_PROD_CODE1, ORD_PROD_CODE2, ORD_PROD_CODE3, ORD_PROD_CODE4   ) AS TOTAL ' +
+                '              GROUP BY ORD_ALC_CODE, ORD_PROD_CODE1, ORD_PROD_CODE2, ORD_PROD_CODE3, ORD_PROD_CODE4 ';
+      SQL.Text := StrSQL;
+      Open;
+    end;
+  except
+  on e : Exception do ShowMessage(e.Message);
+  end;
+end;
+
+//==============================================================================
+// fnCommandClose [닫기]
+//==============================================================================
+procedure TfrmU460.fnCommandClose;
+begin
+  Close;
+end;
+
+//==============================================================================
+// SetComboBox
+//==============================================================================
+procedure TfrmU460.SetComboBox;
+begin
+  MainDm.SearchCodeList(cbSTOC_CODE  , 'TT_TRANS', 'ORD_ALC_CODE' );
+end;
+
+//==============================================================================
+// Pnl_MainResize
+//==============================================================================
+procedure TfrmU460.Pnl_MainResize(Sender: TObject);
+begin
+//
+end;
+
+//==============================================================================
+// tmrQueryTimer
+//==============================================================================
+procedure TfrmU460.tmrQueryTimer(Sender: TObject);
+begin
+  try
+    tmrQuery.Enabled := False;
+    fnCommandQuery;
+  finally
+    tmrQuery.Enabled := True;
+  end;
+end;
+
+//==============================================================================
+// dgTitleClick
+//==============================================================================
+procedure TfrmU460.dgTitleClick(Column: TColumnEh);
+begin
+  if Column.Field.DataSet is TADOQuery then
+  begin
+    with TADOQuery(Column.Field.DataSet) do
+    begin
+      if RecordCount=0 then Exit ;
+      if SrtFlag = 0 then
+      begin
+        SrtFlag := 1; Sort := Column.FieldName + ' DESC' ;
+      end else
+      begin
+        SrtFlag := 0; Sort := Column.FieldName + ' ASC' ;
+      end;
+    end;
+  end;
+end;
+
+//==============================================================================
+// pmInPopup  [입고작업 팝업]
+//==============================================================================
+procedure TfrmU460.pmInfoPopup(Sender: TObject);
+begin
+{  if (Trim(qryInfo.FieldByName('STATUS').AsString) = '') or (not cb_Qry.Checked ) then
+  begin
+    mnInOk.Visible     := False;
+    mnInCancel.Visible := False;
+    mnInDelete.Visible := False;
+  end else
+  if (qryInfo.FieldByName('STATUS').AsString = 'SC지시') then
+  begin
+    mnInOk.Visible     := True;
+    mnInCancel.Visible := False;
+    mnInDelete.Visible := False;
+  end else
+  begin
+    if Trim(qryInfo.FieldByname('IDX').AsString) <> '0'  then
+    begin
+      mnInOk.Visible     := True;
+      mnInCancel.Visible := True;
+      mnInDelete.Visible := False;
+    end else
+    begin
+      mnInOk.Visible     := False;
+      mnInCancel.Visible := False;
+      mnInDelete.Visible := True;
+    end;
+  end;          }
+end;
+
+//==============================================================================
+// mnInOkClick [입고작업 - 강제완료]
+//==============================================================================
+procedure TfrmU460.mnInOkClick(Sender: TObject);
+var
+  ID_TYPE, ID_DATE, ID_TIME, ID_INDEX, ID_SUBIDX : String ;
+  RowCnt, SelCnt : integer;
+begin
+{  SelCnt := dgInfo.SelectedRows.Count;
+  if MessageDlg(IntToStr(SelCnt) + '건 강제완료처리 하시겠습니까?', mtWarning, [mbYes, mbNo], 0) <> mrYes then Exit;
+
+  for RowCnt := 0 to SelCnt - 1 do
+  begin
+    with dgInfo.DataSource.DataSet do
+    begin
+      GotoBookmark(Pointer(dgInfo.SelectedRows.Items[Rowcnt]));
+
+      ID_TYPE   := Trim(qryInfo.FieldByName('ID_TYPE'  ).AsString);
+      ID_DATE   := Trim(qryInfo.FieldByName('ID_DATE'  ).AsString);
+      ID_TIME   := Trim(qryInfo.FieldByName('ID_TIME'  ).AsString);
+      ID_INDEX  := Trim(qryInfo.FieldByName('ID_INDEX' ).AsString);
+      ID_SUBIDX := Trim(qryInfo.FieldByName('ID_SUBIDX').AsString);
+
+      OrderProcess('일반수정', ID_DATE, ID_TIME, ID_INDEX,  ID_SUBIDX, ID_TYPE, '강제완료'); // TT_ORDER -> PROCESS -> 강제완료
+      OrderProcess('일반삭제', ID_DATE, ID_TIME, ID_INDEX,  ID_SUBIDX, ID_TYPE, '삭제');     // TT_ORDER , TT_TRACK -> 삭제
+    end;
+  end;
+  cb_Qry.Checked := False;
+  fnCommandQuery;}
+end;
+
+//==============================================================================
+// mnInOkClick [입고작업 - 작업취소]
+//==============================================================================
+procedure TfrmU460.mnInCancelClick(Sender: TObject);
+var
+  ID_TYPE, ID_DATE, ID_TIME, ID_INDEX, ID_SUBIDX : String ;
+  RowCnt, SelCnt : integer;
+begin
+ { SelCnt := dgInfo.SelectedRows.Count;
+  if MessageDlg(IntToStr(SelCnt) + '건 취소처리 하시겠습니까?', mtWarning, [mbYes, mbNo], 0) <> mrYes then Exit;
+
+  for RowCnt := 0 to SelCnt - 1 do
+  begin
+    with dgInfo.DataSource.DataSet do
+    begin
+      GotoBookmark(pointer(dgInfo.SelectedRows.Items[Rowcnt]));
+
+      ID_TYPE   := Trim(qryInfo.FieldByName('ID_TYPE'  ).AsString);
+      ID_DATE   := Trim(qryInfo.FieldByName('ID_DATE'  ).AsString);
+      ID_TIME   := Trim(qryInfo.FieldByName('ID_TIME'  ).AsString);
+      ID_INDEX  := Trim(qryInfo.FieldByName('ID_INDEX' ).AsString);
+      ID_SUBIDX := Trim(qryInfo.FieldByName('ID_SUBIDX').AsString);
+
+      OrderProcess('일반수정', ID_DATE, ID_TIME, ID_INDEX,  ID_SUBIDX, ID_TYPE, '취소'); // TT_ORDER -> PROCESS -> 취소
+      OrderProcess('일반삭제', ID_DATE, ID_TIME, ID_INDEX,  ID_SUBIDX, ID_TYPE, '삭제'); // TT_ORDER , TT_TRACK -> 삭제
+    end;
+  end;
+  cb_Qry.Checked := False;
+  fnCommandQuery;         }
+end;
+
+//==============================================================================
+// mnInOkClick [입고작업 - 트랙삭제]
+//==============================================================================
+procedure TfrmU460.mnInDeleteClick(Sender: TObject);
+var
+  nowBuff : String;
+begin
+ { nowBuff := Trim(qryInfo.FieldByName('LOCATION').AsString ) ;
+
+  try
+    if not MainDm.MainDatabase.InTransaction then
+       MainDm.MainDatabase.BeginTrans;
+
+    with qryOrderUpdate do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := DeleteTrack('일반삭제', '', '', '', '', nowBuff);
+      ExecSQL;
+
+      if MainDm.MainDatabase.InTransaction then
+         MainDm.MainDatabase.CommitTrans;
+    end;
+    cb_Qry.Checked := False;
+    fnCommandQuery;
+  except
+    if qryOrderUpdate.Active then qryOrderUpdate.Close;
+    if MainDm.MainDatabase.InTransaction then
+       MainDm.MainDatabase.RollbackTrans;
+    Showmessage('DB Error 인하여 작업 지시가 취소되었습니다.');
+  end;   }
+end;
+
+//==============================================================================
+// OrderProcess
+//==============================================================================
+procedure TfrmU460.OrderProcess(MODE, ID_DATE, ID_TIME, ID_INDEX,  ID_SUBIDX, ID_TYPE, STATUS: String);
+var
+  StrSQL : string;
+Begin
+  if MODE = '일반삭제' then
+  begin
+    StrSQL := ' DELETE FROM TT_ORDER                   ' +
+              '  WHERE ID_DATE   = ''' + ID_DATE + ''' ' +
+              '    AND ID_TIME   = ''' + ID_TIME + ''' ' +
+              '    AND ID_INDEX  = '   + ID_INDEX +
+              '    AND ID_SUBIDX = '   + ID_SUBIDX ;
+  end else
+  if MODE = '일반수정' then
+  begin
+    StrSQL := ' UPDATE TT_ORDER SET PROCESS = ''' + STATUS + ''' '+
+              '  WHERE ID_DATE   = ''' + ID_DATE + ''' ' +
+              '    AND ID_TIME   = ''' + ID_TIME + ''' ' +
+              '    AND ID_INDEX  = '   + ID_INDEX +
+              '    AND ID_SUBIDX = '   + ID_SUBIDX ;
+  end else
+  if MODE = '상태수정' then
+  begin
+    StrSQL := ' UPDATE TT_ORDER SET STATUS = ''' + STATUS + ''' '+
+              ' WHERE ID_DATE   = ''' + ID_DATE + ''' ' +
+              '   AND ID_TIME   = ''' + ID_TIME + ''' ' +
+              '   AND ID_INDEX  = '   + ID_INDEX +
+              '   AND ID_SUBIDX = '   + ID_SUBIDX ;
+  end ;
+
+  try
+    if not MainDm.MainDatabase.InTransaction then
+       MainDm.MainDatabase.BeginTrans;
+
+    with qryOrderUpdate do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := ' SELECT STATUS FROM TT_ORDER            ' +
+                  '  WHERE ID_DATE   = ''' + ID_DATE + ''' ' +
+                  '    AND ID_TIME   = ''' + ID_TIME + ''' ' +
+                  '    AND ID_INDEX  = '   + ID_INDEX +
+                  '    AND ID_SUBIDX = '   + ID_SUBIDX ;
+      Open;
+
+      if not (Bof and Eof) then
+      begin
+        Close;
+        SQL.Clear;
+        SQL.Text := StrSQL ;
+        ExecSQL ;
+
+        if (Status = '삭제') then
+        begin
+          Close;
+          SQL.Clear;
+          SQL.Text := DeleteTrack(MODE, ID_DATE, ID_TIME, ID_INDEX,  ID_SUBIDX, '');
+          ExecSQL;
+        end;
+      end;
+    end;
+    if MainDm.MainDatabase.InTransaction then
+       MainDm.MainDatabase.CommitTrans;
+  except
+    if qryOrderUpdate.Active then qryOrderUpdate.Close;
+    if MainDm.MainDatabase.InTransaction then
+       MainDm.MainDatabase.RollbackTrans;
+    Showmessage('DB Error 인하여 작업 지시가 취소되었습니다.');
+  end;
+end;
+
+//==============================================================================
+// DeleteTrack
+//==============================================================================
+function TfrmU460.DeleteTrack(MODE, ID_DATE, ID_TIME, ID_INDEX, ID_SUBIDX, NOWBUFF: String): String;
+begin
+  Result := ' UPDATE TT_TRACK  ' +
+            '    SET ID_DATA      = ''0'', ID_TYPE      = '''' ,  ' +
+            '        ORDER_DATE   = '''' , ORDER_TIME   = '''' ,  ' +
+            '        ORDER_INDEX  = 0    , ORDER_SUBIDX = 0 ,     ' +
+            '        ID_SC        = '''' , ID_BANK      = '''' ,  ' +
+            '        ID_BAY       = '''' , ID_LEVEL     = '''' ,  ' +
+            '        HL_GUBUN     = '''' , LOAD_CODE    = '''' ,  ' +
+            '        COMPANY_CODE = '''' ,                        ' +
+            '        ITEM_CODE1   = '''' , ITEM_CODE2   = '''' ,  ' +
+            '        ITEM_CODE3   = '''' , ITEM_CODE4   = '''' ,  ' +
+            '        LOT_NO1      = '''' , LOT_NO2      = '''' ,  ' +
+            '        LOT_NO3      = '''' , LOT_NO4      = '''' ,  ' +
+            '        ID_CONTROL   = '''' , ID_MEMO      = '''' ,  ' +
+            '        PALLET_CODE  = '''' , LOAD_STATUS  = '''' ,  ' +
+            '        FR_GUBUN     = '''' ';
+
+  if NOWBUFF = '' then
+  begin
+    Result := Result +
+              ' WHERE ORDER_DATE   = ''' + ID_DATE  + ''' '+
+              '   AND ORDER_INDEX  = ' + ID_INDEX ;
+
+    if Mode = '일반삭제' then
+      Result := Result +
+                ' AND ORDER_SUBIDX = ' + ID_SUBIDX ;
+  end else
+  begin
+    Result := Result +
+              ' WHERE ID_BUFF = ' + NOWBUFF ;
+  end;
+end;
+
+end.

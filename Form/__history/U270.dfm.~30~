@@ -1,0 +1,930 @@
+object frmU270: TfrmU270
+  Left = 2026
+  Top = 265
+  Caption = '270. '#44596#44553' '#51648#51221#52636#44256
+  ClientHeight = 592
+  ClientWidth = 1264
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poDefault
+  Visible = True
+  WindowState = wsMaximized
+  OnActivate = FormActivate
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDeactivate = FormDeactivate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object shpB: TShape
+    Left = 0
+    Top = 591
+    Width = 1264
+    Height = 1
+    Align = alBottom
+    Brush.Color = clNavy
+    Pen.Color = 9408913
+    ExplicitTop = 12
+    ExplicitWidth = 1184
+  end
+  object shpL: TShape
+    Left = 0
+    Top = 5
+    Width = 1
+    Height = 586
+    Align = alLeft
+    Brush.Color = clNavy
+    Pen.Color = 9408913
+    ExplicitLeft = 213
+    ExplicitTop = 20
+    ExplicitHeight = 22
+  end
+  object shpR: TShape
+    Left = 1263
+    Top = 5
+    Width = 1
+    Height = 586
+    Align = alRight
+    Brush.Color = clNavy
+    Pen.Color = 9408913
+    ExplicitLeft = 213
+    ExplicitTop = 20
+    ExplicitHeight = 22
+  end
+  object shpT: TShape
+    Left = 0
+    Top = 4
+    Width = 1264
+    Height = 1
+    Align = alTop
+    Brush.Color = clNavy
+    Pen.Color = 9408913
+    ExplicitWidth = 1184
+  end
+  object Pnl_Main: TPanel
+    Left = 1
+    Top = 5
+    Width = 1262
+    Height = 586
+    Align = alClient
+    BevelInner = bvRaised
+    BevelOuter = bvNone
+    TabOrder = 0
+    ExplicitLeft = -5
+    ExplicitTop = 8
+    object Splitter: TSplitter
+      Left = 432
+      Top = 54
+      Height = 531
+      Color = 16510126
+      ParentColor = False
+      ExplicitLeft = 372
+      ExplicitTop = 49
+    end
+    object Pnl_Top: TPanel
+      Left = 1
+      Top = 1
+      Width = 1260
+      Height = 50
+      Align = alTop
+      BevelInner = bvRaised
+      BevelOuter = bvNone
+      ParentBackground = False
+      TabOrder = 0
+      ExplicitLeft = -4
+      ExplicitTop = -2
+      object Panel9: TPanel
+        Left = 1099
+        Top = 1
+        Width = 160
+        Height = 48
+        Align = alRight
+        BevelOuter = bvNone
+        TabOrder = 5
+        object btnOut: TSpeedButton
+          Left = 6
+          Top = 5
+          Width = 140
+          Height = 37
+          Cursor = crHandPoint
+          Caption = #51648#51221#52636#44256
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Glyph.Data = {
+            36030000424D3603000000000000360000002800000010000000100000000100
+            1800000000000003000012170000121700000000000000000000FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA0CFBC409E7816895B409E78A0CFBCFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF79BBA1
+            32A9854DD2B84EDAC04DD2B832A9854D906E9696859696859696859696859696
+            85969685969685C2C2B899CBB73AB08E49D6BB2CB190177B5832C1A049D6BB36
+            AC898EC2A8F1F1E7F1F1E7F1F1E7F1F1E7F1F1E7F1F1E7989887429F7950D5BB
+            2CB390136D4B187C5A16795731C2A050D7BD37956DEEEEE2BBBBABBBBBABBBBB
+            ABBBBBABEEEEE29B9B8A2B936A4DD9BF229A7723A3802DC29E1B87651779574A
+            D3B92B936AEBECDFEDEDE0EDEDE0EDEDE0EDEDE0EDEDE09E9E8D4BA28051D5BC
+            33C7A42DC29E2DC29E2DC29E2194724CCBB1429975EDEDE0BBBBABBBBBABEDED
+            E0BBBBABEDEDE0A1A190A3D0BE47B79849D6BB35C7A630C4A135C7A64AD7BC45
+            B39399C6AFEEEEE3EEEEE3EEEEE3EEEEE3EEEEE3EEEEE3A4A494FFFFFF8CC3AE
+            48B39452D3BB4FDAC152D3BB48B3946FA78BF0F0E5F0F0E5BBBBABBBBBABBBBB
+            ABBBBBABF0F0E5A8A899FFFFFFFFFFFFB2D7C9539E7F3E9B7760AB8CAACFBBF2
+            F2E8F2F2E8F2F2E8F2F2E8F2F2E8F2F2E8F2F2E8F2F2E8ADAD9DFFFFFFFFFFFF
+            FFFFFFB1B1A1F4F4EBF4F4EBF4F4EBF4F4EBBBBBABBBBBABBBBBABF4F4EBF4F4
+            EBBBBBABF4F4EBB1B1A1FFFFFFFFFFFFFFFFFFB5B5A5F6F6EEF6F6EEF6F6EEF6
+            F6EEF6F6EEF6F6EEF6F6EEF6F6EEF6F6EEF6F6EEF6F6EEB5B5A5FFFFFFFFFFFF
+            FFFFFFB8B8A9F7F7F1BBBBABF7F7F1BBBBABBBBBABF7F7F1BBBBABF7F7F1C0C0
+            B2C0C0B2C0C0B2C0C0B2FFFFFFFFFFFFFFFFFFBBBBADF9F9F4F9F9F4F9F9F4F9
+            F9F4F9F9F4F9F9F4F9F9F4F9F9F4C0C0B2F3F3EDC4C4B7DEDED8FFFFFFFFFFFF
+            FFFFFFBFBFB0FAFAF6FAFAF6FAFAF6FAFAF6FAFAF6FAFAF6FAFAF6FAFAF6C0C0
+            B2C7C7BAE0E0D9FFFFFFFFFFFFFFFFFFFFFFFFDBDBD2C1C1B3C1C1B3C1C1B3C1
+            C1B3C1C1B3C1C1B3C1C1B3C1C1B3C0C0B2E1E1DAFFFFFFFFFFFF}
+          ParentFont = False
+          OnClick = btnOutClick
+        end
+      end
+      object Panel11: TPanel
+        Left = 953
+        Top = 1
+        Width = 146
+        Height = 48
+        Align = alRight
+        BevelOuter = bvNone
+        TabOrder = 6
+        ExplicitLeft = 954
+        object btnEmergyOut: TSpeedButton
+          Left = 6
+          Top = 5
+          Width = 140
+          Height = 37
+          Cursor = crHandPoint
+          Caption = #44596#44553#52636#44256
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          Glyph.Data = {
+            36030000424D3603000000000000360000002800000010000000100000000100
+            1800000000000003000012170000121700000000000000000000FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA0CFBC409E7816895B409E78A0CFBCFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF79BBA1
+            32A9854DD2B84EDAC04DD2B832A9854D906E9696859696859696859696859696
+            85969685969685C2C2B899CBB73AB08E49D6BB2CB190177B5832C1A049D6BB36
+            AC898EC2A8F1F1E7F1F1E7F1F1E7F1F1E7F1F1E7F1F1E7989887429F7950D5BB
+            2CB390136D4B187C5A16795731C2A050D7BD37956DEEEEE2BBBBABBBBBABBBBB
+            ABBBBBABEEEEE29B9B8A2B936A4DD9BF229A7723A3802DC29E1B87651779574A
+            D3B92B936AEBECDFEDEDE0EDEDE0EDEDE0EDEDE0EDEDE09E9E8D4BA28051D5BC
+            33C7A42DC29E2DC29E2DC29E2194724CCBB1429975EDEDE0BBBBABBBBBABEDED
+            E0BBBBABEDEDE0A1A190A3D0BE47B79849D6BB35C7A630C4A135C7A64AD7BC45
+            B39399C6AFEEEEE3EEEEE3EEEEE3EEEEE3EEEEE3EEEEE3A4A494FFFFFF8CC3AE
+            48B39452D3BB4FDAC152D3BB48B3946FA78BF0F0E5F0F0E5BBBBABBBBBABBBBB
+            ABBBBBABF0F0E5A8A899FFFFFFFFFFFFB2D7C9539E7F3E9B7760AB8CAACFBBF2
+            F2E8F2F2E8F2F2E8F2F2E8F2F2E8F2F2E8F2F2E8F2F2E8ADAD9DFFFFFFFFFFFF
+            FFFFFFB1B1A1F4F4EBF4F4EBF4F4EBF4F4EBBBBBABBBBBABBBBBABF4F4EBF4F4
+            EBBBBBABF4F4EBB1B1A1FFFFFFFFFFFFFFFFFFB5B5A5F6F6EEF6F6EEF6F6EEF6
+            F6EEF6F6EEF6F6EEF6F6EEF6F6EEF6F6EEF6F6EEF6F6EEB5B5A5FFFFFFFFFFFF
+            FFFFFFB8B8A9F7F7F1BBBBABF7F7F1BBBBABBBBBABF7F7F1BBBBABF7F7F1C0C0
+            B2C0C0B2C0C0B2C0C0B2FFFFFFFFFFFFFFFFFFBBBBADF9F9F4F9F9F4F9F9F4F9
+            F9F4F9F9F4F9F9F4F9F9F4F9F9F4C0C0B2F3F3EDC4C4B7DEDED8FFFFFFFFFFFF
+            FFFFFFBFBFB0FAFAF6FAFAF6FAFAF6FAFAF6FAFAF6FAFAF6FAFAF6FAFAF6C0C0
+            B2C7C7BAE0E0D9FFFFFFFFFFFFFFFFFFFFFFFFDBDBD2C1C1B3C1C1B3C1C1B3C1
+            C1B3C1C1B3C1C1B3C1C1B3C1C1B3C0C0B2E1E1DAFFFFFFFFFFFF}
+          ParentFont = False
+          OnClick = btnEmergyOutClick
+        end
+      end
+      object cbSTOC_CODE: TComboBox
+        Left = 85
+        Top = 14
+        Width = 120
+        Height = 23
+        Cursor = crHandPoint
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = #54620#44397#50612' '#51077#47141' '#49884#49828#53596' (IME 2000)'
+        ParentFont = False
+        TabOrder = 0
+        OnKeyPress = KeyPress
+      end
+      object cbSTOC_ITEM_1: TComboBox
+        Left = 284
+        Top = 14
+        Width = 120
+        Height = 23
+        Cursor = crHandPoint
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = #54620#44397#50612' '#51077#47141' '#49884#49828#53596' (IME 2000)'
+        ParentFont = False
+        TabOrder = 1
+        OnKeyPress = KeyPress
+      end
+      object Panel1: TPanel
+        Left = 12
+        Top = 14
+        Width = 70
+        Height = 23
+        BevelOuter = bvNone
+        Caption = #51201#51116#53076#46300
+        Color = 14935011
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 7
+      end
+      object Panel4: TPanel
+        Left = 211
+        Top = 14
+        Width = 70
+        Height = 23
+        BevelOuter = bvNone
+        Caption = '1'#48264#54408#47785
+        Color = 14935011
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 8
+      end
+      object cbSTOC_ITEM_2: TComboBox
+        Left = 483
+        Top = 14
+        Width = 120
+        Height = 23
+        Cursor = crHandPoint
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = #54620#44397#50612' '#51077#47141' '#49884#49828#53596' (IME 2000)'
+        ParentFont = False
+        TabOrder = 2
+        OnKeyPress = KeyPress
+      end
+      object Panel7: TPanel
+        Left = 410
+        Top = 14
+        Width = 70
+        Height = 23
+        BevelOuter = bvNone
+        Caption = '2'#48264#54408#47785
+        Color = 14935011
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 9
+      end
+      object cbSTOC_ITEM_3: TComboBox
+        Left = 682
+        Top = 14
+        Width = 120
+        Height = 23
+        Cursor = crHandPoint
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = #54620#44397#50612' '#51077#47141' '#49884#49828#53596' (IME 2000)'
+        ParentFont = False
+        TabOrder = 3
+        OnKeyPress = KeyPress
+      end
+      object Panel8: TPanel
+        Left = 609
+        Top = 14
+        Width = 70
+        Height = 23
+        BevelOuter = bvNone
+        Caption = '3'#48264#54408#47785
+        Color = 14935011
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 10
+      end
+      object Panel10: TPanel
+        Left = 808
+        Top = 14
+        Width = 70
+        Height = 23
+        BevelOuter = bvNone
+        Caption = '4'#48264#54408#47785
+        Color = 14935011
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 11
+      end
+      object cbSTOC_ITEM_4: TComboBox
+        Left = 881
+        Top = 14
+        Width = 120
+        Height = 23
+        Cursor = crHandPoint
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = #54620#44397#50612' '#51077#47141' '#49884#49828#53596' (IME 2000)'
+        ParentFont = False
+        TabOrder = 4
+        OnKeyPress = KeyPress
+      end
+    end
+    object Panel2: TPanel
+      Left = 1
+      Top = 51
+      Width = 1260
+      Height = 3
+      ParentCustomHint = False
+      Align = alTop
+      BevelOuter = bvNone
+      BiDiMode = bdLeftToRight
+      Color = 16442514
+      Ctl3D = True
+      DoubleBuffered = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentBackground = False
+      ParentCtl3D = False
+      ParentDoubleBuffered = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = False
+      TabOrder = 3
+      object Panel3: TPanel
+        Left = 0
+        Top = 0
+        Width = 18
+        Height = 3
+        Align = alLeft
+        BevelOuter = bvNone
+        Color = 14258944
+        TabOrder = 0
+      end
+    end
+    object dgInfo: TDBGridEh
+      Left = 1
+      Top = 54
+      Width = 431
+      Height = 531
+      Align = alLeft
+      ColumnDefValues.Layout = tlCenter
+      Constraints.MaxWidth = 640
+      DataGrouping.Font.Charset = GB2312_CHARSET
+      DataGrouping.Font.Color = clWindowText
+      DataGrouping.Font.Height = -11
+      DataGrouping.Font.Name = 'Tahoma'
+      DataGrouping.Font.Style = []
+      DataGrouping.ParentFont = False
+      DataSource = dsInfo
+      DrawGraphicData = True
+      DynProps = <>
+      EditActions = [geaCopyEh]
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = #46027#50880
+      Font.Style = []
+      FooterRowCount = 1
+      FooterParams.FillStyle = cfstThemedEh
+      FooterParams.Font.Charset = DEFAULT_CHARSET
+      FooterParams.Font.Color = clNavy
+      FooterParams.Font.Height = -13
+      FooterParams.Font.Name = #46027#50880
+      FooterParams.Font.Style = [fsBold]
+      FooterParams.ParentFont = False
+      ImeName = 'Microsoft Office IME 2007'
+      IndicatorParams.FillStyle = cfstThemedEh
+      IndicatorTitle.TitleButton = True
+      IndicatorTitle.UseGlobalMenu = False
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+      ParentFont = False
+      RowHeight = 6
+      RowLines = 1
+      SumList.Active = True
+      TabOrder = 1
+      TitleParams.FillStyle = cfstThemedEh
+      TitleParams.Font.Charset = GB2312_CHARSET
+      TitleParams.Font.Color = clWindowText
+      TitleParams.Font.Height = -13
+      TitleParams.Font.Name = #46027#50880
+      TitleParams.Font.Style = []
+      TitleParams.MultiTitle = True
+      TitleParams.ParentFont = False
+      TitleParams.RowHeight = 24
+      VertScrollBar.VisibleMode = sbAlwaysShowEh
+      OnCellClick = dgInfoCellClick
+      OnDblClick = dgInfoDblClick
+      OnDrawColumnCell = dgInfoDrawColumnCell
+      OnTitleClick = dgInfoTitleClick
+      Columns = <
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Color = 16710378
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'STOCK_ALC_CODE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footer.Alignment = taCenter
+          Footer.Value = #52509' '#44148#49688
+          Footer.ValueType = fvtStaticText
+          Footers = <>
+          Title.Caption = #51201#51116#53076#46300
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Color = clWhite
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'DRV_TYPE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footer.Alignment = taRightJustify
+          Footer.DisplayFormat = '###,###,##0 '#44148
+          Footer.FieldName = 'DRV_TYPE'
+          Footer.ValueType = fvtCount
+          Footers = <>
+          Title.Caption = #53076#46300#53440#51077
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'SEAT_CLASS'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footers = <>
+          Title.Caption = #53076#46300#44396#48516
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'COVER_SET'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footers = <>
+          Title.Caption = #53076#46300#51221#48372
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Visible = False
+          Width = 150
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'CNT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footer.Alignment = taRightJustify
+          Footer.DisplayFormat = '###,###,##0 '
+          Footer.FieldName = 'CNT'
+          Footer.ValueType = fvtSum
+          Footers = <>
+          Title.Caption = #49688#47049
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 90
+        end>
+      object RowDetailData: TRowDetailPanelControlEh
+      end
+    end
+    object dgInfo_Sub: TDBGridEh
+      Left = 435
+      Top = 54
+      Width = 826
+      Height = 531
+      Align = alClient
+      ColumnDefValues.Layout = tlCenter
+      DataGrouping.Font.Charset = GB2312_CHARSET
+      DataGrouping.Font.Color = clWindowText
+      DataGrouping.Font.Height = -11
+      DataGrouping.Font.Name = 'Tahoma'
+      DataGrouping.Font.Style = []
+      DataGrouping.ParentFont = False
+      DataSource = dsInfoSub
+      DrawGraphicData = True
+      DynProps = <>
+      EditActions = [geaCopyEh]
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = #46027#50880
+      Font.Style = []
+      FooterRowCount = 1
+      FooterParams.FillStyle = cfstThemedEh
+      FooterParams.Font.Charset = DEFAULT_CHARSET
+      FooterParams.Font.Color = clNavy
+      FooterParams.Font.Height = -13
+      FooterParams.Font.Name = #46027#50880
+      FooterParams.Font.Style = [fsBold]
+      FooterParams.ParentFont = False
+      ImeName = 'Microsoft Office IME 2007'
+      IndicatorParams.FillStyle = cfstThemedEh
+      IndicatorTitle.TitleButton = True
+      IndicatorTitle.UseGlobalMenu = False
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+      ParentFont = False
+      RowHeight = 6
+      RowLines = 1
+      SumList.Active = True
+      TabOrder = 2
+      TitleParams.FillStyle = cfstThemedEh
+      TitleParams.Font.Charset = GB2312_CHARSET
+      TitleParams.Font.Color = clWindowText
+      TitleParams.Font.Height = -13
+      TitleParams.Font.Name = #46027#50880
+      TitleParams.Font.Style = []
+      TitleParams.MultiTitle = True
+      TitleParams.ParentFont = False
+      TitleParams.RowHeight = 24
+      VertScrollBar.VisibleMode = sbAlwaysShowEh
+      OnDblClick = dgInfoDblClick
+      OnDrawColumnCell = dgInfo_SubDrawColumnCell
+      OnTitleClick = dgInfoTitleClick
+      Columns = <
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Color = 16710378
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'STOCK_ALC_CODE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footer.Alignment = taCenter
+          Footer.Value = #52509' '#44148#49688
+          Footer.ValueType = fvtStaticText
+          Footers = <>
+          Title.Caption = #51201#51116#53076#46300
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'CELL_POS'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footer.Alignment = taRightJustify
+          Footer.DisplayFormat = '###,###,##0 '#44148
+          Footer.FieldName = 'CELL_POS'
+          Footer.ValueType = fvtCount
+          Footers = <>
+          Title.Caption = #51077#44256#50948#52824
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Color = clWhite
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'STOCK_LOT_NO1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footer.Alignment = taRightJustify
+          Footers = <>
+          Title.Caption = '1'#48264' '#54408#47785
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'STOCK_LOT_NO2'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footers = <>
+          Title.Caption = '2'#48264' '#54408#47785
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'STOCK_LOT_NO3'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footers = <>
+          Title.Caption = '3'#48264' '#54408#47785
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'STOCK_LOT_NO4'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footers = <>
+          Title.Caption = '4'#48264' '#54408#47785
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'CELL_OT_USE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footers = <>
+          Title.Caption = #52636#44256#44032#45733
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'dSTOCK_DATE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footers = <>
+          Title.Caption = #51077#44256#51068#51088
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 90
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DisplayFormat = '00:00:00'
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'iSTOCK_TIME'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footers = <>
+          Title.Caption = #51077#44256#49884#44036
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 90
+        end>
+      object RowDetailData: TRowDetailPanelControlEh
+      end
+    end
+  end
+  object Panel5: TPanel
+    Left = 0
+    Top = 0
+    Width = 1264
+    Height = 4
+    ParentCustomHint = False
+    Align = alTop
+    BevelOuter = bvNone
+    BiDiMode = bdLeftToRight
+    Ctl3D = True
+    DoubleBuffered = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentBiDiMode = False
+    ParentBackground = False
+    ParentCtl3D = False
+    ParentDoubleBuffered = False
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = False
+    TabOrder = 1
+    object Panel6: TPanel
+      Left = 0
+      Top = 0
+      Width = 18
+      Height = 4
+      Align = alLeft
+      BevelOuter = bvNone
+      Color = 14258944
+      TabOrder = 0
+    end
+  end
+  object dsInfo: TDataSource
+    DataSet = qryInfo
+    Left = 384
+    Top = 510
+  end
+  object qryInfo: TADOQuery
+    Connection = MainDm.MainDatabase
+    Parameters = <>
+    Left = 352
+    Top = 510
+  end
+  object qryTemp: TADOQuery
+    Connection = MainDm.MainDatabase
+    Parameters = <>
+    Left = 352
+    Top = 454
+  end
+  object qryInfoSub: TADOQuery
+    Connection = MainDm.MainDatabase
+    Parameters = <>
+    Left = 1136
+    Top = 502
+  end
+  object dsInfoSub: TDataSource
+    DataSet = qryInfoSub
+    Left = 1168
+    Top = 502
+  end
+  object EhPrint: TPrintDBGridEh
+    Options = []
+    PageFooter.Font.Charset = DEFAULT_CHARSET
+    PageFooter.Font.Color = clWindowText
+    PageFooter.Font.Height = -11
+    PageFooter.Font.Name = 'Tahoma'
+    PageFooter.Font.Style = []
+    PageHeader.Font.Charset = DEFAULT_CHARSET
+    PageHeader.Font.Color = clWindowText
+    PageHeader.Font.Height = -11
+    PageHeader.Font.Name = 'Tahoma'
+    PageHeader.Font.Style = []
+    Units = MM
+    Left = 384
+    Top = 454
+  end
+  object qryInsertToOrder: TADOQuery
+    Connection = MainDm.MainDatabase
+    Parameters = <>
+    Left = 1137
+    Top = 453
+  end
+  object SP_AUTO_INDEX: TADOStoredProc
+    Connection = MainDm.MainDatabase
+    ProcedureName = 'fn_auto_index;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@index'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 1
+        Value = Null
+      end>
+    Left = 834
+    Top = 314
+  end
+end

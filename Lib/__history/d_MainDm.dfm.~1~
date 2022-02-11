@@ -1,0 +1,21 @@
+object MainDm: TMainDm
+  OldCreateOrder = False
+  Height = 247
+  Width = 272
+  object MainDatabase: TADOConnection
+    LoginPrompt = False
+    Provider = 'SQLNCLI10.1'
+    Left = 40
+    Top = 24
+  end
+  object qrySearch: TADOQuery
+    Connection = MainDatabase
+    Parameters = <>
+    Left = 96
+    Top = 24
+  end
+  object saveDlg: TSaveDialog
+    Left = 144
+    Top = 24
+  end
+end

@@ -1,0 +1,48 @@
+ 
+SELECT TMP.* 
+  FROM (
+       SELECT R.WMS_NO, R.SC_HOGI, R.RACK_LOC as BASE_LOC,
+              SUBSTRING(R.RACK_LOC,1,2)  + '-' + SUBSTRING(R.RACK_LOC,3,2)  + '-' + SUBSTRING(R.RACK_LOC,5,2) DESC_LOC, ' +
+              SUBSTRING(R.RACK_LOC,1,2)  + '-' + SUBSTRING(R.RACK_LOC,3,2)  + '-' + SUBSTRING(R.RACK_LOC,5,2) + ' / '+  ' +
+              SUBSTRING(D.xRACK_LOC,1,2) + '-' + SUBSTRING(D.xRACK_LOC,3,2) + '-' + SUBSTRING(D.xRACK_LOC,5,2) DOUBLE_INFO, ' +
+       	      CASE WHEN SUBSTRING(R.RACK_LOC,1,2) in ('02','03','06','07','10','11') THEN '菊凯' ELSE '缔凯' END DOUBLE_POS,
+       
+       	      CASE WHEN (R.RACK_STAT<>'后发' and D.xRACK_STAT<> '后发') THEN '剧率犁绊'
+       	           WHEN (R.RACK_STAT ='后发' and D.xRACK_STAT<> '后发') or 
+       			     (R.RACK_STAT<>'后发' and D.xRACK_STAT = '后发') THEN 
+       			     (CASE WHEN SUBSTRING(R.RACK_LOC,1,2) in ('02','03','06','07','10','11') THEN '菊凯' ELSE '缔凯' END)+'犁绊'
+                   WHEN (R.RACK_STAT ='后发' and D.xRACK_STAT = '后发') THEN '剧率绝澜' ELSE '' END DOUBLE_STAT,
+       	   
+       	   CASE WHEN S.ITEM = D.xITEM THEN '悼老犁绊' ELSE '' END DOUBLE_ITEM,
+       	        
+           R.RACK_LOC, R.RACK_STAT, R.ORDER_STAT, R.ERR_STAT,
+           S.ITEM, S.ITEM_NM, S.QTY, S.BOX_QTY, S.SPEC, S.LOT_NO, S.EXPIRY_DAY, 
+       	   S.EXPY_DATE, S.NOW_IN_DT, S.USER_ID, 
+       	   
+		   D.xRACK_LOC, D.xRACK_STAT, D.xORDER_STAT, D.xERR_STAT,
+       	   D.xITEM, D.xITEM_NM, D.xQTY, D.xBOX_QTY, D.xSPEC, D.xLOT_NO, D.xEXPIRY_DAY,
+       	   D.xEXPY_DATE, D.xNOW_IN_DT, D.xUSER_ID 
+         FROM TT_RACK R WITH (NOLOCK)
+         LEFT JOIN TT_RACK_STOCK S WITH (NOLOCK)
+           ON R.WMS_NO   = S.WMS_NO
+          AND R.RACK_LOC = S.RACK_LOC
+         LEFT JOIN (
+                    SELECT R.WMS_NO, R.RACK_LOC, R.RACK_LOC_2 xRACK_LOC, 
+                           xRACK_STAT = (SELECT RACK_STAT  FROM TT_RACK WITH (NOLOCK) WHERE RACK_LOC = R.RACK_LOC_2),
+                           xORDER_STAT= (SELECT ORDER_STAT FROM TT_RACK WITH (NOLOCK) WHERE RACK_LOC = R.RACK_LOC_2),
+                           xERR_STAT  = (SELECT ERR_STAT   FROM TT_RACK WITH (NOLOCK) WHERE RACK_LOC = R.RACK_LOC_2),
+       	                S.ITEM xITEM, S.ITEM_NM xITEM_NM, S.QTY xQTY, S.BOX_QTY xBOX_QTY, S.SPEC xSPEC, S.LOT_NO xLOT_NO, 
+       	                S.EXPIRY_DAY xEXPIRY_DAY, S.EXPY_DATE xEXPY_DATE, S.NOW_IN_DT xNOW_IN_DT, S.USER_ID xUSER_ID
+                      FROM TT_RACK R WITH (NOLOCK)
+                      LEFT JOIN TT_RACK_STOCK S WITH (NOLOCK)
+                        ON R.WMS_NO    = S.WMS_NO
+                       AND R.RACK_LOC_2 = S.RACK_LOC
+       			) D		
+           ON R.WMS_NO   = D.WMS_NO
+          AND R.RACK_LOC = D.RACK_LOC
+        WHERE R.RACK_STAT  <>'后发' 
+          AND R.ORDER_STAT = '绝澜'
+          AND R.ERR_STAT   = '绝澜'
+       ) Tmp
+ WHERE 1 = 1 
+   AND TMP.DOUBLE_STAT = '剧率犁绊'

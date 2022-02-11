@@ -1,0 +1,613 @@
+unit U110;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, d_MainDm, h_MainLib, h_ReferLib, StdCtrls, DB, ADODB,
+  Grids, StrUtils, DBGrids, comobj, frxClass, frxDBSet, DBGridEhGrouping, EhLibADO,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh,DBGridEhImpExp,
+  DBGridEh, Vcl.Mask, Vcl.DBCtrls, DBCtrlsEh, PrnDbgeh, Vcl.Buttons, Vcl.Menus,
+  Vcl.ComCtrls ;
+
+type
+  TfrmU110 = class(TForm)
+    dsInfo: TDataSource;
+    qryInfo: TADOQuery;
+    qryTemp: TADOQuery;
+    shpB: TShape;
+    shpL: TShape;
+    shpR: TShape;
+    shpT: TShape;
+    EhPrint: TPrintDBGridEh;
+    pmControl: TPopupMenu;
+    mnCodeDel: TMenuItem;
+    Pnl_Base: TPanel;
+    Pnl_Main: TPanel;
+    dgInfo: TDBGridEh;
+    Pnl_Top: TPanel;
+    Panel1: TPanel;
+    Panel11: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    edtCode: TEdit;
+    Panel4: TPanel;
+    edtName: TEdit;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    cbStock_YN: TComboBox;
+    cbSet_YN: TComboBox;
+    Panel7: TPanel;
+    cbClass_1: TComboBox;
+    Panel9: TPanel;
+    Panel8: TPanel;
+    sbtClear: TSpeedButton;
+    mnCodeDelAll: TMenuItem;
+    Panel10: TPanel;
+    Panel12: TPanel;
+    udRowHeight: TUpDown;
+    edtRowHeight: TEdit;
+    udFontSize: TUpDown;
+    edtFontSize: TEdit;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormActivate(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
+    procedure dgInfoTitleClick(Column: TColumnEh);
+    procedure ComboChange(Sender: TObject);
+    procedure dgInfoDblClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure KeyPress(Sender: TObject; var Key: Char);
+    procedure dgInfoDrawColumnCell(Sender: TObject; const Rect: TRect;
+    DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure mnCodeDelClick(Sender: TObject);
+    procedure dgInfoCellClick(Column: TColumnEh);
+    procedure sbtClearClick(Sender: TObject);
+    procedure edtChange(Sender: TObject);
+    procedure mnCodeDelAllClick(Sender: TObject);
+    procedure pmControlPopup(Sender: TObject);
+    procedure edtRowHeightChange(Sender: TObject);
+    procedure edtFontSizeChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure fnCommandStart;
+    procedure fnCommandAdd  ;
+    procedure fnCommandExcel;
+    procedure fnCommandDelete;
+    procedure fnCommandPrint;
+    procedure fnCommandQuery;
+    procedure fnCommandClose;
+    procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
+    procedure SetComboBox ;
+    procedure ProcDeleteCode(CODE: String);
+    procedure ProcDeleteCodeAll;
+  end;
+    procedure U110Create();
+
+const
+  FormNo ='110';
+
+var
+  frmU110: TfrmU110;
+  SrtFlag : integer = 0 ;
+
+implementation
+
+uses Main, U110_Pop ;
+
+{$R *.dfm}
+
+//==============================================================================
+// U110Create
+//==============================================================================
+procedure U110Create();
+begin
+  if not Assigned( frmU110 ) then
+  begin
+    frmU110 := TfrmU110.Create(Application);
+    with frmU110 do
+    begin
+      fnCommandStart;
+    end;
+  end;
+  frmU110.Show;
+end;
+
+//==============================================================================
+// fnWmMsgRecv
+//==============================================================================
+procedure TfrmU110.fnWmMsgRecv(var MSG: TMessage);
+begin
+  case MSG.WParam of
+    MSG_MDI_WIN_ADD     : begin fnCommandAdd     ; end;
+    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;
+    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;
+    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;
+    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;
+    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;
+  end;
+end;
+
+//==============================================================================
+// FormCreate
+//==============================================================================
+procedure TfrmU110.FormCreate(Sender: TObject);
+begin
+//
+end;
+
+//==============================================================================
+// FormShow
+//==============================================================================
+procedure TfrmU110.FormShow(Sender: TObject);
+begin
+//
+end;
+
+//==============================================================================
+// FormActivate
+//==============================================================================
+procedure TfrmU110.FormActivate(Sender: TObject);
+begin
+  frmMain.LblMenu000.Caption := (Sender as TForm).Caption ;
+  if MainDM.M_Info.UserAdmin = 'Y' then
+  begin
+    fnWmMsgSend( 11111, 111 );
+  end else
+  begin
+    fnWmMsgSend( 21211, 111 );
+  end;
+  SetComboBox;
+  fnCommandQuery ;
+end;
+
+//==============================================================================
+// FormDeactivate
+//==============================================================================
+procedure TfrmU110.FormDeactivate(Sender: TObject);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+end;
+
+//==============================================================================
+// FormClose
+//==============================================================================
+procedure TfrmU110.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+
+  Action := Cafree;
+  try frmU110 := Nil ;
+  except end;
+end;
+
+//==============================================================================
+// fnCommandStart [시작]
+//==============================================================================
+procedure TfrmU110.fnCommandStart;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandAdd [신규]
+//==============================================================================
+procedure TfrmU110.fnCommandAdd  ;
+begin
+  frmU110_Pop := TfrmU110_Pop.Create(Application);
+  frmU110_Pop.PnlFormName.Caption := '품목 코드 등록';
+  frmU110_Pop.Caption := '품목 코드 관리';
+  frmU110_Pop.btnSave.Caption := '등 록';
+
+  // 사용자코드
+  frmU110_Pop.edtITEM_CODE.Text  := '';
+  frmU110_Pop.edtITEM_CODE.Color := clWhite;
+  frmU110_Pop.edtITEM_CODE.ReadOnly := False;
+
+  frmU110_Pop.ShowModal ;
+end;
+
+//==============================================================================
+// fnCommandExcel [엑셀]
+//==============================================================================
+procedure TfrmU110.fnCommandExcel;
+begin
+  if not qryInfo.Active then Exit;
+  if qryInfo.RecordCount < 1 then Exit;
+
+  if hlbEhgridListExcel ( dgInfo , '품목코드' + '_' + FormatDatetime('YYYYMMDD', Now) ) then
+  begin
+    MessageDlg('  엑셀 저장을 완료하였습니다.', mtConfirmation, [mbYes], 0);
+  end;
+end;
+
+//==============================================================================
+// fnCommandDelete [삭제]
+//==============================================================================
+procedure TfrmU110.fnCommandDelete;
+var
+  i : Integer;
+  tmpCode : String;
+begin
+  if not qryInfo.Active then Exit;
+  if dgInfo.SelectedRows.Count < 1 then Exit ;
+
+  tmpCode := UpperCase(qryInfo.FieldByName('ITEM_CODE').AsString);
+
+  if dgInfo.SelectedRows.Count = 1 then
+  begin
+    if MessageDlg('  선택한 품목코드['+tmpCode+']를 삭제하시겠습니까?', mtConfirmation, [mbYes, mbNo], 0) <> mrYes then Exit ;
+  end else
+  begin
+    if MessageDlg('  선택한 품목코드['+ IntToStr(dgInfo.SelectedRows.Count) +'건]를 삭제하시겠습니까?', mtConfirmation, [mbYes, mbNo], 0) <> mrYes then Exit ;
+  end;
+
+  for i := 0 to (dgInfo.SelectedRows.Count-1) do
+  begin
+    with dgInfo.DataSource.DataSet do
+    begin
+      GotoBookmark(pointer(dgInfo.SelectedRows.Items[i]));
+      ProcDeleteCode(UpperCase(qryInfo.FieldByName('ITEM_CODE').AsString));
+    end;
+  end;
+  SetComboBox;
+  fnCommandQuery;
+end;
+
+//==============================================================================
+// fnCommandPrint [인쇄]
+//==============================================================================
+procedure TfrmU110.fnCommandPrint;
+begin
+  if not qryInfo.Active then Exit;
+  if qryInfo.RecordCount < 1 then Exit;
+
+  fnCommandQuery;
+  EhPrint.DBGridEh := dgInfo;
+  EhPrint.PageFooter.RightText.Clear;
+  EhPrint.PageFooter.RightText.Add(FormatDateTime('YYYY-MM-DD HH:NN:SS',Now()) + '   ' +
+                                   MainDM.M_Info.UserCode+' / '+MainDM.M_Info.UserName);
+  EhPrint.PageFooter.Font.Name := '돋움';
+  EhPrint.PageFooter.Font.Size := 11;
+  EhPrint.Preview;
+end;
+
+//==============================================================================
+// fnCommandQuery [조회]
+//==============================================================================
+procedure TfrmU110.fnCommandQuery;
+var
+  WhereStr, StrSQL : String;
+begin
+  try
+    WhereStr := '' ;
+    // 품목코드
+    if (Trim(edtCode.Text) <> '') then
+      WhereStr := WhereStr + ' AND ITEM_CODE LIKE ' + QuotedStr('%'+edtCode.Text+'%') ;
+    // 품목명
+    if (Trim(edtName.Text) <> '') then
+      WhereStr := WhereStr + ' AND ITEM_NM LIKE ' + QuotedStr('%'+edtName.Text+'%') ;
+    // 재고관리
+    if (cbStock_YN.Text <> '전체') then
+      WhereStr := WhereStr + ' AND STOCK_YN LIKE ' + QuotedStr('%'+cbStock_YN.Text+'%') ;
+    // 세트여부
+    if (cbSet_YN.Text <> '전체') then
+      WhereStr := WhereStr + ' AND SET_YN LIKE ' + QuotedStr('%'+cbSet_YN.Text+'%') ;
+    // 냉장분류
+    if (cbClass_1.Text <> '전체') then
+      WhereStr := WhereStr + ' AND CLASS_1 LIKE ' + QuotedStr('%'+cbClass_1.Text+'%') ;
+
+    with qryInfo do
+    begin
+      Close;
+      SQL.Clear;
+      StrSQL := ' SELECT ROW_NUMBER() OVER(ORDER BY ITEM_CODE) as IDX, * ' +
+                '   FROM TT_ITEM WITH (NOLOCK) ' +
+                '  WHERE 1 = 1 ' + WhereStr ;
+      SQL.Text := StrSQL;
+      Open;
+    end;
+  except
+    on E : Exception do
+    begin
+      if qryInfo.Active then qryInfo.Close;
+      TraceLogWrite( '[110] 품목코드 에러 | ' +
+                     'fnCommandQuery -> StrSQL : ['+StrSQL+
+                     '], Exception : ['+E.Message+']');
+    end;
+  end ;
+end;
+
+//==============================================================================
+// fnCommandClose [닫기]
+//==============================================================================
+procedure TfrmU110.fnCommandClose;
+begin
+  Close;
+end;
+
+//==============================================================================
+// SetComboBox
+//==============================================================================
+procedure TfrmU110.SetComboBox;
+begin
+//
+end;
+
+//==============================================================================
+// dgInfoCellClick
+//==============================================================================
+procedure TfrmU110.dgInfoCellClick(Column: TColumnEh);
+begin
+//
+end;
+
+//==============================================================================
+// dgInfoDblClick
+//==============================================================================
+procedure TfrmU110.dgInfoDblClick(Sender: TObject);
+begin
+  if MainDM.M_Info.UserAdmin <> 'Y' then Exit;
+
+  frmU110_Pop := TfrmU110_Pop.Create(Application);
+  frmU110_Pop.PnlFormName.Caption := '품목 코드 수정';
+  frmU110_Pop.Caption := '품목 코드 관리';
+  frmU110_Pop.btnSave.Caption := '수 정';
+
+  // 사용자코드
+  frmU110_Pop.edtITEM_CODE.Text  := UpperCase(qryInfo.FieldByName('ITEM_CODE').AsString);
+  frmU110_Pop.edtITEM_CODE.Color := $00E9F3E9;
+  frmU110_Pop.edtITEM_CODE.ReadOnly := True;
+
+  frmU110_Pop.edtITEM_NM.Text    := qryInfo.FieldByName('ITEM_NM').AsString;
+  frmU110_Pop.edtSPEC.Text       := qryInfo.FieldByName('SPEC'   ).AsString;
+  frmU110_Pop.edtEXPIRY_DAY.Text := qryInfo.FieldByName('EXPIRY_DAY').AsString;
+  frmU110_Pop.edtPLT_BOX.Text    := qryInfo.FieldByName('PLT_BOX').AsString;
+  frmU110_Pop.edtBOX_QTY.Text    := qryInfo.FieldByName('BOX_QTY').AsString;
+  frmU110_Pop.cbSTOCK_YN.Text    := qryInfo.FieldByName('STOCK_YN').AsString;
+  frmU110_Pop.cbSET_YN.Text      := qryInfo.FieldByName('SET_YN' ).AsString;
+  frmU110_Pop.cbCLASS_1.Text     := qryInfo.FieldByName('CLASS_1').AsString;
+
+  frmU110_Pop.ShowModal ;
+end;
+
+//==============================================================================
+// ComboChange
+//==============================================================================
+procedure TfrmU110.ComboChange(Sender: TObject);
+begin
+  if (Trim((Sender as TComboBox).Text) <> '') then
+  begin
+    fnCommandQuery;
+  end;
+end;
+
+//==============================================================================
+// edtChange
+//==============================================================================
+procedure TfrmU110.edtChange(Sender: TObject);
+begin
+  fnCommandQuery;
+end;
+
+//==============================================================================
+// ProcDeleteCode [선택코드삭제]
+//==============================================================================
+procedure TfrmU110.ProcDeleteCode(CODE: String);
+var
+  ExecNo : integer;
+  StrSQL : String;
+begin
+  try
+    StrSQL := ' DELETE FROM TT_ITEM ' +
+              '  WHERE ITEM_CODE = ' + QuotedStr(CODE) ;
+
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSQL;
+      ExecNo := ExecSQL;
+      if ExecNo > 0 then
+        TraceLogWrite( '[110] 품목코드 삭제성공 | 품목코드 : ['+CODE+
+                     '], 로그인계정 : ['+MainDm.M_Info.UserCode+']' )
+      else
+        TraceLogWrite( '[110] 품목코드 삭제실패 | 품목코드 : ['+CODE+
+                     '], 로그인계정 : ['+MainDm.M_Info.UserCode+']' );
+      Close;
+    end;
+  except
+    on E : Exception do
+    begin
+      if qryTemp.Active then qryTemp.Close;
+      TraceLogWrite( '[110] 품목코드 에러 | ' +
+                     'ProcDeleteCode -> 품목코드 : ['+CODE+
+                     '], StrSQL : ['+StrSQL+
+                     '], Exception : ['+E.Message+']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// ProcDeleteCode [전체코드삭제]
+//==============================================================================
+procedure TfrmU110.ProcDeleteCodeAll;
+var
+  ExecNo : integer;
+  StrSQL : String;
+begin
+  try
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      StrSQL := ' DELETE FROM TT_ITEM ' ;
+      SQL.Text := StrSQL;
+      ExecNo := ExecSQL;
+      if ExecNo > 0 then
+        TraceLogWrite( '[110] 품목코드 삭제성공 | 품목코드 : [전체'+
+                     '], 로그인계정 : ['+MainDm.M_Info.UserCode+']' )
+      else
+        TraceLogWrite( '[110] 품목코드 삭제실패 | 품목코드 : [전체'+
+                     '], 로그인계정 : ['+MainDm.M_Info.UserCode+']' );
+      Close;
+    end;
+  except
+    on E : Exception do
+    begin
+    if qryTemp.Active then qryTemp.Close;
+      TraceLogWrite( '[110] 품목코드 에러 | ' +
+                     'ProcDeleteCodeAll -> 품목코드 : [전체'+
+                     '], StrSQL : ['+StrSQL+
+                     '], Exception : ['+E.Message+']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// dgInfoDrawColumnCell
+//==============================================================================
+procedure TfrmU110.dgInfoDrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+begin
+  with dgInfo do
+  begin
+    if Column.Field.DataSet.FieldByName('STOCK_YN').AsString = 'Y' then
+    begin
+      Canvas.Font.Color := clBlack;
+      Canvas.Font.Style := [];
+    end else
+    begin
+      Canvas.Font.Color := clBlack;
+      Canvas.Font.Style := [];
+    end;
+    dgInfo.defaultdrawcolumncell(rect, datacol, column, state);
+  end;
+end;
+
+//==============================================================================
+// pmControlPopup
+//==============================================================================
+procedure TfrmU110.pmControlPopup(Sender: TObject);
+begin
+  if qryInfo.RecordCount < 1 then Exit;
+  if dgInfo.SelectedRows.Count < 1 then Exit ;
+
+  if MainDM.M_Info.UserAdmin = 'Y' then
+  begin
+    mnCodeDel.Visible    := True;
+    mnCodeDelAll.Visible := True;
+  end else
+  begin
+    mnCodeDel.Visible    := False;
+    mnCodeDelAll.Visible := False;
+  end;
+end;
+
+//==============================================================================
+// mnCodeDelClick
+//==============================================================================
+procedure TfrmU110.mnCodeDelClick(Sender: TObject);
+begin
+  fnCommandDelete;
+end;
+
+//==============================================================================
+// mnCodeDelAllClick
+//==============================================================================
+procedure TfrmU110.mnCodeDelAllClick(Sender: TObject);
+begin
+  if MessageDlg('  품목코드 전체를 삭제하시겠습니까?' + #13#10 + #13#10 +
+                '  삭제된 코드는 복구 할수 없습니다.' + #13#10 +
+                '  삭제를 진행하시겠습니까?',
+                 mtWarning, [mbYes, mbNo], 0) <> mrYes then Exit ;
+  TraceLogWrite( '[110] 품목코드 전체삭제 진행===============================');
+  ProcDeleteCodeAll;
+end;
+
+//==============================================================================
+// KeyPress
+//==============================================================================
+procedure TfrmU110.KeyPress(Sender: TObject; var Key: Char);
+begin
+  if key = #13 then
+  begin
+    fnCommandQuery;
+  end;
+end;
+
+//==============================================================================
+// sbtClearClick
+//==============================================================================
+procedure TfrmU110.sbtClearClick(Sender: TObject);
+begin
+  edtCode.Text := '';
+  edtName.Text := '';
+  cbStock_YN.ItemIndex := 0;
+  cbSet_YN.ItemIndex   := 0;
+  cbClass_1.ItemIndex  := 0;
+  fnCommandQuery;
+end;
+
+//==============================================================================
+// dgInfoTitleClick
+//==============================================================================
+procedure TfrmU110.dgInfoTitleClick(Column: TColumnEh);
+begin
+  if Column.Field.DataSet is TADOQuery then
+  begin
+    with TADOQuery(Column.Field.DataSet) do
+    begin
+      if RecordCount=0 then Exit ;
+      if SrtFlag = 0 then
+      begin
+        SrtFlag := 1; Sort := Column.FieldName + ' DESC' ;
+      end else
+      begin
+        SrtFlag := 0; Sort := Column.FieldName + ' ASC' ;
+      end;
+    end;
+  end;
+end;
+
+//==============================================================================
+// edtRowHeightChange
+//==============================================================================
+procedure TfrmU110.edtRowHeightChange(Sender: TObject);
+begin
+  dgInfo.RowLines := StrToIntDef((Sender as TEdit).Text,0);
+end;
+
+//==============================================================================
+// edtFontSizeChange
+//==============================================================================
+procedure TfrmU110.edtFontSizeChange(Sender: TObject);
+begin
+  dgInfo.Font.Size := StrToIntDef((Sender as TEdit).Text,11);
+end;
+
+end.
+
+
+
+

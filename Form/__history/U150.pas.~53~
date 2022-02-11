@@ -1,0 +1,374 @@
+unit U150;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, d_MainDm, h_MainLib, h_ReferLib, StdCtrls, DB, ADODB,
+  Grids, StrUtils, DBGrids, comobj, frxClass, frxDBSet, DBGridEhGrouping, EhLibADO,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh,DBGridEhImpExp,
+  DBGridEh, Vcl.Mask, Vcl.DBCtrls, DBCtrlsEh, PrnDbgeh, Vcl.Buttons, Vcl.Menus ;
+
+type
+  TfrmU150 = class(TForm)
+    Pnl_Main: TPanel;
+    Pnl_Top: TPanel;
+    dsInfo: TDataSource;
+    EhPrint: TPrintDBGridEh;
+    qryInfo: TADOQuery;
+    qryTemp: TADOQuery;
+    cbERR_MACH: TComboBox;
+    Panel1: TPanel;
+    shpR: TShape;
+    shpL: TShape;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    shpT: TShape;
+    shpB: TShape;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    dgInfo: TDBGridEh;
+    pmControl: TPopupMenu;
+    mnCodeDel: TMenuItem;
+    cbERR_CODE: TComboBox;
+    Panel4: TPanel;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormActivate(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
+    procedure dgInfoTitleClick(Column: TColumnEh);
+    procedure ComboChange(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure KeyPress(Sender: TObject; var Key: Char);
+    procedure dgInfoDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure mnCodeDelClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure fnCommandStart;
+    procedure fnCommandAdd  ;
+    procedure fnCommandExcel;
+    procedure fnCommandDelete;
+    procedure fnCommandPrint;
+    procedure fnCommandQuery;
+    procedure fnCommandClose;
+    procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
+    procedure SetComboBox ;
+    procedure ProcDeleteCode(ERR_MACH, ERR_CODE: String);
+  end;
+  procedure U150Create();
+
+const
+  FormNo ='150';
+
+var
+  frmU150: TfrmU150;
+  SrtFlag : integer = 0 ;
+
+implementation
+
+uses Main;
+
+{$R *.dfm}
+
+//==============================================================================
+// MtrInCreate
+//==============================================================================
+procedure U150Create();
+begin
+  if not Assigned( frmU150 ) then
+  begin
+    frmU150 := TfrmU150.Create(Application);
+    with frmU150 do
+    begin
+      fnCommandStart;
+    end;
+  end;
+  frmU150.Show;
+end;
+
+//==============================================================================
+// fnWmMsgRecv
+//==============================================================================
+procedure TfrmU150.fnWmMsgRecv(var MSG: TMessage);
+begin
+  case MSG.WParam of
+    MSG_MDI_WIN_ADD     : begin fnCommandAdd     ; end;
+    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;
+    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;
+    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;
+    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;
+    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;
+  end;
+end;
+
+//==============================================================================
+// FormCreate
+//==============================================================================
+procedure TfrmU150.FormCreate(Sender: TObject);
+begin
+//
+end;
+
+//==============================================================================
+// FormShow
+//==============================================================================
+procedure TfrmU150.FormShow(Sender: TObject);
+begin
+//
+end;
+
+//==============================================================================
+// FormActivate
+//==============================================================================
+procedure TfrmU150.FormActivate(Sender: TObject);
+begin
+  frmMain.LblMenu000.Caption := (Sender as TForm).Caption ;
+  fnWmMsgSend( 22221,111 );
+end;
+
+//==============================================================================
+// FormDeactivate
+//==============================================================================
+procedure TfrmU150.FormDeactivate(Sender: TObject);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+end;
+
+//==============================================================================
+// FormClose
+//==============================================================================
+procedure TfrmU150.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+
+  Action := Cafree;
+  try frmU150 := Nil ;
+  except end;
+end;
+
+//==============================================================================
+// fnCommandStart [시작]
+//==============================================================================
+procedure TfrmU150.fnCommandStart;
+begin
+  SetComboBox;
+  fnCommandQuery ;
+end;
+
+//==============================================================================
+// fnCommandAdd [신규]
+//==============================================================================
+procedure TfrmU150.fnCommandAdd  ;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandExcel [엑셀]
+//==============================================================================
+procedure TfrmU150.fnCommandExcel;
+begin
+  if hlbEhgridListExcel ( dgInfo , '에러 코드 관리' + '_' + FormatDatetime('YYYYMMDD', Now) ) then
+  begin
+    MessageDlg('엑셀 저장을 완료하였습니다.', mtConfirmation, [mbYes], 0);
+  end;
+end;
+
+//==============================================================================
+// fnCommandDelete [삭제]
+//==============================================================================
+procedure TfrmU150.fnCommandDelete;
+var
+  i : Integer;
+  tmpCode1, tmpCode2 : String;
+begin
+  if not qryInfo.Active then Exit;
+  if dgInfo.SelectedRows.Count < 1 then Exit ;
+
+  tmpCode1 := UpperCase(qryInfo.FieldByName('ERR_MACH').AsString);
+  tmpCode2 := UpperCase(qryInfo.FieldByName('ERR_CODE').AsString);
+
+  if dgInfo.SelectedRows.Count = 1 then
+  begin
+    if MessageDlg('선택한 에러 코드['+tmpCode1+' : '+tmpCode2+']를 삭제하시겠습니까?', mtConfirmation, [mbYes, mbNo], 0) <> mrYes then Exit ;
+  end else
+  begin
+    if MessageDlg('선택한 에러 코드['+ IntToStr(dgInfo.SelectedRows.Count) +'건]를 삭제하시겠습니까?', mtConfirmation, [mbYes, mbNo], 0) <> mrYes then Exit ;
+  end;
+
+  for i := 0 to (dgInfo.SelectedRows.Count-1) do
+  begin
+    with dgInfo.DataSource.DataSet do
+    begin
+      GotoBookmark(pointer(dgInfo.SelectedRows.Items[i]));
+      ProcDeleteCode(UpperCase(qryInfo.FieldByName('ERR_MACH').AsString),
+                     UpperCase(qryInfo.FieldByName('ERR_CODE').AsString));
+    end;
+  end;
+  SetComboBox;
+  fnCommandQuery;
+end;
+
+//==============================================================================
+// fnCommandPrint [인쇄]
+//==============================================================================
+procedure TfrmU150.fnCommandPrint;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandQuery [조회]
+//==============================================================================
+procedure TfrmU150.fnCommandQuery;
+var
+  WhereStr : String;
+begin
+  WhereStr := '' ;
+  // 설비구분
+  if (cbERR_MACH.Text <> '전체') then
+    WhereStr := WhereStr + ' AND ERR_MACH LIKE ' + QuotedStr('%'+cbERR_MACH.Text+'%') ;
+
+  // 에러코드
+  if (cbERR_CODE.Text <> '전체') then
+    WhereStr := WhereStr + ' AND ERR_CODE LIKE ' + QuotedStr('%'+cbERR_CODE.Text+'%') ;
+
+  try
+    with qryInfo do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := ' SELECT ROW_NUMBER() OVER(ORDER BY USERID) as IDX, * ' +
+                  '   FROM TM_ERROR ' +
+                  '  WHERE 1 = 1 ' + WhereStr ;
+      Open;
+    end;
+  except
+    if qryInfo.Active then qryInfo.Close;
+  end ;
+end;
+
+//==============================================================================
+// fnCommandClose [닫기]
+//==============================================================================
+procedure TfrmU150.fnCommandClose;
+begin
+  Close;
+end;
+
+//==============================================================================
+// SetComboBox
+//==============================================================================
+procedure TfrmU150.SetComboBox;
+begin
+  MainDm.SearchCodeList(cbERR_MACH, 'TM_ERROR', 'ERR_MACH'  );
+  MainDm.SearchCodeList(cbERR_CODE, 'TM_ERROR', 'ERR_CODE'  );
+end;
+
+//==============================================================================
+// ComboChange
+//==============================================================================
+procedure TfrmU150.ComboChange(Sender: TObject);
+begin
+  if (Trim((Sender as TComboBox).Text) <> '') then
+  begin
+    fnCommandQuery;
+  end;
+end;
+
+//==============================================================================
+// dgInfoTitleClick
+//==============================================================================
+procedure TfrmU150.dgInfoTitleClick(Column: TColumnEh);
+begin
+  if Column.Field.DataSet is TADOQuery then
+  begin
+    with TADOQuery(Column.Field.DataSet) do
+    begin
+      if RecordCount=0 then Exit ;
+      if SrtFlag = 0 then
+      begin
+        SrtFlag := 1; Sort := Column.FieldName + ' DESC' ;
+      end else
+      begin
+        SrtFlag := 0; Sort := Column.FieldName + ' ASC' ;
+      end;
+    end;
+  end;
+end;
+
+//==============================================================================
+// ProcDeleteCode [코드삭제]
+//==============================================================================
+procedure TfrmU150.ProcDeleteCode(ERR_MACH, ERR_CODE: String);
+var
+  StrSQL : String;
+begin
+  try
+    StrSQL := ' DELETE FROM TM_ERROR ' +
+              '  WHERE ERR_MACH = ' + QuotedStr(ERR_MACH) +
+              '    AND ERR_CODE = ' + QuotedStr(ERR_CODE) ;
+
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSQL;
+      ExecSQL;
+    end;
+  except
+    if qryTemp.Active then qryTemp.Close;
+  end;
+end;
+
+//==============================================================================
+// dgInfoDrawColumnCell
+//==============================================================================
+procedure TfrmU150.dgInfoDrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+begin
+//
+end;
+
+//==============================================================================
+// KeyPress
+//==============================================================================
+procedure TfrmU150.KeyPress(Sender: TObject; var Key: Char);
+begin
+  if key = #13 then
+  begin
+    fnCommandQuery;
+  end;
+end;
+
+procedure TfrmU150.mnCodeDelClick(Sender: TObject);
+begin
+  fnCommandDelete;
+end;
+
+end.
+
+
+
+

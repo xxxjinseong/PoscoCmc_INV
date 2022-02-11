@@ -1,0 +1,86 @@
+unit U260_Pop;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmU260_Pop = class(TForm)
+    Panel1: TPanel;
+    btn1F: TButton;
+    btn2F: TButton;
+    Panel2: TPanel;
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+  procedure U260_Pop_Create;
+var
+  frmU260_Pop: TfrmU260_Pop;
+
+implementation
+
+uses U260;
+
+{$R *.dfm}
+
+
+
+procedure U260_Pop_Create;
+begin
+  if not Assigned( frmU260_Pop ) then
+  begin
+    frmU260 := frmU260_Pop.Create(Application);
+  end;
+  frmU260.Show;
+end;
+
+//==============================================================================
+// FormClose
+//==============================================================================
+procedure TfrmU260_Pop.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := Cafree;
+  try TfrmU260_Pop := Nil ;
+  except end;
+end;
+
+
+
+//==============================================================================
+// FormKeyPress
+//==============================================================================
+procedure TfrmU260_Pop.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if ( Key = #27 ) then
+  begin
+    Close;
+  end;
+end;
+
+
+//==============================================================================
+// FormKeyPress
+//==============================================================================
+procedure TfrmU260_Pop.btnClick(Sender: TObject);
+begin
+
+  case (Sender as TButton).Tag of
+    1 : byPopUnloadLevel := '01';
+    2 : byPopUnloadLevel := '02';
+  end;
+end;
+
+
+
+
+
+
+end.
+

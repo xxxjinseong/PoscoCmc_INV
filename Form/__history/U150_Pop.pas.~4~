@@ -1,0 +1,259 @@
+unit U150_Pop;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, jpeg, ExtCtrls, StdCtrls, Buttons, d_MainDm, h_MainLib, h_ReferLib,
+  DB, ADODB, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  Vcl.Mask, Vcl.DBCtrls, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh;
+
+type
+  TfrmU150_Pop = class(TForm)
+    Pnl_Main: TPanel;
+    Pnl_Sub: TPanel;
+    Pnl_Top: TPanel;
+    Pnl_BTN: TPanel;
+    Pnl_Btn5: TPanel;
+    btnClose: TSpeedButton;
+    Pnl_Btn0: TPanel;
+    btnSave: TSpeedButton;
+    Panel24: TPanel;
+    Panel13: TPanel;
+    Panel14: TPanel;
+    PnlFormName: TPanel;
+    Panel16: TPanel;
+    GroupBox3: TGroupBox;
+    Panel39: TPanel;
+    edtALC_NAME: TEdit;
+    Panel42: TPanel;
+    PnlcodeType: TPanel;
+    Panel44: TPanel;
+    qryCommand: TADOQuery;
+    qrySearch: TADOQuery;
+    Panel2: TPanel;
+    cbALC_ITEM_2: TComboBox;
+    edtALC_KIND: TEdit;
+    Panel5: TPanel;
+    edtALC_CODE: TEdit;
+    cbALC_ITEM_1: TComboBox;
+    edtALC_WORK_USER: TEdit;
+    edtALC_ITEM_1: TEdit;
+    edtALC_ITEM_2: TEdit;
+    procedure FormActivate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnSaveClick(Sender: TObject);
+    procedure btnCloseClick(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
+    procedure cbALC_ITEMChange(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+  private
+    procedure SetItemList;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+var
+  frmU150_Pop: TfrmU150_Pop;
+
+implementation
+
+uses U150;
+
+{$R *.dfm}
+
+//==============================================================================
+// btnSaveClick
+//==============================================================================
+procedure TfrmU150_Pop.btnSaveClick(Sender: TObject);
+var
+  ExecNo : integer ;
+  StrSQL, tmpStr : String ;
+begin
+  //+++++++++++++++++++++++++++++++
+  // 코드데이터 체크
+  //+++++++++++++++++++++++++++++++
+  if Trim(edtALC_CODE.Text) = ''  then
+  begin
+    edtALC_CODE.SetFocus;
+    MessageDlg('차량코드를 확인해주십시오', mtConfirmation, [mbYes], 0) ;
+    Exit;
+  end;
+
+  if Trim(edtALC_KIND.Text) = '' then
+  begin
+    edtALC_KIND.SetFocus;
+    MessageDlg('AST를 확인해주십시오', mtConfirmation, [mbYes], 0) ;
+    Exit;
+  end;
+
+  //+++++++++++++++++++++++++++++++
+  // 코드데이터 처리
+  //+++++++++++++++++++++++++++++++
+  if btnSave.Caption = '등 록' then
+  begin
+    tmpStr := '등록';
+    StrSQL := ' Insert Into TB_ALC_CODE ( ' +
+              '     ALC_CODE, ALC_KIND, ALC_NAME,     ' +
+              '     ALC_QTY, ALC_ITEM_1, ALC_ITEM_2,  ' +
+              '     ALC_DATE, ALC_TIME, ALC_WORK_USER)' +
+              '   Values( ' +
+              QuotedStr(UpperCase(edtALC_CODE.Text     )) + ',' +
+              QuotedStr(UpperCase(edtALC_KIND.Text     )) + ',' +
+              QuotedStr(UpperCase(edtALC_NAME.Text     )) + ',' +
+              QuotedStr('1') +                              ',' +
+              QuotedStr(UpperCase(cbALC_ITEM_1.Text   )) + ',' +
+              QuotedStr(UpperCase(cbALC_ITEM_2.Text   )) + ',' +
+              QuotedStr(FormatDateTime('YYYYMMDD',  Now)) + ',' +
+              QuotedStr(FormatDateTime('HHNNSS'  ,  Now)) + ',' +
+              QuotedStr(UpperCase(edtALC_WORK_USER.Text)) + ')' ;
+  end else
+  if btnSave.Caption = '수 정' then
+  begin
+    tmpStr := '수정';
+    StrSQL := ' Update TB_ALC_CODE ' +
+            	'    Set ALC_NAME      = ' + QuotedStr(UpperCase(edtALC_NAME.Text     )) +
+              '      , ALC_QTY       = ' + QuotedStr('1') +
+              '      , ALC_ITEM_1    = ' + QuotedStr(UpperCase(cbALC_ITEM_1.Text   )) +
+              '      , ALC_ITEM_2    = ' + QuotedStr(UpperCase(cbALC_ITEM_2.Text   )) +
+              '      , ALC_DATE      = ' + QuotedStr(FormatDateTime('YYYYMMDD',  Now)) +
+              '      , ALC_TIME      = ' + QuotedStr(FormatDateTime('HHNNSS'  ,  Now)) +
+              '      , ALC_WORK_USER = ' + QuotedStr(UpperCase(edtALC_WORK_USER.Text)) +
+              ' Where ALC_CODE = ' + QuotedStr(UpperCase(edtALC_CODE.Text)) +
+              '   And ALC_KIND = ' + QuotedStr(UpperCase(edtALC_KIND.Text)) ;
+  end;
+
+  try
+    with qryCommand do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := strSQL ;
+      ExecNo := ExecSQL;
+      if (ExecNo <= 0) and (tmpStr = '수정') then
+        ShowMessage('코드' + tmpStr + '에 실패하였습니다.' + #13#10 + '입력 정보를 확인해 주십시오.' );
+    end;
+    frmU150.SetComboBox ;
+    frmU150.fnCommandQuery;
+    Close;
+  except
+    if qryCommand.Active then qryCommand.Close;
+    ShowMessage('코드' + tmpStr + '에 실패하였습니다.' + #13#10 + '중복코드 여부 및 입력 정보를 확인해 주십시오.' );
+  end;
+end;
+
+//==============================================================================
+// FormActivate
+//==============================================================================
+procedure TfrmU150_Pop.FormActivate(Sender: TObject);
+begin
+  SetItemList;
+end;
+
+//==============================================================================
+// FormDeactivate
+//==============================================================================
+procedure TfrmU150_Pop.FormDeactivate(Sender: TObject);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+end;
+
+procedure TfrmU150_Pop.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+if Key = VK_ESCAPE then ShowMessage('Esc key is press.');
+end;
+
+procedure TfrmU150_Pop.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+if Key = #27 then ShowMessage('Esc key is press.');
+end;
+
+//==============================================================================
+// FormClose
+//==============================================================================
+procedure TfrmU150_Pop.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+
+  Action := Cafree;
+  try frmU150_Pop := Nil ;
+  except end;
+end;
+
+//==============================================================================
+// btnCloseClick
+//==============================================================================
+procedure TfrmU150_Pop.btnCloseClick(Sender: TObject);
+begin
+  Close;
+end;
+
+//==============================================================================
+// SetItemList
+//==============================================================================
+procedure TfrmU150_Pop.SetItemList;
+begin
+  MainDm.SearchCodeList2(cbALC_ITEM_1, 'TB_STOC_CODE', 'STOC_CODE');
+  MainDm.SearchCodeList2(cbALC_ITEM_2, 'TB_STOC_CODE', 'STOC_CODE');
+end;
+
+//==============================================================================
+// cbALC_ITEMChange
+//==============================================================================
+procedure TfrmU150_Pop.cbALC_ITEMChange(Sender: TObject);
+var
+  StrSQL, ComboIdx, tmpCode, tmpStr : String;
+begin
+  try
+    ComboIdx := IntToStr((Sender as TComboBox).Tag);
+    tmpCode  := (Sender as TComboBox).Text;
+
+    with qrySearch do
+    begin
+      Close;
+      SQL.Clear;
+      StrSQL := ' SELECT STOC_NAME ' +
+                '   FROM TB_STOC_CODE ' +
+                '  WHERE STOC_CODE =  ' + QuotedStr(UpperCase(tmpCode)) ;
+      SQL.Text := StrSQL;
+      Open;
+
+      if not (eof and bof) then
+      begin
+        tmpStr := FieldByName('STOC_NAME').AsString;
+      end else tmpStr := '';
+      TEdit(Self.FindComponent('edtALC_ITEM_'+ComboIdx)).Text := tmpStr;
+    end;
+  except
+    if qrySearch.Active then qrySearch.Close;
+  end;
+end;
+
+
+end.

@@ -1,0 +1,293 @@
+unit Popup_SetDouble;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
+  Data.DB, Data.Win.ADODB, d_MainDm, h_MainLib, h_ReferLib, Vcl.Menus;
+
+type
+  TfrmPopup_SetDouble = class(TForm)
+    Pnl_Main: TPanel;
+    Pnl_Sub: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Panel16: TPanel;
+    Pnl_Location: TPanel;
+    Panel4: TPanel;
+    Pnl_Top: TPanel;
+    Pnl_BTN: TPanel;
+    Pnl_Btn5: TPanel;
+    btnClose: TSpeedButton;
+    PnlFormName: TPanel;
+    Shape3: TShape;
+    Panel24: TPanel;
+    Panel13: TPanel;
+    Panel14: TPanel;
+    cbHogi1: TComboBox;
+    cbBank1: TComboBox;
+    cbBay1: TComboBox;
+    cbLevel1: TComboBox;
+    cbHogi2: TComboBox;
+    cbBank2: TComboBox;
+    cbBay2: TComboBox;
+    cbLevel2: TComboBox;
+    btnOrder: TButton;
+    qryOrder: TADOQuery;
+    qrySearch: TADOQuery;
+    Panel1: TPanel;
+    edtLUGG: TEdit;
+    procedure btnCloseClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnOrderClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  var IO_TYPE : String;
+
+  function SetJobOrder : Boolean;
+  function fnGetSCSetInfo(SC_NO: Integer; GetField: String): String;
+  function fnSetSCSetInfo(SC_NO: Integer; SetField, SetValue: String): Boolean;
+  end;
+
+var
+  frmPopup_SetDouble: TfrmPopup_SetDouble;
+  OrderData : TJobOrder;
+
+
+implementation
+
+{$R *.dfm}
+
+uses U120;
+
+//==============================================================================
+// btnOrderClick
+//==============================================================================
+procedure TfrmPopup_SetDouble.btnOrderClick(Sender: TObject);
+var
+  Msg : String;
+begin
+  Msg := '입고위치를 변경하시겠습니까?' + #13#10 +
+         '       [' + cbBank1.Text + ' - ' + cbBay1.Text + ' - ' + cbLevel1.Text + ']' + #13#10 +
+         '  ->  [' + cbBank2.Text + ' - ' + cbBay2.Text + ' - ' + cbLevel2.Text + ']';
+  if MessageDlg(Msg, mtConfirmation, [mbYes, mbNo], 0) = mrYes  then
+  begin
+    SetJobOrder;
+    Sleep(1000);
+    fnSetSCSetInfo(1, 'JOB_RETRY', '1');
+
+    frmU120.cbOrder.Checked := False;
+    Close;
+  end;
+
+end;
+
+//==============================================================================
+// SetJobOrder
+//==============================================================================
+function TfrmPopup_SetDouble.SetJobOrder : Boolean;
+var
+  i : Integer;
+  StrSQL, CellStatus : String;
+  TmpBank : String;
+begin
+  try
+    Result := False;
+
+    if not MainDm.MainDB.InTransaction then
+           MainDm.MainDB.BeginTrans;
+
+    with qryOrder do
+    begin
+      //+++++++++++++++++++++++++++++++++++++++++++++++
+      // TT_ORDER 이중입고된 작업번호의 작업위치 변경
+      //+++++++++++++++++++++++++++++++++++++++++++++++
+      Close;
+      SQL.Clear;
+
+      if IO_TYPE = '' then Exit;
+
+      if cbBank2.Text = 'A' then TmpBank := '1' else TmpBank := '2';
+
+      if (IO_TYPE = '1') or (IO_TYPE = '3') then
+      begin
+        CellStatus := '4'; // 입고예약
+        StrSQL := ' UPDATE TT_ORDER ' +
+                    '    SET DSTAISLE = ' + QuotedStr(FormatFloat('0000', StrToInt(TmpBank)))  + ',' +
+                    '        DSTBAY   = ' + QuotedStr(FormatFloat('0000', StrToInt(cbBay2.Text)))   + ',' +
+                    '        DSTLEVEL = ' + QuotedStr(FormatFloat('0000', StrToInt(cbLevel2.Text))) + ',' +
+                    '        ETC      = ''' + '입고위치변경' + ''' ' +
+                    '  WHERE LUGG = ' + QuotedStr(edtLUGG.Text);
+      end else
+      begin
+        CellStatus := '5';  // 출고예약
+        StrSQL := ' UPDATE TT_ORDER ' +
+                    '    SET SRCAISLE = ' + QuotedStr(FormatFloat('0000', StrToInt(TmpBank)))  + ',' +
+                    '        SRCBAY   = ' + QuotedStr(FormatFloat('0000', StrToInt(cbBay2.Text)))   + ',' +
+                    '        SRCLEVEL = ' + QuotedStr(FormatFloat('0000', StrToInt(cbLevel2.Text))) + ',' +
+                    '        ETC      = ''' + '출고위치변경' + ''' ' +
+                    '  WHERE LUGG = ' + QuotedStr(edtLUGG.Text);
+      end;
+      SQL.Text := StrSQL;
+      ExecSql;
+//      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//      // TT_STOCK 이중입고 된 셀의 상태 변경 ( 셀의 원래 상태로???)
+//      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//      Close;
+//      SQL.Clear;
+//      SQL.Text :=
+//      ' UPDATE TT_STOCK               ' + #13#10 +
+//      '    SET ID_STATUS = :ID_STATUS ' + #13#10 +
+//      '  WHERE ID_HOGI = :ID_HOGI     ' + #13#10+
+//      '    AND ID_CODE = :ID_CODE ' ;
+//      Parameters[0].Value := '2';  // 2 or 1
+//      Parameters[1].Value := '1';
+//      Parameters[2].Value := cbBank1.Text + cbBay1.Text + cbLevel1.Text; // 셀위치
+//      ExecSql;
+//      Close;
+      //+++++++++++++++++++++++++++++++++++++
+      // 셀상태 변경  ( 공셀(0) -> 입고예약(4) )
+      //+++++++++++++++++++++++++++++++++++++
+      Close;
+      SQL.Clear;
+      SQL.Text :=
+      ' UPDATE TT_STOCK               ' + #13#10 +
+      '    SET ID_STATUS = :ID_STATUS ' + #13#10 +
+      '  WHERE ID_HOGI = :ID_HOGI     ' + #13#10+
+      '    AND ID_CODE = :ID_CODE ' ;
+      Parameters[0].Value := CellStatus;
+      Parameters[1].Value := '1';
+      Parameters[2].Value := TmpBank + cbBay2.Text + cbLevel2.Text; // 셀위치
+      ExecSql;
+      Close;
+    end;
+    Result := True;
+
+    if MainDm.MainDB.InTransaction then
+       MainDm.MainDB.CommitTrans;
+  except
+    if MainDm.MainDB.InTransaction then
+       MainDm.MainDB.RollbackTrans;
+    if qryOrder.Active then qryOrder.Close;
+  end;
+end;
+
+
+
+//==============================================================================
+// fnGetSCSetInfo : 설비 명령 관련 데이터 반환
+//==============================================================================
+function TfrmPopup_SetDouble.fnGetSCSetInfo(SC_NO: Integer; GetField: String): String;
+var
+  StrSQL : String ;
+begin
+  Result := '' ;
+  StrSQL := ' SELECT ' + GetField + ' AS DATA ' +
+            '   FROM TC_SCSETINFO ' +
+            '  WHERE SC_NO = ' + IntToStr(SC_No)  ;
+
+  try
+    with qrySearch do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSQL ;
+      Open ;
+
+      if not ( Bof and Eof) then
+      begin
+        Result := FieldByName('Data').AsString ;
+      end;
+      Close ;
+    end;
+  except
+    if qrySearch.Active then qrySearch.Close;
+  end;
+end;
+
+//==============================================================================
+// fnSetSCSetInfo : 설비 명령 관련 데이터 저장
+//==============================================================================
+function TfrmPopup_SetDouble.fnSetSCSetInfo(SC_NO: Integer; SetField, SetValue: String): Boolean;
+var
+  StrSQL : String ;
+  ExecNo : Integer;
+begin
+  try
+    Result := False;
+    StrSQL := ' UPDATE TC_SCSETINFO ' +
+              '    SET ' + SetField + ' = ''' + SetValue + '''  ' +
+              '  WHERE SC_NO = ' + IntToStr(SC_No)  ;
+
+    with qrySearch do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSQL ;
+      ExecNo := ExecSQL ;
+      if ExecNo > 0 then Result := True ;
+      Close ;
+    end;
+  except
+    if qrySearch.Active then qrySearch.Close;
+  end;
+end;
+
+//==============================================================================
+// FormClose
+//==============================================================================
+procedure TfrmPopup_SetDouble.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+
+  Action := Cafree;
+  try frmPopup_SetDouble := Nil ;
+  except end;
+end;
+
+procedure TfrmPopup_SetDouble.FormCreate(Sender: TObject);
+begin
+//
+end;
+
+//==============================================================================
+// FormKeyPress
+//==============================================================================
+procedure TfrmPopup_SetDouble.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if ( Key = #27 ) then
+  begin
+    Close;
+  end;
+end;
+
+//==============================================================================
+// btnCloseClick
+//==============================================================================
+procedure TfrmPopup_SetDouble.btnCloseClick(Sender: TObject);
+begin
+  Close;
+end;
+
+
+
+
+end.

@@ -1,0 +1,565 @@
+object frmU460: TfrmU460
+  Left = 331
+  Top = 141
+  Caption = '460. '#51089#50629#44592#44036#48324' '#49892#51201#51312#54924
+  ClientHeight = 592
+  ClientWidth = 1244
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poDefault
+  Visible = True
+  WindowState = wsMaximized
+  OnActivate = FormActivate
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDeactivate = FormDeactivate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object shpB: TShape
+    Left = 0
+    Top = 591
+    Width = 1244
+    Height = 1
+    Align = alBottom
+    Brush.Color = clNavy
+    Pen.Color = 9408913
+    ExplicitTop = 12
+    ExplicitWidth = 1184
+  end
+  object shpL: TShape
+    Left = 0
+    Top = 5
+    Width = 1
+    Height = 586
+    Align = alLeft
+    Brush.Color = clNavy
+    Pen.Color = 9408913
+    ExplicitLeft = 213
+    ExplicitTop = 20
+    ExplicitHeight = 22
+  end
+  object shpR: TShape
+    Left = 1243
+    Top = 5
+    Width = 1
+    Height = 586
+    Align = alRight
+    Brush.Color = clNavy
+    Pen.Color = 9408913
+    ExplicitLeft = 213
+    ExplicitTop = 20
+    ExplicitHeight = 22
+  end
+  object shpT: TShape
+    Left = 0
+    Top = 4
+    Width = 1244
+    Height = 1
+    Align = alTop
+    Brush.Color = clNavy
+    Pen.Color = 9408913
+    ExplicitWidth = 1184
+  end
+  object Pnl_Main: TPanel
+    Left = 1
+    Top = 5
+    Width = 1242
+    Height = 586
+    Align = alClient
+    BevelInner = bvRaised
+    BevelOuter = bvNone
+    TabOrder = 0
+    object Pnl_Top: TPanel
+      Left = 1
+      Top = 1
+      Width = 1240
+      Height = 50
+      Align = alTop
+      BevelInner = bvRaised
+      BevelOuter = bvNone
+      ParentBackground = False
+      TabOrder = 0
+      object DatePicker1: TDateTimePicker
+        Left = 95
+        Top = 14
+        Width = 125
+        Height = 23
+        Cursor = crHandPoint
+        Date = 38664.594927025500000000
+        Time = 38664.594927025500000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = #54620#44397#50612' '#51077#47141' '#49884#49828#53596' (IME 2000)'
+        ParentFont = False
+        TabOrder = 0
+        OnKeyPress = KeyPress
+      end
+      object DatePicker2: TDateTimePicker
+        Left = 392
+        Top = 14
+        Width = 125
+        Height = 23
+        Cursor = crHandPoint
+        Date = 38664.594982314800000000
+        Time = 38664.594982314800000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = #54620#44397#50612' '#51077#47141' '#49884#49828#53596' (IME 2000)'
+        ParentFont = False
+        TabOrder = 2
+        OnChange = DatePicker2Change
+        OnKeyPress = KeyPress
+      end
+      object Panel1: TPanel
+        Left = 22
+        Top = 14
+        Width = 70
+        Height = 23
+        BevelOuter = bvNone
+        Caption = #49884#51089#51068#51088
+        Color = 14935011
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 5
+      end
+      object Panel2: TPanel
+        Left = 319
+        Top = 14
+        Width = 70
+        Height = 23
+        BevelOuter = bvNone
+        Caption = #51333#47308#51068#51088
+        Color = 14935011
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 6
+      end
+      object TimePicker1: TDateTimePicker
+        Left = 223
+        Top = 14
+        Width = 90
+        Height = 23
+        Cursor = crHandPoint
+        Date = 38799.000000000000000000
+        Format = 'HH:mm:ss'
+        Time = 38799.000000000000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = #54620#44397#50612' '#51077#47141' '#49884#49828#53596' (IME 2000)'
+        Kind = dtkTime
+        ParentFont = False
+        TabOrder = 1
+        OnKeyPress = KeyPress
+      end
+      object TimePicker2: TDateTimePicker
+        Left = 520
+        Top = 14
+        Width = 90
+        Height = 23
+        Cursor = crHandPoint
+        Date = 38799.999988425930000000
+        Format = 'HH:mm:ss'
+        Time = 38799.999988425930000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = #54620#44397#50612' '#51077#47141' '#49884#49828#53596' (IME 2000)'
+        Kind = dtkTime
+        ParentFont = False
+        TabOrder = 3
+        OnKeyPress = KeyPress
+      end
+      object Panel4: TPanel
+        Left = 616
+        Top = 14
+        Width = 70
+        Height = 23
+        BevelOuter = bvNone
+        Caption = #51201#51116#53076#46300
+        Color = 14935011
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 7
+      end
+      object cbALC_CODE: TComboBox
+        Left = 689
+        Top = 14
+        Width = 120
+        Height = 23
+        Cursor = crHandPoint
+        CharCase = ecUpperCase
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = #54620#44397#50612' '#51077#47141' '#49884#49828#53596' (IME 2000)'
+        ParentFont = False
+        TabOrder = 4
+        OnKeyPress = KeyPress
+      end
+      object cbDate: TCheckBox
+        Left = 5
+        Top = 17
+        Width = 14
+        Height = 17
+        Checked = True
+        State = cbChecked
+        TabOrder = 8
+        OnClick = cbDateClick
+      end
+    end
+    object Pnl_List: TPanel
+      Left = 1
+      Top = 54
+      Width = 1240
+      Height = 531
+      Align = alClient
+      BevelOuter = bvNone
+      TabOrder = 1
+      object dgInfo: TDBGridEh
+        Tag = 1
+        Left = 0
+        Top = 0
+        Width = 1240
+        Height = 531
+        Align = alClient
+        ColumnDefValues.Layout = tlCenter
+        DataGrouping.Font.Charset = GB2312_CHARSET
+        DataGrouping.Font.Color = clWindowText
+        DataGrouping.Font.Height = -11
+        DataGrouping.Font.Name = 'Tahoma'
+        DataGrouping.Font.Style = []
+        DataGrouping.ParentFont = False
+        DataSource = dsInfo
+        DrawGraphicData = True
+        DynProps = <>
+        EditActions = [geaCopyEh]
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        FooterRowCount = 1
+        FooterParams.FillStyle = cfstThemedEh
+        FooterParams.Font.Charset = DEFAULT_CHARSET
+        FooterParams.Font.Color = clNavy
+        FooterParams.Font.Height = -13
+        FooterParams.Font.Name = #46027#50880
+        FooterParams.Font.Style = [fsBold]
+        FooterParams.ParentFont = False
+        ImeName = 'Microsoft Office IME 2007'
+        IndicatorOptions = [gioShowRowIndicatorEh, gioShowRecNoEh]
+        IndicatorParams.FillStyle = cfstThemedEh
+        IndicatorTitle.TitleButton = True
+        IndicatorTitle.UseGlobalMenu = False
+        OddRowColor = clWhite
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+        OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghShowRecNo, dghColumnResize, dghColumnMove, dghExtendVertLines]
+        ParentFont = False
+        RowHeight = 6
+        RowLines = 1
+        SumList.Active = True
+        TabOrder = 0
+        TitleParams.FillStyle = cfstThemedEh
+        TitleParams.Font.Charset = GB2312_CHARSET
+        TitleParams.Font.Color = clWindowText
+        TitleParams.Font.Height = -13
+        TitleParams.Font.Name = #46027#50880
+        TitleParams.Font.Style = []
+        TitleParams.MultiTitle = True
+        TitleParams.ParentFont = False
+        TitleParams.RowHeight = 24
+        VertScrollBar.VisibleMode = sbAlwaysShowEh
+        OnDrawColumnCell = dgInfoDrawColumnCell
+        OnTitleClick = dgTitleClick
+        Columns = <
+          item
+            Alignment = taCenter
+            Color = 16710378
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'ALC_CODE'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = []
+            Footers = <>
+            Title.Caption = #51201#51116#53076#46300
+            Width = 100
+          end
+          item
+            Alignment = taCenter
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DRV_TYPE'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = []
+            Footer.Alignment = taCenter
+            Footer.Value = #52509' '#44148#49688
+            Footer.ValueType = fvtStaticText
+            Footers = <>
+            Title.Caption = #53076#46300#53440#51077
+            Width = 100
+          end
+          item
+            Alignment = taCenter
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'SEAT_CLASS'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = []
+            Footer.Alignment = taRightJustify
+            Footer.DisplayFormat = '###,###,##0 '#44148
+            Footer.FieldName = 'SEAT_CLASS'
+            Footer.ValueType = fvtCount
+            Footers = <>
+            Title.Caption = #53076#46300#44396#48516
+            Width = 100
+          end
+          item
+            Alignment = taCenter
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'COVER_SET'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = []
+            Footers = <>
+            Title.Caption = #53076#46300#51221#48372
+            Width = 150
+          end
+          item
+            Alignment = taCenter
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'IN_CNT'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = []
+            Footer.Alignment = taRightJustify
+            Footer.DisplayFormat = '###,###,##0 '
+            Footer.FieldName = 'IN_CNT'
+            Footer.ValueType = fvtSum
+            Footers = <>
+            Title.Caption = #51077#44256#49688#47049
+            Width = 100
+          end
+          item
+            Alignment = taCenter
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'OUT_CNT'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = []
+            Footer.Alignment = taRightJustify
+            Footer.DisplayFormat = '###,###,##0 '
+            Footer.FieldName = 'OUT_CNT'
+            Footer.ValueType = fvtSum
+            Footers = <>
+            Title.Caption = #52636#44256#49688#47049
+            Width = 100
+          end
+          item
+            Alignment = taCenter
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'STOCK_CNT'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = []
+            Footer.Alignment = taRightJustify
+            Footer.DisplayFormat = '###,###,##0 '
+            Footer.FieldName = 'STOCK_CNT'
+            Footer.ValueType = fvtSum
+            Footers = <>
+            Title.Caption = #51201#51116#49688#47049
+            Width = 100
+          end>
+        object RowDetailData: TRowDetailPanelControlEh
+        end
+      end
+    end
+    object Pnl_Line: TPanel
+      Left = 1
+      Top = 51
+      Width = 1240
+      Height = 3
+      ParentCustomHint = False
+      Align = alTop
+      BevelOuter = bvNone
+      BiDiMode = bdLeftToRight
+      Color = 16442514
+      Ctl3D = True
+      DoubleBuffered = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentBackground = False
+      ParentCtl3D = False
+      ParentDoubleBuffered = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = False
+      TabOrder = 2
+      object Panel12: TPanel
+        Left = 0
+        Top = 0
+        Width = 18
+        Height = 3
+        Align = alLeft
+        BevelOuter = bvNone
+        Color = 14258944
+        TabOrder = 0
+      end
+    end
+  end
+  object Panel9: TPanel
+    Left = 0
+    Top = 0
+    Width = 1244
+    Height = 4
+    ParentCustomHint = False
+    Align = alTop
+    BevelOuter = bvNone
+    BiDiMode = bdLeftToRight
+    Ctl3D = True
+    DoubleBuffered = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentBiDiMode = False
+    ParentBackground = False
+    ParentCtl3D = False
+    ParentDoubleBuffered = False
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = False
+    TabOrder = 1
+    object Panel11: TPanel
+      Left = 0
+      Top = 0
+      Width = 18
+      Height = 4
+      Align = alLeft
+      BevelOuter = bvNone
+      Color = 14258944
+      TabOrder = 0
+    end
+  end
+  object EhPrint: TPrintDBGridEh
+    Options = []
+    PageFooter.Font.Charset = DEFAULT_CHARSET
+    PageFooter.Font.Color = clWindowText
+    PageFooter.Font.Height = -11
+    PageFooter.Font.Name = 'Tahoma'
+    PageFooter.Font.Style = []
+    PageHeader.Font.Charset = DEFAULT_CHARSET
+    PageHeader.Font.Color = clWindowText
+    PageHeader.Font.Height = -11
+    PageHeader.Font.Name = 'Tahoma'
+    PageHeader.Font.Style = []
+    Units = MM
+    Left = 91
+    Top = 104
+  end
+  object qryInfo: TADOQuery
+    Connection = MainDm.MainDatabase
+    CursorType = ctStatic
+    CommandTimeout = 100
+    Parameters = <>
+    SQL.Strings = (
+      ''
+      
+        'SELECT ORD_ALC_CODE, ORD_PROD_CODE1, ORD_PROD_CODE2, ORD_PROD_CO' +
+        'DE3, ORD_PROD_CODE4, SUM(IN_CNT) AS IN_CNT, SUM(OUT_CNT) AS OUT_' +
+        'CNT'
+      '  FROM ('
+      
+        '  SELECT ORD_ALC_CODE, COUNT(ORD_ALC_CODE) AS IN_CNT , 0 AS OUT_' +
+        'CNT,ORD_PROD_CODE1, ORD_PROD_CODE2, ORD_PROD_CODE3, ORD_PROD_COD' +
+        'E4'
+      #9'FROM TT_TRANS '
+      #9'WHERE ORD_TYPE = '#39#49373#49328#51077#44256#39
+      
+        #9'GROUP BY ORD_ALC_CODE, ORD_PROD_CODE1, ORD_PROD_CODE2, ORD_PROD' +
+        '_CODE3, ORD_PROD_CODE4'
+      #9'UNION ALL'
+      
+        #9'SELECT ORD_ALC_CODE, 0 AS IN_CNT, COUNT(ORD_ALC_CODE) AS OUT_CN' +
+        'T,ORD_PROD_CODE1, ORD_PROD_CODE2, ORD_PROD_CODE3, ORD_PROD_CODE4'
+      #9'  FROM TT_TRANS '
+      #9' WHERE ORD_TYPE IN ('#39#49436#50676#52636#44256#39', '#39#51648#51221#52636#44256#39', '#39#44596#44553#52636#44256#39')'
+      
+        #9'GROUP BY ORD_ALC_CODE, ORD_PROD_CODE1, ORD_PROD_CODE2, ORD_PROD' +
+        '_CODE3, ORD_PROD_CODE4'
+      
+        #9') AS TOTAL GROUP BY ORD_ALC_CODE, ORD_PROD_CODE1, ORD_PROD_CODE' +
+        '2, ORD_PROD_CODE3, ORD_PROD_CODE4'
+      ''
+      ''
+      ''
+      '')
+    Left = 56
+    Top = 104
+  end
+  object dsInfo: TDataSource
+    DataSet = qryInfo
+    Left = 24
+    Top = 104
+  end
+end

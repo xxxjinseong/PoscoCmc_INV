@@ -1,0 +1,91 @@
+unit U310_Pop;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmU310_Pop = class(TForm)
+    Panel1: TPanel;
+    btn1F: TButton;
+    btn2F: TButton;
+    pnlInfo: TPanel;
+    procedure btnClick(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+  procedure U310_Pop_Create(caption : String);
+var
+  frmU310_Pop: TfrmU310_Pop;
+
+implementation
+
+uses U310;
+
+{$R *.dfm}
+
+
+
+
+procedure U310_Pop_Create(caption : String);
+begin
+  if not Assigned( frmU310_Pop ) then
+  begin
+    frmU310_Pop := TfrmU310_Pop.Create(Application);
+    frmU310_Pop.pnlInfo.Caption := caption;
+  end;
+  frmU310_Pop.ShowModal;
+end;
+
+
+//==============================================================================
+// btnClick
+//==============================================================================
+procedure TfrmU310_Pop.btnClick(Sender: TObject);
+begin
+
+  case (Sender as TButton).Tag of
+    1 :
+    begin
+      byPopUnloadLevel := '01';
+      isSelectedFloor := True;
+      Close;
+    end;
+    2 :
+    begin
+      byPopUnloadLevel := '02';
+      isSelectedFloor := True;
+      Close;
+    end;
+  end;
+end;
+
+//==============================================================================
+// FormClose
+//==============================================================================
+procedure TfrmU310_Pop.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := Cafree;
+  try frmU310_Pop := Nil ;
+  except end;
+end;
+
+//==============================================================================
+// FormKeyPress
+//==============================================================================
+procedure TfrmU310_Pop.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if ( Key = #27 ) then
+  begin
+    isSelectedFloor := False;
+    Close;
+  end;
+end;
+
+end.

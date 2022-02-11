@@ -1,0 +1,251 @@
+unit Popup_Order;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, jpeg, ExtCtrls, StdCtrls, Buttons, d_MainDm, h_MainLib, h_ReferLib,
+  DB, ADODB, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  Vcl.Mask, Vcl.DBCtrls, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh;
+
+type
+  TfrmPopup_Order = class(TForm)
+    Pnl_Main: TPanel;
+    Pnl_Top: TPanel;
+    Pnl_BTN: TPanel;
+    Pnl_Btn5: TPanel;
+    btnClose: TSpeedButton;
+    Pnl_Btn0: TPanel;
+    btnOrder: TSpeedButton;
+    Panel24: TPanel;
+    Panel13: TPanel;
+    Panel14: TPanel;
+    PnlFormName: TPanel;
+    Shape3: TShape;
+    ImgInsert: TImage;
+    ImgUpdate: TImage;
+    Pnl_Sub: TPanel;
+    dsOut: TDataSource;
+    qryOut: TADOQuery;
+    dgOut: TDBGridEh;
+    Panel1: TPanel;
+    cmdINQUIRY: TSpeedButton;
+    qryCommand: TADOQuery;
+    SP_AUTO_INDEX: TADOStoredProc;
+    procedure FormActivate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnOrderClick(Sender: TObject);
+    procedure btnCloseClick(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
+    procedure cmdINQUIRYClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+     procedure SetOutOrder(Idx, SubIdx : String; RowCnt : Integer);
+     Function Get_BrNo():String;
+    { Public declarations }
+  end;
+
+var
+  frmPopup_Order: TfrmPopup_Order;
+
+
+implementation
+
+uses U240;
+
+{$R *.dfm}
+
+//==============================================================================
+// cmdINQUIRYClick [조회]
+//==============================================================================
+procedure TfrmPopup_Order.cmdINQUIRYClick(Sender: TObject);
+var
+  StrSQL : String;
+begin
+  try
+    with qryOut do
+    begin
+      Close;
+      SQL.Clear;
+      StrSQL := '  Select Data.*, ' +
+                '         (CASE WHEN Data.STATUS = ''CV이동'' OR Data.STATUS = ''CV완료'' THEN CAST(Trk.ID_BUFF AS VARCHAR(3)) ' +
+                '               ELSE  '''' END) AS LOCATION ' +
+                '    From (  Select Ord.*, Alc.KIND_CODE, ' +
+                '                   SUBSTRING(Ord.ID_CODE,1,2)+''-''+SUBSTRING(Ord.ID_CODE,3,2)+''-''+SUBSTRING(Ord.ID_CODE,5,2) AS CELL,    ' +
+                '                  (SUBSTRING(Ord.ID_DATE,1,4)+''-''+SUBSTRING(Ord.ID_DATE,5,2)+''-''+SUBSTRING(Ord.ID_DATE,7,2)+'' ''+      ' +
+                '                   SUBSTRING(Ord.ID_TIME,1,2)+'':''+SUBSTRING(Ord.ID_TIME,3,2)+'':''+SUBSTRING(Ord.ID_TIME,5,2)) AS ORDATE  ' +
+                '              From TC_OrderTemp Ord Left Outer Join TM_ALCC Alc ' +
+                '                On Ord.LOAD_CODE = Alc.DAYOU_CODE ' +
+                '         ) Data  Left Outer Join TT_TRACK Trk ' +
+                '       On Data.ID_DATE   = Trk.ORDER_DATE     ' +
+                '      And Data.ID_INDEX  = Trk.ORDER_INDEX    ' +
+                '      And Data.ID_SUBIDX = Trk.ORDER_SUBIDX   ' +
+                '    Where Data.ID_TYPE IN (''지정출고'',''긴급출고'', ''서열출고'', ''보충출고'') ' +
+                '    Order By ID_DATE, ID_TIME, ID_INDEX, ID_SUBIDX DESC ' ;
+
+      SQL.Text := StrSQL;
+      Open;
+    end;
+  except
+    if qryOut.Active then qryOut.Close;
+  end;
+end;
+
+//==============================================================================
+// btnOrderClick [출고]
+//==============================================================================
+procedure TfrmPopup_Order.btnOrderClick(Sender: TObject);
+var
+  i, Change_Idx : integer;
+begin
+  if MessageDlg(IntToStr(dgOut.SelectedRows.Count) + '건 서열 출하지시 하시겠습니까?',
+                mtInformation, [mbYes, mbNo], 0) <> mrYes then Exit;
+
+  Change_Idx := dgOut.SelectedRows.Count;
+
+  for i := 0 to (dgOut.SelectedRows.Count-1) do
+  begin
+    with dgOut.DataSource.DataSet do
+    begin
+      GotoBookmark(pointer(dgOut.SelectedRows.Items[i]));
+      SetOutOrder(qryOut.FieldByName('ID_INDEX').AsString,
+                  qryOut.FieldByName('ID_SUBIDX').AsString,
+                  Change_Idx);
+      Change_Idx := Change_Idx - 1;
+      Next;
+    end;
+  end;
+  cmdINQUIRY.OnClick(Self);
+end;
+
+//==============================================================================
+// FormActivate
+//==============================================================================
+procedure TfrmPopup_Order.FormActivate(Sender: TObject);
+begin
+  cmdINQUIRYClick(nil);
+end;
+
+//==============================================================================
+// FormDeactivate
+//==============================================================================
+procedure TfrmPopup_Order.FormDeactivate(Sender: TObject);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+end;
+
+function TfrmPopup_Order.Get_BrNo: String;
+var
+  strDateTime, strIndex : String ;
+  Index : integer ;
+begin
+
+  strDateTime := FormatDateTime('YYYYMMDDHHNNSS', now) ;
+
+  with SP_AUTO_INDEX do
+  begin
+    Parameters.ParamByName('@Index').Value := '';
+    ExecProc;
+    Index := Integer(Parameters.ParamValues['@RETURN_VALUE']);
+  end;
+
+  // 작업번호 자릿수가 4자리 이하일때 완료 안되는 문제 때문에 수정.
+  strIndex := strDateTime + FormatFloat('0000', Index) ; // IntToStr(Index);
+  Result   := strIndex ;
+end;
+
+procedure TfrmPopup_Order.SetOutOrder(Idx, SubIdx : String; RowCnt : Integer);
+var
+  strBR_NO, strDate, strTime, strIndex, StrSQL : String;
+  i : integer;
+begin
+  strBR_NO := Get_BrNo ;
+  strDate  := copy(strBR_NO, 1, 8) ; // YYYYMMDD
+  strTime  := copy(strBR_NO, 9, 6) ; // HHNNSS
+  strIndex := copy(strBR_NO, 15, Length(strBR_NO) - 14 ) ;
+
+  try
+    StrSQL := ' Update TC_OrderTemp  ' +
+              '    Set ID_INDEX  = ''' + strIndex + ''', ' +
+              '        ID_DATE   = ''' + strDate  + ''', ' +
+              '        ID_TIME   = ''' + strTime  + ''', ' +
+              '        ID_SUBIDX = ' + IntToStr(RowCnt) +
+              '  Where ID_INDEX  = ''' + Idx    + ''' ' +
+              '    And ID_SUBIDX = ''' + SubIdx + ''' ' ;
+
+    with qryCommand do
+    begin
+      Close ;
+      SQL.Clear;
+      SQL.Text := StrSQL ;
+      if ExecSQL > 0 then RowCnt := RowCnt - 1;
+    end;
+
+    StrSQL := ' INSERT INTO TT_ORDER ' +
+              '   SELECT * ' +
+              '     FROM TC_OrderTemp ' +
+              '    ORDER BY ID_SUBIDX  ' ;
+    with qryCommand do
+    begin
+      Close ;
+      SQL.Clear;
+      SQL.Text := StrSQL ;
+      ExecSQL;
+
+      StrSQL   := ' Delete FROM TC_OrderTemp ' ;
+      SQL.Text := StrSQL ;
+      ExecSQL;
+    end;
+
+  except
+
+  end;
+
+end;
+
+//==============================================================================
+// FormClose
+//==============================================================================
+procedure TfrmPopup_Order.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+
+  Action := Cafree;
+  try frmPopup_Order := Nil ;
+  except end;
+end;
+
+//==============================================================================
+// btnCloseClick
+//==============================================================================
+procedure TfrmPopup_Order.btnCloseClick(Sender: TObject);
+begin
+  Close;
+end;
+
+end.

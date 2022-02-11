@@ -1,0 +1,732 @@
+unit Popup_Item;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, jpeg, ExtCtrls, StdCtrls, Buttons, d_MainDm, h_MainLib, h_ReferLib,
+  DB, ADODB, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  Vcl.Mask, Vcl.DBCtrls, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh;
+
+type
+  TfrmPopup_Item = class(TForm)
+    Pnl_Main: TPanel;
+    Pnl_Sub: TPanel;
+    Pnl_Top: TPanel;
+    Pnl_BTN: TPanel;
+    Pnl_Btn5: TPanel;
+    btnClose: TSpeedButton;
+    Pnl_Btn0: TPanel;
+    btnSave: TSpeedButton;
+    Panel24: TPanel;
+    Panel13: TPanel;
+    Panel14: TPanel;
+    PnlFormName: TPanel;
+    Shape3: TShape;
+    Panel16: TPanel;
+    GroupBox3: TGroupBox;
+    Panel39: TPanel;
+    edtKIND_CODE: TEdit;
+    Panel40: TPanel;
+    rbCOMPANY_CODE1: TRadioButton;
+    rbCOMPANY_CODE2: TRadioButton;
+    Panel41: TPanel;
+    Panel42: TPanel;
+    PnlcodeType: TPanel;
+    Panel44: TPanel;
+    edtDAYOU_CODE: TEdit;
+    Panel50: TPanel;
+    rbFRT1: TRadioButton;
+    rbFRT3: TRadioButton;
+    Panel51: TPanel;
+    rbFRT2: TRadioButton;
+    Panel22: TPanel;
+    Panel1: TPanel;
+    gbRH: TGroupBox;
+    PnlLot_RH: TPanel;
+    PnlMaterial_RH: TPanel;
+    Panel7: TPanel;
+    Panel8: TPanel;
+    gbLH: TGroupBox;
+    PnlLot_LH: TPanel;
+    PnlMaterial_LH: TPanel;
+    Panel25: TPanel;
+    edtLot_LH: TEdit;
+    edtMaterial_LH: TEdit;
+    edtALC_LH: TEdit;
+    edtLot_RH: TEdit;
+    edtMaterial_RH: TEdit;
+    edtALC_RH: TEdit;
+    qryCommand: TADOQuery;
+    qrySearch: TADOQuery;
+    sbtCrtCode: TSpeedButton;
+    PnlDY: TPanel;
+    Panel45: TPanel;
+    Panel46: TPanel;
+    Panel47: TPanel;
+    Panel48: TPanel;
+    Panel49: TPanel;
+    Panel52: TPanel;
+    rbDRV_TYPE1: TRadioButton;
+    Panel53: TPanel;
+    rbDRV_TYPE2: TRadioButton;
+    Panel54: TPanel;
+    rbSEAT_CLASS1: TRadioButton;
+    Panel55: TPanel;
+    rbSEAT_CLASS2: TRadioButton;
+    cbREGION: TComboBox;
+    cbCOVER_COLOR: TComboBox;
+    cbCOVER_SET: TComboBox;
+    PnlDW: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    edt_Spec: TEdit;
+    edt_Model: TEdit;
+    ImgInsert: TImage;
+    ImgUpdate: TImage;
+    Panel2: TPanel;
+    cbTurn_Flag: TComboBox;
+    procedure FormActivate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnSaveClick(Sender: TObject);
+    procedure btnCloseClick(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
+    procedure rbFRTClick(Sender: TObject);
+    procedure sbtCrtCodeClick(Sender: TObject);
+    procedure edtMaterialChange(Sender: TObject);
+    procedure rbCOMPANYClick(Sender: TObject);
+    procedure edtKIND_CODEChange(Sender: TObject);
+  private
+    procedure SetItemList;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPopup_Item: TfrmPopup_Item;
+
+
+implementation
+
+uses U110;
+
+{$R *.dfm}
+
+//==============================================================================
+// btnSaveClick
+//==============================================================================
+procedure TfrmPopup_Item.btnSaveClick(Sender: TObject);
+var
+  ExecNo : integer ;
+  StrSQL, COMPANY_CODE, FRT, DRV_TYPE, SEAT_CLASS, REGION,
+  COVER_COLOR, COVER_SET, TmpNULL, TURN_FLAG : String;
+begin
+  COMPANY_CODE:= ''; FRT:= ''; DRV_TYPE:= ''; SEAT_CLASS:= ''; REGION:='';
+  COVER_COLOR:='';COVER_SET:=''; TmpNULL:= ''; TURN_FLAG :='';
+
+  //+++++++++++++++++++++++++++++++
+  // 코드데이터 체크
+  //+++++++++++++++++++++++++++++++
+  if Length(Trim(edtKIND_CODE.Text)) <> 1  then
+  begin
+    edtKIND_CODE.SetFocus;
+    MessageDlg('차종코드를 확인해주십시오', mtConfirmation, [mbYes], 0) ;
+    Exit;
+  end;
+
+  if Trim(edtDAYOU_CODE.Text)='' then
+  begin
+    edtDAYOU_CODE.SetFocus;
+    if rbCOMPANY_CODE1.Checked then
+      MessageDlg('대유코드를 확인해주십시오', mtConfirmation, [mbYes], 0)
+    else
+      MessageDlg('대원코드를 확인해주십시오', mtConfirmation, [mbYes], 0) ;
+    Exit;
+  end;
+
+  if (rbCOMPANY_CODE1.Checked) and (Length(Copy(Trim(edtMaterial_LH.Text),1,1)) <> 1)  then
+  begin
+    edtMaterial_LH.SetFocus;
+    MessageDlg('원단코드를 확인해주십시오', mtConfirmation, [mbYes], 0) ;
+    Exit;
+  end;
+
+//  if      Length(Trim(edtALC_LH.Text))=3 then edtALC_LH.Text := Trim(edtALC_LH.Text) + '*'
+//  else if Length(Trim(edtALC_LH.Text))=4 then edtALC_LH.Text := Trim(edtALC_LH.Text)
+//  else
+//  begin
+//    edtALC_LH.SetFocus;
+//    MessageDlg('LH ALC 코드를 확인해주십시오', mtConfirmation, [mbYes], 0) ;
+//    Exit;
+//  end;
+//
+//  if      Length(Trim(edtALC_RH.Text))=3 then edtALC_RH.Text := Trim(edtALC_RH.Text) + '*'
+//  else if Length(Trim(edtALC_RH.Text))=4 then edtALC_RH.Text := Trim(edtALC_RH.Text)
+//  else
+//  begin
+//    edtALC_RH.SetFocus;
+//    MessageDlg('RH ALC 코드를 확인해주십시오', mtConfirmation, [mbYes], 0) ;
+//    Exit;
+//  end;
+
+
+  //+++++++++++++++++++++++++++++++
+  // 데이터 생성
+  //+++++++++++++++++++++++++++++++
+  if      rbCOMPANY_CODE1.Checked then COMPANY_CODE := 'DY'  // 대유
+  else if rbCOMPANY_CODE2.Checked then COMPANY_CODE := 'DW'; // 대원
+
+  if      rbFRT1.Checked then FRT := 'F'  // FRT
+  else if rbFRT2.Checked then FRT := 'R'  // 2ND
+  else if rbFRT3.Checked then FRT := 'T'; // 3RD
+
+  if rbCOMPANY_CODE1.Checked then
+  begin
+    if      rbDRV_TYPE1.Checked then DRV_TYPE := 'LHD'  // LHD
+    else if rbDRV_TYPE2.Checked then DRV_TYPE := 'RHD'; // RHD
+    REGION      := Trim(cbREGION.Text);
+    COVER_COLOR := Trim(cbCOVER_COLOR.Text);
+    COVER_SET   := Trim(cbCOVER_SET.Text);
+    if      rbSEAT_CLASS1.Checked then SEAT_CLASS := '5'  // 5인승
+    else if rbSEAT_CLASS2.Checked then SEAT_CLASS := '7'; // 7인승
+  end else
+  begin
+    DRV_TYPE  := Trim(edt_Model.Text);
+    COVER_SET := Trim(edt_Spec.Text);
+  end;
+
+  if      cbTurn_Flag.ItemIndex=0 then TURN_FLAG := ''
+  else if cbTurn_Flag.ItemIndex=1 then TURN_FLAG := 'R'
+  else if cbTurn_Flag.ItemIndex=2 then TURN_FLAG := 'L'
+  else                                 TURN_FLAG := '';
+
+
+  if btnSave.Caption = '수 정' then
+  begin
+    StrSQL := ' Update TM_ALCC ' +
+              // 공통사항
+            	'    Set COMPANY_CODE  = ' + QuotedStr(UpperCase(Trim(COMPANY_CODE       ))) +
+              '      , KIND_CODE     = ' + QuotedStr(UpperCase(Trim(edtKIND_CODE.Text  ))) +
+              '      , FRT           = ' + QuotedStr(UpperCase(Trim(FRT                ))) +
+              '      , DRV_TYPE      = ' + QuotedStr(UpperCase(Trim(DRV_TYPE           ))) +
+              '      , SEAT_CLASS    = ' + QuotedStr(UpperCase(Trim(SEAT_CLASS         ))) +
+              '      , REGION        = ' + QuotedStr(UpperCase(Trim(REGION             ))) +
+              '      , COVER_COLOR   = ' + QuotedStr(UpperCase(Trim(COVER_COLOR        ))) +
+              '      , COVER_SET     = ' + QuotedStr(UpperCase(Trim(COVER_SET          ))) +
+              '      , TURN_FLAG     = ' + QuotedStr(UpperCase(Trim(TURN_FLAG          ))) ;
+
+              // FRT
+              if      rbFRT1.Checked then
+                StrSQL := StrSQL +
+                '      , F_LH_CODE     = ' + QuotedStr(UpperCase(Trim(edtLot_LH.Text     ))) +
+                '      , F_LH_M_CODE   = ' + QuotedStr(UpperCase(Trim(edtMaterial_LH.Text))) +
+                '      , F_LH_A_CODE   = ' + QuotedStr(UpperCase(Trim(edtALC_LH.Text     ))) +
+                '      , F_RH_CODE     = ' + QuotedStr(UpperCase(Trim(edtLot_RH.Text     ))) +
+                '      , F_RH_M_CODE   = ' + QuotedStr(UpperCase(Trim(edtMaterial_RH.Text))) +
+                '      , F_RH_A_CODE   = ' + QuotedStr(UpperCase(Trim(edtALC_RH.Text     ))) +
+                '      , R1_LH_CODE    = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R1_LH_M_CODE  = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R1_LH_A_CODE  = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R1_RH_CODE    = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R1_RH_M_CODE  = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R1_RH_A_CODE  = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R2_LH_CODE    = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R2_LH_M_CODE  = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R2_LH_A_CODE  = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R2_RH_CODE    = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R2_RH_M_CODE  = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R2_RH_A_CODE  = ' + QuotedStr(Trim(TmpNULL            ))
+
+              // 2ND
+              else if rbFRT2.Checked then
+                StrSQL := StrSQL +
+                '      , F_LH_CODE     = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , F_LH_M_CODE   = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , F_LH_A_CODE   = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , F_RH_CODE     = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , F_RH_M_CODE   = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , F_RH_A_CODE   = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R1_LH_CODE    = ' + QuotedStr(UpperCase(Trim(edtLot_LH.Text     ))) +
+                '      , R1_LH_M_CODE  = ' + QuotedStr(UpperCase(Trim(edtMaterial_LH.Text))) +
+                '      , R1_LH_A_CODE  = ' + QuotedStr(UpperCase(Trim(edtALC_LH.Text     ))) +
+                '      , R1_RH_CODE    = ' + QuotedStr(UpperCase(Trim(edtLot_RH.Text     ))) +
+                '      , R1_RH_M_CODE  = ' + QuotedStr(UpperCase(Trim(edtMaterial_RH.Text))) +
+                '      , R1_RH_A_CODE  = ' + QuotedStr(UpperCase(Trim(edtALC_RH.Text     ))) +
+                '      , R2_LH_CODE    = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R2_LH_M_CODE  = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R2_LH_A_CODE  = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R2_RH_CODE    = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R2_RH_M_CODE  = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R2_RH_A_CODE  = ' + QuotedStr(Trim(TmpNULL            ))
+              // 3RD
+              else if rbFRT3.Checked then
+                StrSQL := StrSQL +
+                '      , F_LH_CODE     = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , F_LH_M_CODE   = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , F_LH_A_CODE   = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , F_RH_CODE     = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , F_RH_M_CODE   = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , F_RH_A_CODE   = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R1_LH_CODE    = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R1_LH_M_CODE  = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R1_LH_A_CODE  = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R1_RH_CODE    = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R1_RH_M_CODE  = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R1_RH_A_CODE  = ' + QuotedStr(Trim(TmpNULL            )) +
+                '      , R2_LH_CODE    = ' + QuotedStr(UpperCase(Trim(edtLot_LH.Text     ))) +
+                '      , R2_LH_M_CODE  = ' + QuotedStr(UpperCase(Trim(edtMaterial_LH.Text))) +
+                '      , R2_LH_A_CODE  = ' + QuotedStr(UpperCase(Trim(edtALC_LH.Text     ))) +
+                '      , R2_RH_CODE    = ' + QuotedStr(UpperCase(Trim(edtLot_RH.Text     ))) +
+                '      , R2_RH_M_CODE  = ' + QuotedStr(UpperCase(Trim(edtMaterial_RH.Text))) +
+                '      , R2_RH_A_CODE  = ' + QuotedStr(UpperCase(Trim(edtALC_RH.Text     ))) ;
+              // 변경시간
+              StrSQL := StrSQL +
+            	'      , UP_DATE   = GETDATE() ' +
+              ' Where DAYOU_CODE = ' + QuotedStr(UpperCase(Trim(edtDAYOU_CODE.Text))) ;
+  end else
+  if btnSave.Caption = '등 록' then
+  begin
+    StrSQL := ' Insert Into TM_ALCC ( ' +
+              // 공통사항
+              '     COMPANY_CODE, KIND_CODE, DAYOU_CODE,       ' +
+              '     FRT, DRV_TYPE, SEAT_CLASS,                 ' +
+              '     REGION, COVER_COLOR, COVER_SET, TURN_FLAG, ' +
+              // FRT
+              '     F_LH_CODE, F_LH_M_CODE, F_LH_A_CODE,       ' +
+              '     F_RH_CODE, F_RH_M_CODE, F_RH_A_CODE,       ' +
+              // 2ND
+              '     R1_LH_CODE, R1_LH_M_CODE, R1_LH_A_CODE,    ' +
+              '     R1_RH_CODE, R1_RH_M_CODE, R1_RH_A_CODE,    ' +
+              // 3RD
+              '     R2_LH_CODE, R2_LH_M_CODE, R2_LH_A_CODE,    ' +
+              '     R2_RH_CODE, R2_RH_M_CODE, R2_RH_A_CODE,    ' +
+              // 등록시간
+              '     CR_DATE ) ' +
+              '   Values( ' +
+              // 공통사항
+              QuotedStr(UpperCase(Trim(COMPANY_CODE       ))) + ',' + QuotedStr(UpperCase(Trim(edtKIND_CODE.Text  ))) + ',' + QuotedStr(UpperCase(Trim(edtDAYOU_CODE.Text ))) + ',' +
+              QuotedStr(UpperCase(Trim(FRT                ))) + ',' + QuotedStr(UpperCase(Trim(DRV_TYPE           ))) + ',' + QuotedStr(UpperCase(Trim(SEAT_CLASS         ))) + ',' +
+              QuotedStr(UpperCase(Trim(REGION             ))) + ',' + QuotedStr(UpperCase(Trim(COVER_COLOR        ))) + ',' + QuotedStr(UpperCase(Trim(COVER_SET          ))) + ',' +
+              QuotedStr(UpperCase(Trim(TURN_FLAG          ))) + ',' ;
+
+              // FRT
+              if      rbFRT1.Checked then
+                StrSQL := StrSQL +
+                QuotedStr(UpperCase(Trim(edtLot_LH.Text ))) + ',' + QuotedStr(UpperCase(Trim(edtMaterial_LH.Text ))) + ',' + QuotedStr(UpperCase(Trim(edtALC_LH.Text ))) + ',' +
+                QuotedStr(UpperCase(Trim(edtLot_RH.Text ))) + ',' + QuotedStr(UpperCase(Trim(edtMaterial_RH.Text ))) + ',' + QuotedStr(UpperCase(Trim(edtALC_RH.Text ))) + ',' +
+                QuotedStr(Trim(TmpNULL        )) + ',' + QuotedStr(Trim(TmpNULL             )) + ',' + QuotedStr(Trim(TmpNULL        )) + ',' +
+                QuotedStr(Trim(TmpNULL        )) + ',' + QuotedStr(Trim(TmpNULL             )) + ',' + QuotedStr(Trim(TmpNULL        )) + ',' +
+                QuotedStr(Trim(TmpNULL        )) + ',' + QuotedStr(Trim(TmpNULL             )) + ',' + QuotedStr(Trim(TmpNULL        )) + ',' +
+                QuotedStr(Trim(TmpNULL        )) + ',' + QuotedStr(Trim(TmpNULL             )) + ',' + QuotedStr(Trim(TmpNULL        )) + ','
+              // 2ND
+              else if rbFRT2.Checked then
+                StrSQL := StrSQL +
+                QuotedStr(Trim(TmpNULL        )) + ',' + QuotedStr(Trim(TmpNULL             )) + ',' + QuotedStr(Trim(TmpNULL        )) + ',' +
+                QuotedStr(Trim(TmpNULL        )) + ',' + QuotedStr(Trim(TmpNULL             )) + ',' + QuotedStr(Trim(TmpNULL        )) + ',' +
+                QuotedStr(UpperCase(Trim(edtLot_LH.Text ))) + ',' + QuotedStr(UpperCase(Trim(edtMaterial_LH.Text ))) + ',' + QuotedStr(UpperCase(Trim(edtALC_LH.Text ))) + ',' +
+                QuotedStr(UpperCase(Trim(edtLot_RH.Text ))) + ',' + QuotedStr(UpperCase(Trim(edtMaterial_RH.Text ))) + ',' + QuotedStr(UpperCase(Trim(edtALC_RH.Text ))) + ',' +
+                QuotedStr(Trim(TmpNULL        )) + ',' + QuotedStr(Trim(TmpNULL             )) + ',' + QuotedStr(Trim(TmpNULL        )) + ',' +
+                QuotedStr(Trim(TmpNULL        )) + ',' + QuotedStr(Trim(TmpNULL             )) + ',' + QuotedStr(Trim(TmpNULL        )) + ','
+              // 3RD
+              else if rbFRT3.Checked then
+                StrSQL := StrSQL +
+                QuotedStr(Trim(TmpNULL        )) + ',' + QuotedStr(Trim(TmpNULL             )) + ',' + QuotedStr(Trim(TmpNULL        )) + ',' +
+                QuotedStr(Trim(TmpNULL        )) + ',' + QuotedStr(Trim(TmpNULL             )) + ',' + QuotedStr(Trim(TmpNULL        )) + ',' +
+                QuotedStr(Trim(TmpNULL        )) + ',' + QuotedStr(Trim(TmpNULL             )) + ',' + QuotedStr(Trim(TmpNULL        )) + ',' +
+                QuotedStr(Trim(TmpNULL        )) + ',' + QuotedStr(Trim(TmpNULL             )) + ',' + QuotedStr(Trim(TmpNULL        )) + ',' +
+                QuotedStr(UpperCase(Trim(edtLot_LH.Text ))) + ',' + QuotedStr(UpperCase(Trim(edtMaterial_LH.Text ))) + ',' + QuotedStr(UpperCase(Trim(edtALC_LH.Text ))) + ',' +
+                QuotedStr(UpperCase(Trim(edtLot_RH.Text ))) + ',' + QuotedStr(UpperCase(Trim(edtMaterial_RH.Text ))) + ',' + QuotedStr(UpperCase(Trim(edtALC_RH.Text ))) + ',' ;
+              // 등록시간
+              StrSQL := StrSQL + ' GETDATE() ) ' ;
+  end;
+
+  try
+    with qryCommand do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := strSQL ;
+      ExecNo := ExecSQL;
+    end;
+    frmU110.SetComboBox ;
+    frmU110.fnCommandQuery;
+    Close;
+  except
+    if qryCommand.Active then qryCommand.Close;
+  end;
+end;
+
+//==============================================================================
+// FormActivate
+//==============================================================================
+procedure TfrmPopup_Item.FormActivate(Sender: TObject);
+begin
+  SetItemList;
+end;
+
+//==============================================================================
+// FormDeactivate
+//==============================================================================
+procedure TfrmPopup_Item.FormDeactivate(Sender: TObject);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+end;
+
+//==============================================================================
+// FormClose
+//==============================================================================
+procedure TfrmPopup_Item.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 do
+  begin
+    if (Self.Components[i] is TTimer) then
+       (Self.Components[i] as TTimer).Enabled := False ;
+  end;
+
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+
+  Action := Cafree;
+  try frmPopup_Item := Nil ;
+  except end;
+end;
+
+//==============================================================================
+// SetItemList
+//==============================================================================
+procedure TfrmPopup_Item.SetItemList;
+var
+  StrSQL : String;
+begin
+  try
+    if btnSave.Caption = '수 정' then
+    begin
+      sbtCrtCode.Enabled := False;
+
+      MainDm.SearchCodeList2(cbREGION     , 'TM_ALCC', 'REGION'     ); // 지역
+      MainDm.SearchCodeList2(cbCOVER_COLOR, 'TM_ALCC', 'COVER_COLOR'); // COLOR CODE
+      MainDm.SearchCodeList2(cbCOVER_SET  , 'TM_ALCC', 'COVER_SET'  ); // COVER'G 사양
+
+      with qrySearch do
+      begin
+        Close;
+        SQL.Clear;
+        StrSQL := ' Select COMPANY_CODE, KIND_CODE, DAYOU_CODE,       ' +
+                  '        FRT, DRV_TYPE, SEAT_CLASS,                 ' +
+                  '        REGION, COVER_COLOR, COVER_SET, TURN_FLAG, ' +
+                  '        F_LH_CODE,  F_LH_M_CODE, F_LH_A_CODE,      ' + // FRT LH
+                  '        F_RH_CODE,  F_RH_M_CODE, F_RH_A_CODE,      ' + // FRT RH
+                  '        R1_LH_CODE, R1_LH_M_CODE, R1_LH_A_CODE,    ' + // 2ND LH
+                  '        R1_RH_CODE, R1_RH_M_CODE, R1_RH_A_CODE,    ' + // 2ND RH
+                  '        R2_LH_CODE, R2_LH_M_CODE, R2_LH_A_CODE,    ' + // 3RD LH
+                  '        R2_RH_CODE, R2_RH_M_CODE, R2_RH_A_CODE,    ' + // 3RD RH
+                  '        CR_DATE, UP_DATE                           ' + // 등록시간, 변경시간
+                  '   From TM_ALCC ' +
+                  '  Where Upper(DAYOU_CODE) = ' + QuotedStr(UpperCase(Trim(edtDAYOU_CODE.Text))) ;
+        SQL.Text := StrSQL;
+        Open;
+
+        if Not (Eof and Bof) then
+        begin
+          edtKIND_CODE.Text  := Trim(FieldByName('KIND_CODE').AsString);  // 차종코드
+          edtDAYOU_CODE.Text := Trim(FieldByName('DAYOU_CODE').AsString); // 대유코드
+
+          if      Trim(FieldByName('FRT').AsString)='F' then rbFRT1.Checked := True  // FRT
+          else if Trim(FieldByName('FRT').AsString)='R' then rbFRT2.Checked := True  // 2ND
+          else if Trim(FieldByName('FRT').AsString)='T' then rbFRT3.Checked := True; // 3RD
+
+          if      Trim(FieldByName('TURN_FLAG').AsString)='R' then cbTurn_Flag.ItemIndex := 1
+          else if Trim(FieldByName('TURN_FLAG').AsString)='L' then cbTurn_Flag.ItemIndex := 2
+          else                                                     cbTurn_Flag.ItemIndex := 0;
+
+          if rbCOMPANY_CODE1.Checked then // 대유
+          begin
+            if      Trim(FieldByName('DRV_TYPE').AsString)='LHD' then rbDRV_TYPE1.Checked := True  // LHD
+            else if Trim(FieldByName('DRV_TYPE').AsString)='RHD' then rbDRV_TYPE2.Checked := True; // RHD
+
+            if      Trim(FieldByName('SEAT_CLASS').AsString)='5' then rbSEAT_CLASS1.Checked := True  // 5인승
+            else if Trim(FieldByName('SEAT_CLASS').AsString)='7' then rbSEAT_CLASS2.Checked := True; // 7인승
+
+            cbREGION.Text      := Trim(FieldByName('REGION').AsString);       // 지역
+            cbCOVER_COLOR.Text := Trim(FieldByName('COVER_COLOR').AsString);  // COLOR CODE
+            cbCOVER_SET.Text   := Trim(FieldByName('COVER_SET').AsString);    // COVER'G 사양
+          end else
+          if rbCOMPANY_CODE2.Checked then // 대원
+          begin
+            edt_Model.Text := Trim(FieldByName('DRV_TYPE').AsString);     // DRV Type을 모델명으로 사용
+            edt_Spec.Text  := Trim(FieldByName('COVER_SET').AsString);    // COVER'G 사양을 대원코드 사양으로 사용
+          end;
+
+          if Trim(FieldByName('FRT').AsString)='F' then
+          begin
+            gbLH.Caption        := '[ FRT LH ]';
+            gbRH.Caption        := '[ FRT RH ]';
+            edtLot_LH.Text      := Trim(FieldByName('F_LH_CODE').AsString);
+            edtMaterial_LH.Text := Trim(FieldByName('F_LH_M_CODE').AsString);
+            edtALC_LH.Text      := Trim(FieldByName('F_LH_A_CODE').AsString);
+            edtLot_RH.Text      := Trim(FieldByName('F_RH_CODE').AsString);
+            edtMaterial_RH.Text := Trim(FieldByName('F_RH_M_CODE').AsString);
+            edtALC_RH.Text      := Trim(FieldByName('F_RH_A_CODE').AsString);
+          end else
+          if Trim(FieldByName('FRT').AsString)='R' then
+          begin
+            gbLH.Caption        := '[ 2ND LH ]';
+            gbRH.Caption        := '[ 2ND RH ]';
+            edtLot_LH.Text      := Trim(FieldByName('R1_LH_CODE').AsString);
+            edtMaterial_LH.Text := Trim(FieldByName('R1_LH_M_CODE').AsString);
+            edtALC_LH.Text      := Trim(FieldByName('R1_LH_A_CODE').AsString);
+            edtLot_RH.Text      := Trim(FieldByName('R1_RH_CODE').AsString);
+            edtMaterial_RH.Text := Trim(FieldByName('R1_RH_M_CODE').AsString);
+            edtALC_RH.Text      := Trim(FieldByName('R1_RH_A_CODE').AsString);
+          end else
+          if Trim(FieldByName('FRT').AsString)='T' then
+          begin
+            gbLH.Caption        := '[ 3RD LH ]';
+            gbRH.Caption        := '[ 3RD RH ]';
+            edtLot_LH.Text      := Trim(FieldByName('R2_LH_CODE').AsString);
+            edtMaterial_LH.Text := Trim(FieldByName('R2_LH_M_CODE').AsString);
+            edtALC_LH.Text      := Trim(FieldByName('R2_LH_A_CODE').AsString);
+            edtLot_RH.Text      := Trim(FieldByName('R2_RH_CODE').AsString);
+            edtMaterial_RH.Text := Trim(FieldByName('R2_RH_M_CODE').AsString);
+            edtALC_RH.Text      := Trim(FieldByName('R2_RH_A_CODE').AsString);
+          end;
+        end;
+      end;
+    end else
+    if btnSave.Caption = '등 록' then
+    begin
+      sbtCrtCode.Enabled := True;
+      rbCOMPANY_CODE1.Checked := True; // 대유
+      edtKIND_CODE.Text  := '';        // 차종코드
+      edtDAYOU_CODE.Text := '';        // 대유코드
+      rbFRT1.Checked := True;          // FRT
+      cbTurn_Flag.ItemIndex := 1;      // Turn_Flag
+
+      // 대유 사용
+      rbDRV_TYPE1.Checked := True;     // DRV TYPE
+      rbSEAT_CLASS1.Checked := True;   // 인승구분
+      MainDm.SearchCodeList2(cbREGION     , 'TM_ALCC', 'REGION'     ); // 지역
+      MainDm.SearchCodeList2(cbCOVER_COLOR, 'TM_ALCC', 'COVER_COLOR'); // COLOR CODE
+      MainDm.SearchCodeList2(cbCOVER_SET  , 'TM_ALCC', 'COVER_SET'  ); // COVER'G 사양
+
+      // 대원 사용
+      edt_Model.Text := ''; // 모델명
+      edt_Spec.Text  := ''; // 사양
+
+      edtLot_LH.Text      := '';       // LH 품번
+      edtMaterial_LH.Text := '';       // LH 원단코드
+      edtALC_LH.Text      := '';       // LH ALC CODE
+      edtLot_RH.Text      := '';       // RH 품번
+      edtMaterial_RH.Text := '';       // RH 원단코드
+      edtALC_RH.Text      := '';       // RH ALC CODE
+
+      gbLH.Caption        := '[ FRT LH ]';
+      gbRH.Caption        := '[ FRT RH ]';
+    end;
+  except
+    if qrySearch.Active then qrySearch.Close;
+  end;
+end;
+
+//==============================================================================
+// btnCloseClick
+//==============================================================================
+procedure TfrmPopup_Item.btnCloseClick(Sender: TObject);
+begin
+  Close;
+end;
+
+//==============================================================================
+// btnCloseClick
+//==============================================================================
+procedure TfrmPopup_Item.rbFRTClick(Sender: TObject);
+begin
+  if (Sender as TRadioButton).Tag = 1 then
+  begin
+    gbLH.Caption := '[ FRT LH ]';
+    gbRH.Caption := '[ FRT RH ]';
+  end else
+  if (Sender as TRadioButton).Tag = 2 then
+  begin
+    gbLH.Caption := '[ 2ND LH ]';
+    gbRH.Caption := '[ 2ND RH ]';
+  end else
+  if (Sender as TRadioButton).Tag = 3 then
+  begin
+    gbLH.Caption := '[ 3RD LH ]';
+    gbRH.Caption := '[ 3RD RH ]';
+  end;
+
+  if UpperCase(edtKIND_CODE.Text)='Y' then
+  begin
+    if      rbFRT1.Checked then cbTurn_Flag.ItemIndex := 1   // R - 정방향
+    else if rbFRT2.Checked then cbTurn_Flag.ItemIndex := 1   // R - 정방향
+    else if rbFRT3.Checked then cbTurn_Flag.ItemIndex := 1 ; // R - 정방향
+  end else
+  if UpperCase(edtKIND_CODE.Text)='G' then
+  begin
+    if      rbFRT1.Checked then cbTurn_Flag.ItemIndex := 1   // R - 정방향
+    else if rbFRT2.Checked then cbTurn_Flag.ItemIndex := 1   // R - 정방향
+    else if rbFRT3.Checked then cbTurn_Flag.ItemIndex := 2 ; // L - 역방향
+  end else
+  if UpperCase(edtKIND_CODE.Text)='A' then
+  begin
+    if      rbFRT1.Checked then cbTurn_Flag.ItemIndex := 1   // R - 정방향
+    else if rbFRT2.Checked then cbTurn_Flag.ItemIndex := 2   // L - 역방향
+    else if rbFRT3.Checked then cbTurn_Flag.ItemIndex := 2 ; // L - 역방향
+  end else
+  begin
+    if      rbFRT1.Checked then cbTurn_Flag.ItemIndex := 1   // R - 정방향
+    else if rbFRT2.Checked then cbTurn_Flag.ItemIndex := 2   // L - 역방향
+    else if rbFRT3.Checked then cbTurn_Flag.ItemIndex := 2 ; // L - 역방향
+  end;
+end;
+
+//==============================================================================
+// sbtCrtCodeClick
+//==============================================================================
+procedure TfrmPopup_Item.sbtCrtCodeClick(Sender: TObject);
+var
+  LH_CODE, RH_CODE, M_CODE, K_CODE : String;
+begin
+  LH_CODE:=''; RH_CODE:=''; M_CODE:=''; K_CODE:='';
+
+  if rbCOMPANY_CODE1.Checked then // 대유코드
+  begin
+    if      Length(Trim(edtALC_LH.Text)) = 3 then LH_CODE := Trim(edtALC_LH.Text) + '*'
+    else if Length(Trim(edtALC_LH.Text)) = 4 then LH_CODE := Trim(edtALC_LH.Text) ;
+
+    if      Length(Trim(edtALC_RH.Text)) = 3 then RH_CODE := Trim(edtALC_RH.Text) + '*'
+    else if Length(Trim(edtALC_RH.Text)) = 4 then RH_CODE := Trim(edtALC_RH.Text)
+    else if Length(Trim(edtALC_RH.Text)) = 0 then RH_CODE := '****' ;
+
+    M_CODE := Copy(Trim(edtMaterial_LH.Text),1,1) ;
+    K_CODE := Copy(Trim(edtKIND_CODE.Text),1,1) ;
+
+    if Length(K_CODE) <> 1 then
+    begin
+      edtKIND_CODE.SetFocus;
+      MessageDlg('차종코드를 확인해주십시오', mtConfirmation, [mbYes], 0) ;
+      Exit;
+    end;
+
+    if Length(M_CODE) <> 1 then
+    begin
+      edtMaterial_LH.SetFocus;
+      MessageDlg('원단코드를 확인해주십시오', mtConfirmation, [mbYes], 0) ;
+      Exit;
+    end;
+
+    if Length(LH_CODE) < 3 then
+    begin
+      edtALC_LH.SetFocus;
+      MessageDlg('LH ALC 코드를 확인해주십시오', mtConfirmation, [mbYes], 0) ;
+      Exit;
+    end;
+
+    if Length(RH_CODE) < 3 then
+    begin
+      edtALC_RH.SetFocus;
+      MessageDlg('RH ALC 코드를 확인해주십시오', mtConfirmation, [mbYes], 0) ;
+      Exit;
+    end;
+
+//    edtALC_LH.Text := UpperCase(LH_CODE) ;
+//    edtALC_RH.Text := UpperCase(RH_CODE) ;
+    edtDAYOU_CODE.Text := UpperCase(LH_CODE + RH_CODE + M_CODE + K_CODE);
+  end;
+end;
+
+//==============================================================================
+// edtMaterialChange
+//==============================================================================
+procedure TfrmPopup_Item.edtMaterialChange(Sender: TObject);
+begin
+  if (Sender as TEdit).Tag = 1 then
+  begin
+    edtMaterial_RH.Text := (Sender as TEdit).Text;
+  end else
+  if (Sender as TEdit).Tag = 2 then
+  begin
+    edtMaterial_LH.Text := (Sender as TEdit).Text;
+  end;
+end;
+
+//==============================================================================
+// rbCOMPANYClick
+//==============================================================================
+procedure TfrmPopup_Item.rbCOMPANYClick(Sender: TObject);
+begin
+  if (Sender as TRadioButton).Tag = 1 then
+  begin
+    PnlCodeType.Caption := '대유코드';
+    edtDAYOU_CODE.Width := 210 ;
+    sbtCrtCode.Visible := True ;
+    PnlDY.Visible := True ;
+    PnlDW.Visible := False ;
+
+    frmPopup_Item.edtMaterial_LH.Color := $00D6E9D6;
+    frmPopup_Item.edtMaterial_RH.Color := $00D6E9D6;
+  end else
+  begin
+    PnlCodeType.Caption := '대원코드';
+    edtDAYOU_CODE.Width := 250 ;
+    sbtCrtCode.Visible := False ;
+    PnlDY.Visible := False ;
+    PnlDW.Visible := True ;
+
+    frmPopup_Item.edtMaterial_LH.Color := clWhite;
+    frmPopup_Item.edtMaterial_RH.Color := clWhite;
+  end;
+end;
+
+//==============================================================================
+// edtKIND_CODEChange
+//==============================================================================
+procedure TfrmPopup_Item.edtKIND_CODEChange(Sender: TObject);
+begin
+  if UpperCase((Sender as TEdit).Text)='Y' then
+  begin
+    if      rbFRT1.Checked then cbTurn_Flag.ItemIndex := 1   // R - 정방향
+    else if rbFRT2.Checked then cbTurn_Flag.ItemIndex := 1   // R - 정방향
+    else if rbFRT3.Checked then cbTurn_Flag.ItemIndex := 1 ; // R - 정방향
+  end else
+  if UpperCase((Sender as TEdit).Text)='G' then
+  begin
+    if      rbFRT1.Checked then cbTurn_Flag.ItemIndex := 1   // R - 정방향
+    else if rbFRT2.Checked then cbTurn_Flag.ItemIndex := 1   // R - 정방향
+    else if rbFRT3.Checked then cbTurn_Flag.ItemIndex := 2 ; // L - 역방향
+  end else
+  if UpperCase((Sender as TEdit).Text)='A' then
+  begin
+    if      rbFRT1.Checked then cbTurn_Flag.ItemIndex := 1   // R - 정방향
+    else if rbFRT2.Checked then cbTurn_Flag.ItemIndex := 2   // L - 역방향
+    else if rbFRT3.Checked then cbTurn_Flag.ItemIndex := 2 ; // L - 역방향
+  end else
+  begin
+    if      rbFRT1.Checked then cbTurn_Flag.ItemIndex := 1   // R - 정방향
+    else if rbFRT2.Checked then cbTurn_Flag.ItemIndex := 2   // L - 역방향
+    else if rbFRT3.Checked then cbTurn_Flag.ItemIndex := 2 ; // L - 역방향
+  end;
+end;
+
+
+end.

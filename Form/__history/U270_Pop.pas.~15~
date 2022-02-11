@@ -1,0 +1,99 @@
+unit U270_Pop;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmU270_Pop = class(TForm)
+    Panel1: TPanel;
+    btn1F: TButton;
+    btn2F: TButton;
+    pnlInfo: TPanel;
+    lblMessage: TLabel;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure btnClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+  procedure U270_Pop_Create(caption : String);
+
+var
+  frmU270_Pop: TfrmU270_Pop;
+
+implementation
+
+uses U270;
+
+{$R *.dfm}
+
+
+procedure U270_Pop_Create(caption : String);
+var
+  msg : String;
+begin
+  msg := caption + #13#10 + '어디로 출고하시겠습니까? (ESC:취소)';
+  if not Assigned( frmU270_Pop ) then
+  begin
+    frmU270_Pop := TfrmU270_Pop.Create(Application);
+    frmU270_Pop.lblMessage.Caption := msg;
+  end;
+  frmU270_Pop.ShowModal;
+end;
+
+
+
+//==============================================================================
+// FormClose
+//==============================================================================
+procedure TfrmU270_Pop.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := Cafree;
+  try frmU270_Pop := Nil ;
+  except end;
+end;
+
+
+
+//==============================================================================
+// FormKeyPress
+//==============================================================================
+procedure TfrmU270_Pop.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if ( Key = #27 ) then
+  begin
+    isSelectedFloor := False;
+    Close;
+  end;
+end;
+
+//==============================================================================
+// btnClick
+//==============================================================================
+procedure TfrmU270_Pop.btnClick(Sender: TObject);
+begin
+
+  case (Sender as TButton).Tag of
+    1 :
+    begin
+      byPopUnloadLevel := '01';
+      isSelectedFloor := True;
+      Close;
+    end;
+    2 :
+    begin
+      byPopUnloadLevel := '02';
+      isSelectedFloor := True;
+      Close;
+    end;
+  end;
+end;
+
+
+
+end.

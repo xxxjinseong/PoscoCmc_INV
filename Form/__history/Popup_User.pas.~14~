@@ -1,0 +1,146 @@
+unit Popup_User;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Buttons, StdCtrls, ExtCtrls, DB, ADODB, jpeg;
+
+type
+  TfrmPopupUser = class(TForm)
+    Panel2: TPanel;
+    UserSubQuery: TADOQuery;
+    Panel15: TPanel;
+    Panel22: TPanel;
+    Pnl_Top: TPanel;
+    Pnl_BTN: TPanel;
+    Pnl_Btn5: TPanel;
+    btnClose: TSpeedButton;
+    Pnl_Btn0: TPanel;
+    btnSave: TSpeedButton;
+    PnlFormName: TPanel;
+    Shape3: TShape;
+    ImgUpdate: TImage;
+    ImgInsert: TImage;
+    Edt_Code: TEdit;
+    cbo_Used: TComboBox;
+    Panel1: TPanel;
+    Edt_Name: TEdit;
+    Panel3: TPanel;
+    Edt_Password: TEdit;
+    Panel4: TPanel;
+    Edt_Memo: TEdit;
+    procedure FormActivate(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnSaveClick(Sender: TObject);
+    procedure btnCloseClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPopupUser: TfrmPopupUser;
+
+implementation
+
+uses U130;
+
+{$R *.dfm}
+
+//==============================================================================
+// btnCloseClick
+//==============================================================================
+procedure TfrmPopupUser.btnCloseClick(Sender: TObject);
+begin
+  Close;
+end;
+
+//==============================================================================
+// btnSaveClick
+//==============================================================================
+procedure TfrmPopupUser.btnSaveClick(Sender: TObject);
+var
+  StrSQL, Id_Code, Id_Name, Id_Pwd, Id_Used, Id_Memo : String;
+begin
+  Id_Code := Edt_Code.Text;
+  Id_Name := Edt_Name.Text;
+  Id_Pwd  := Edt_Password.Text;
+  Id_Memo := Edt_Memo.Text;
+
+  if cbo_Used.ItemIndex = 0 then Id_Used := '사용'
+  else                           Id_Used := '금지';
+
+  if btnSave.Caption = '등 록' then
+  begin
+    StrSQL := ' INSERT INTO TM_USER (ID_CODE, ID_PASSWD, ID_NAME, ID_LEVEL, ID_USE, ID_MEMO, CR_DATE) VALUES   ' +
+              ' ('''+Id_Code+''', '''+Id_Pwd+''', '''+Id_Name+''', ''0'', '''+Id_Used+''', '''+Id_Memo+''', Getdate() ) ' ;
+  end else
+  begin
+    StrSQL := ' UPDATE TM_USER   ' +
+              '    SET ID_PASSWD = ''' + Id_Pwd     + ''' ' +
+              '      , ID_NAME   = ''' + Id_Name    + ''' ' +
+              '      , ID_USE    = ''' + Id_Used    + ''' ' +
+              '      , ID_MEMO   = ''' + Id_Memo    + ''' ' +
+              '      , CR_DATE   = Getdate()              ' +
+              '  WHERE Upper(ID_CODE) = ''' + UpperCase(Id_Code) + ''' ' ;
+  end;
+
+  try
+    with UserSubQuery do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSQL;
+      ExecSQL ;
+    end;
+    frmU130.fnCommandQuery;
+    Close;
+  except
+    if UserSubQuery.Active then UserSubQuery.Close;
+  end;
+end;
+
+//==============================================================================
+// FormActivate
+//==============================================================================
+procedure TfrmPopupUser.FormActivate(Sender: TObject);
+begin
+//
+end;
+
+//==============================================================================
+// FormDeactivate
+//==============================================================================
+procedure TfrmPopupUser.FormDeactivate(Sender: TObject);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+end;
+
+//==============================================================================
+// FormClose
+//==============================================================================
+procedure TfrmPopupUser.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+
+  Action := Cafree;
+  try frmPopupUser := Nil ;
+  except end;
+end;
+
+end.

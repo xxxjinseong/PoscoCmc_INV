@@ -1,0 +1,766 @@
+object frmU140: TfrmU140
+  Left = 2026
+  Top = 265
+  Caption = '140. '#49324#50857#51088' '#53076#46300' '#44288#47532
+  ClientHeight = 592
+  ClientWidth = 1184
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poDefault
+  Visible = True
+  WindowState = wsMaximized
+  OnActivate = FormActivate
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDeactivate = FormDeactivate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object shpB: TShape
+    Left = 0
+    Top = 591
+    Width = 1184
+    Height = 1
+    Align = alBottom
+    Brush.Color = clNavy
+    Pen.Color = 9408913
+    ExplicitTop = 12
+  end
+  object shpL: TShape
+    Left = 0
+    Top = 5
+    Width = 1
+    Height = 586
+    Align = alLeft
+    Brush.Color = clNavy
+    Pen.Color = 9408913
+    ExplicitLeft = 213
+    ExplicitTop = 20
+    ExplicitHeight = 22
+  end
+  object shpR: TShape
+    Left = 1183
+    Top = 5
+    Width = 1
+    Height = 586
+    Align = alRight
+    Brush.Color = clNavy
+    Pen.Color = 9408913
+    ExplicitLeft = 615
+    ExplicitTop = 29
+  end
+  object shpT: TShape
+    Left = 0
+    Top = 4
+    Width = 1184
+    Height = 1
+    Align = alTop
+    Brush.Color = clNavy
+    Pen.Color = 9408913
+  end
+  object Pnl_Main: TPanel
+    Left = 1
+    Top = 5
+    Width = 1182
+    Height = 586
+    Align = alClient
+    BevelInner = bvRaised
+    BevelOuter = bvNone
+    TabOrder = 0
+    object Pnl_Top: TPanel
+      Left = 1
+      Top = 1
+      Width = 1180
+      Height = 50
+      Align = alTop
+      BevelInner = bvRaised
+      BevelOuter = bvNone
+      ParentBackground = False
+      TabOrder = 0
+      object cbUSERID: TComboBox
+        Left = 85
+        Top = 14
+        Width = 120
+        Height = 23
+        Cursor = crHandPoint
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = #54620#44397#50612' '#51077#47141' '#49884#49828#53596' (IME 2000)'
+        ItemIndex = 0
+        ParentFont = False
+        TabOrder = 0
+        Text = #51204#52404
+        OnChange = ComboChange
+        OnKeyPress = KeyPress
+        Items.Strings = (
+          #51204#52404
+          #45824#50976
+          #45824#50896)
+      end
+      object cbAUTHORITY: TComboBox
+        Left = 287
+        Top = 14
+        Width = 120
+        Height = 23
+        Cursor = crHandPoint
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = #54620#44397#50612' '#51077#47141' '#49884#49828#53596' (IME 2000)'
+        ParentFont = False
+        TabOrder = 1
+        Text = #51204#52404
+        OnChange = ComboChange
+        OnKeyPress = KeyPress
+        Items.Strings = (
+          #51204#52404
+          #51312#54924
+          #51312#54924'/'#51648#49884)
+      end
+      object Panel1: TPanel
+        Left = 12
+        Top = 14
+        Width = 70
+        Height = 23
+        BevelOuter = bvNone
+        Caption = #44228#51221#53076#46300
+        Color = 14935011
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 2
+      end
+      object Panel4: TPanel
+        Left = 214
+        Top = 14
+        Width = 70
+        Height = 23
+        BevelOuter = bvNone
+        Caption = #44228#51221#44428#54620
+        Color = 14935011
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = #46027#50880
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 3
+      end
+    end
+    object dgInfo: TDBGridEh
+      Left = 1
+      Top = 54
+      Width = 608
+      Height = 531
+      Align = alLeft
+      ColumnDefValues.Layout = tlCenter
+      DataGrouping.Font.Charset = GB2312_CHARSET
+      DataGrouping.Font.Color = clWindowText
+      DataGrouping.Font.Height = -11
+      DataGrouping.Font.Name = 'Tahoma'
+      DataGrouping.Font.Style = []
+      DataGrouping.ParentFont = False
+      DataSource = dsInfo
+      DrawGraphicData = True
+      DynProps = <>
+      EditActions = [geaCopyEh]
+      Font.Charset = GB2312_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = #46027#50880
+      Font.Style = []
+      FooterRowCount = 1
+      FooterParams.FillStyle = cfstThemedEh
+      FooterParams.Font.Charset = DEFAULT_CHARSET
+      FooterParams.Font.Color = clNavy
+      FooterParams.Font.Height = -13
+      FooterParams.Font.Name = #46027#50880
+      FooterParams.Font.Style = [fsBold]
+      FooterParams.ParentFont = False
+      ImeName = 'Microsoft Office IME 2007'
+      IndicatorParams.FillStyle = cfstThemedEh
+      IndicatorTitle.TitleButton = True
+      IndicatorTitle.UseGlobalMenu = False
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+      ParentFont = False
+      PopupMenu = pmControl
+      RowHeight = 6
+      RowLines = 1
+      SumList.Active = True
+      TabOrder = 1
+      TitleParams.FillStyle = cfstThemedEh
+      TitleParams.Font.Charset = GB2312_CHARSET
+      TitleParams.Font.Color = clWindowText
+      TitleParams.Font.Height = -13
+      TitleParams.Font.Name = #46027#50880
+      TitleParams.Font.Style = []
+      TitleParams.MultiTitle = True
+      TitleParams.ParentFont = False
+      TitleParams.RowHeight = 24
+      OnCellClick = dgInfoCellClick
+      OnDblClick = dgInfoDblClick
+      OnDrawColumnCell = dgInfoDrawColumnCell
+      OnTitleClick = dgInfoTitleClick
+      Columns = <
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'IDX'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footers = <>
+          Title.Caption = 'NO'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 45
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Color = 16710378
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'USERID'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footer.Alignment = taCenter
+          Footer.Value = #52509' '#44148#49688
+          Footer.ValueType = fvtStaticText
+          Footers = <>
+          Title.Caption = #49324#50857#51088#53076#46300
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Color = clWhite
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'ETC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footer.Alignment = taRightJustify
+          Footer.DisplayFormat = '###,###,##0 '#44148
+          Footer.FieldName = 'ETC'
+          Footer.ValueType = fvtCount
+          Footers = <>
+          Title.Caption = #51221#48372
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Color = clWhite
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'AUTHORITY'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footer.Alignment = taRightJustify
+          Footers = <>
+          KeyList.Strings = (
+            '0'
+            '1')
+          PickList.Strings = (
+            #51312#54924
+            #51312#54924'/'#51648#49884)
+          Title.Caption = #44428#54620
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 80
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'dUSERDATE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footers = <>
+          Title.Caption = #46321#47197#51068#51088
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DisplayFormat = '00:00:00'
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'iUSERTIME'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footers = <>
+          Title.Caption = #46321#47197#49884#44036
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footers = <>
+          Title.Caption = #49324#50577#51648
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Visible = False
+          Width = 70
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footers = <>
+          Title.Caption = #50696#48708
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Visible = False
+          Width = 80
+        end>
+      object RowDetailData: TRowDetailPanelControlEh
+      end
+    end
+    object Panel2: TPanel
+      Left = 1
+      Top = 51
+      Width = 1180
+      Height = 3
+      ParentCustomHint = False
+      Align = alTop
+      BevelOuter = bvNone
+      BiDiMode = bdLeftToRight
+      Color = 16442514
+      Ctl3D = True
+      DoubleBuffered = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentBackground = False
+      ParentCtl3D = False
+      ParentDoubleBuffered = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = False
+      TabOrder = 2
+      object Panel3: TPanel
+        Left = 0
+        Top = 0
+        Width = 18
+        Height = 3
+        Align = alLeft
+        BevelOuter = bvNone
+        Color = 14258944
+        TabOrder = 0
+      end
+    end
+    object dgInfoSub: TDBGridEh
+      Left = 609
+      Top = 54
+      Width = 572
+      Height = 531
+      Align = alClient
+      ColumnDefValues.Layout = tlCenter
+      DataGrouping.Font.Charset = GB2312_CHARSET
+      DataGrouping.Font.Color = clWindowText
+      DataGrouping.Font.Height = -11
+      DataGrouping.Font.Name = 'Tahoma'
+      DataGrouping.Font.Style = []
+      DataGrouping.ParentFont = False
+      DataSource = dsInfoSub
+      DrawGraphicData = True
+      DynProps = <>
+      EditActions = [geaCopyEh]
+      Font.Charset = GB2312_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = #46027#50880
+      Font.Style = []
+      FooterRowCount = 1
+      FooterParams.FillStyle = cfstThemedEh
+      FooterParams.Font.Charset = DEFAULT_CHARSET
+      FooterParams.Font.Color = clNavy
+      FooterParams.Font.Height = -13
+      FooterParams.Font.Name = #46027#50880
+      FooterParams.Font.Style = [fsBold]
+      FooterParams.ParentFont = False
+      ImeName = 'Microsoft Office IME 2007'
+      IndicatorParams.FillStyle = cfstThemedEh
+      IndicatorTitle.TitleButton = True
+      IndicatorTitle.UseGlobalMenu = False
+      ParentFont = False
+      RowHeight = 6
+      RowLines = 1
+      SumList.Active = True
+      TabOrder = 3
+      TitleParams.FillStyle = cfstThemedEh
+      TitleParams.Font.Charset = GB2312_CHARSET
+      TitleParams.Font.Color = clWindowText
+      TitleParams.Font.Height = -13
+      TitleParams.Font.Name = #46027#50880
+      TitleParams.Font.Style = []
+      TitleParams.MultiTitle = True
+      TitleParams.ParentFont = False
+      TitleParams.RowHeight = 24
+      OnDrawColumnCell = dgInfoSubDrawColumnCell
+      OnTitleClick = dgInfoTitleClick
+      Columns = <
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'IDX'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = 'NO'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 45
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'MENU_USERID'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footer.Alignment = taCenter
+          Footer.Value = #52509' '#44148#49688
+          Footer.ValueType = fvtStaticText
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = #49324#50857#51088#53076#46300
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Color = 16710378
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'MENU_NO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footer.Alignment = taRightJustify
+          Footer.DisplayFormat = '###,###,##0 '#44148
+          Footer.FieldName = 'MENU_NO'
+          Footer.ValueType = fvtCount
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = #47700#45684#48264#54840
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Color = 16710378
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'MENU_NAME'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footer.Alignment = taCenter
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = #47700#45684#47749
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 180
+        end
+        item
+          Alignment = taCenter
+          AutoDropDown = True
+          AutoFitColWidth = False
+          Color = clWhite
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'MENU_PERMIT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footer.Alignment = taRightJustify
+          Footers = <>
+          KeyList.Strings = (
+            '0'
+            '1')
+          PickList.Strings = (
+            #44552#51648
+            #54728#50857)
+          Title.Caption = #44428#54620
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          Color = clWhite
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'MENU_DATE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footer.Alignment = taRightJustify
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = #48320#44221#51068#51088
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
+          Visible = False
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'MENU_TIME'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = #46027#50880
+          Font.Style = []
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = #48320#44221#49884#44036
+          Visible = False
+          Width = 100
+        end>
+      object RowDetailData: TRowDetailPanelControlEh
+      end
+    end
+  end
+  object Panel5: TPanel
+    Left = 0
+    Top = 0
+    Width = 1184
+    Height = 4
+    ParentCustomHint = False
+    Align = alTop
+    BevelOuter = bvNone
+    BiDiMode = bdLeftToRight
+    Ctl3D = True
+    DoubleBuffered = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentBiDiMode = False
+    ParentBackground = False
+    ParentCtl3D = False
+    ParentDoubleBuffered = False
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = False
+    TabOrder = 1
+    object Panel6: TPanel
+      Left = 0
+      Top = 0
+      Width = 18
+      Height = 4
+      Align = alLeft
+      BevelOuter = bvNone
+      Color = 14258944
+      TabOrder = 0
+    end
+  end
+  object dsInfo: TDataSource
+    DataSet = qryInfo
+    Left = 56
+    Top = 174
+  end
+  object EhPrint: TPrintDBGridEh
+    DBGridEh = dgInfo
+    Options = []
+    PageFooter.Font.Charset = DEFAULT_CHARSET
+    PageFooter.Font.Color = clWindowText
+    PageFooter.Font.Height = -11
+    PageFooter.Font.Name = 'Tahoma'
+    PageFooter.Font.Style = []
+    PageHeader.Font.Charset = DEFAULT_CHARSET
+    PageHeader.Font.Color = clWindowText
+    PageHeader.Font.Height = -11
+    PageHeader.Font.Name = 'Tahoma'
+    PageHeader.Font.Style = []
+    Units = MM
+    Left = 120
+    Top = 174
+  end
+  object qryInfo: TADOQuery
+    Connection = MainDm.MainDatabase
+    Parameters = <>
+    Left = 24
+    Top = 174
+  end
+  object qryTemp: TADOQuery
+    Connection = MainDm.MainDatabase
+    Parameters = <>
+    Left = 88
+    Top = 174
+  end
+  object pmControl: TPopupMenu
+    AutoHotkeys = maManual
+    AutoLineReduction = maManual
+    Left = 152
+    Top = 174
+    object mnCodeDel: TMenuItem
+      AutoHotkeys = maManual
+      AutoLineReduction = maManual
+      Caption = #53076#46300#49325#51228
+      ImageIndex = 0
+      ShortCut = 46
+      OnClick = mnCodeDelClick
+    end
+    object mnMenuIns: TMenuItem
+      AutoHotkeys = maManual
+      AutoLineReduction = maManual
+      Caption = #47700#45684#52628#44032
+      ImageIndex = 1
+      ShortCut = 45
+      OnClick = mnMenuInsClick
+    end
+  end
+  object qryInfoSub: TADOQuery
+    Connection = MainDm.MainDatabase
+    AfterPost = qryInfoSubAfterPost
+    Parameters = <>
+    Left = 632
+    Top = 179
+  end
+  object dsInfoSub: TDataSource
+    DataSet = qryInfoSub
+    Left = 664
+    Top = 179
+  end
+  object qryTempSub: TADOQuery
+    Connection = MainDm.MainDatabase
+    Parameters = <>
+    Left = 696
+    Top = 179
+  end
+end

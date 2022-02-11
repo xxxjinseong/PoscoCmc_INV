@@ -1,0 +1,141 @@
+unit Popup_Pallet;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Buttons, StdCtrls, ExtCtrls, DB, ADODB, jpeg;
+
+type
+  TfrmPopupPallet = class(TForm)
+    Panel2: TPanel;
+    PalletSubQuery: TADOQuery;
+    Panel15: TPanel;
+    Panel22: TPanel;
+    Pnl_Top: TPanel;
+    Pnl_BTN: TPanel;
+    Pnl_Btn5: TPanel;
+    btnClose: TSpeedButton;
+    Pnl_Btn0: TPanel;
+    btnSave: TSpeedButton;
+    PnlFormName: TPanel;
+    Shape3: TShape;
+    ImgUpdate: TImage;
+    ImgInsert: TImage;
+    Edt_PalletCode: TEdit;
+    cboPalletStatus: TComboBox;
+    procedure FormActivate(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure sbtnCloseClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnCloseClick(Sender: TObject);
+    procedure btnSaveClick(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    procedure SearchCodeList(var ComboBox : TComboBox; Table, Field : String);
+    { Public declarations }
+  end;
+
+var
+  frmPopupPallet: TfrmPopupPallet;
+
+implementation
+
+uses U140;
+
+{$R *.dfm}
+
+//==============================================================================
+// btnCloseClick
+//==============================================================================
+procedure TfrmPopupPallet.btnCloseClick(Sender: TObject);
+begin
+  Close;
+end;
+
+//==============================================================================
+// btnSaveClick
+//==============================================================================
+procedure TfrmPopupPallet.btnSaveClick(Sender: TObject);
+var
+  StrSQL, aStrPalletCode, astrStatus : String;
+begin
+  if Length(Trim(Edt_PalletCode.Text)) <> 5 then
+  begin
+    ShowMessage('Pallet 코드를 5자리로 등록하세요.');
+    Exit;
+  end;
+
+  aStrPalletCode := Trim(Edt_PalletCode.Text);
+  astrStatus     := Trim(CboPalletStatus.Text);
+
+  if btnSave.Caption = '등 록' then
+  begin
+    StrSQL := ' INSERT INTO TM_PALLET (PALLET_CD, STATUS) VALUES   ' +
+              ' ('''+aStrPalletCode+''', '''+astrStatus+''') ' ;
+  end else
+  begin
+    StrSQL := ' UPDATE TM_PALLET   ' +
+              '    SET STATUS    = ''' + aStrSTATUS     + ''' ' +
+              '  WHERE PALLET_CD = ''' + aStrPalletCode + ''' ' ;
+  end;
+
+  try
+    with PalletSubQuery do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSQL;
+      ExecSQL ;
+    end;
+    frmU140.SetComboBox;
+    frmU140.fnCommandQuery;
+    Close;
+  except
+    if PalletSubQuery.Active then PalletSubQuery.Close;
+  end;
+end;
+
+//==============================================================================
+// FormActivate
+//==============================================================================
+procedure TfrmPopupPallet.FormActivate(Sender: TObject);
+begin
+//
+end;
+
+//==============================================================================
+// FormDeactivate
+//==============================================================================
+procedure TfrmPopupPallet.FormDeactivate(Sender: TObject);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+end;
+
+//==============================================================================
+// FormClose
+//==============================================================================
+procedure TfrmPopupPallet.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  i : integer ;
+begin
+  for i := 0 to Self.ComponentCount-1 Do
+  begin
+    if (Self.Components[i] is TADOQuery) then
+       (Self.Components[i] as TADOQuery).Active := False ;
+  end;
+
+  Action := Cafree;
+  try TfrmPopupPallet := Nil ;
+  except end;
+end;
+
+end.
